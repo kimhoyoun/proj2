@@ -1,0 +1,272 @@
+package org.proj.controller;
+
+import static org.proj.Resource.*;
+
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Vector;
+
+import javax.swing.JOptionPane;
+
+import org.proj.model.GameDataDto;
+import org.proj.model.UserDto;
+import org.proj.view.MainView;
+
+public class ClientSocket {
+	private Socket socket = null;
+	public ObjectInputStream ois;
+	public ObjectOutputStream oos;
+	public String req;
+	public String resp;
+	public String msg;
+
+	public ClientSocket() {
+		connectServer();
+
+		ClientThread th = new ClientThread();
+		th.start();
+	}
+
+	public void connectServer() {
+		try {
+			// localHost ip, 9999 port에 접속
+			socket = new Socket(InetAddress.getLocalHost(), 9999);
+
+			// 서버에 접속하고 입출력 스트림 생성
+			// 반드시 oos 부터 생성해줘야한다.
+			// ois먼저 생성하면 에러발생
+			oos = new ObjectOutputStream(socket.getOutputStream());
+			ois = new ObjectInputStream(socket.getInputStream());
+
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Request
+	// 로그인
+	public boolean reqLogin(UserDto dto) {
+		req = LOGIN;
+
+		if (dto.getId().length() != 0 && dto.getPassword().length() != 0) {
+			try {
+				oos.writeUTF(req);
+				oos.flush();
+				oos.writeObject(dto);
+				oos.flush();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			return false;
+		}
+
+		return true;
+	}
+
+	// 회원가입
+	public boolean reqSignUp(UserDto dto) {
+
+		if (dto == null) {
+			return false;
+		}
+
+		req = SIGNUP;
+		try {
+			oos.writeUTF(req);
+			oos.flush();
+			oos.writeObject(dto);
+			oos.flush();
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		return true;
+	}
+
+//			public void idCheck(UserDto dto){
+//				// id 중복확인데 대한 요청임을 나타내는 req변수
+//				req = IDCHECK;
+//				// loginView의 회원가입에서 id를 입력하는 TextField의 값을 가져옴.
+//				String userId = textid.getText();
+//				if (userId.length() != 0) {
+//					try {
+//						// 요청하는 것을 서버에 알려주기위해 req를 먼저 보낸다.
+//						oos.writeUTF(req);
+//						oos.flush();
+	//
+//						// 서버에 req를 보낸 후 실제 쓰일 값을 보냄.
+//						oos.writeUTF(userId);
+//						oos.flush();
+//					} catch (IOException e1) {
+//						e1.printStackTrace();
+//					}
+//				} else {
+//					JOptionPane.showMessageDialog(loginView, "ID를 입력하세요!");
+//				}
+//			}
+
+	// 수정
+	public boolean reqUpdate(UserDto dto) {
+		if (dto == null) {
+			return false;
+		}
+
+		req = UserUPDATE;
+		try {
+			oos.writeUTF(req);
+			oos.flush();
+			oos.writeObject(dto);
+			oos.flush();
+
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return true;
+	}
+
+	class ClientThread extends Thread {
+		@Override
+		public void run() {
+			while (true) {
+				try {
+					// 서버로부터 메세지가 오면 클라이언트의 어떤 요청에 대한 결과인지 먼저 판단하기위해
+					// resp에 저장하고 switch로 어떤 요청인지 판단.
+					resp = ois.readUTF();
+					System.out.println("server response >> " + resp);
+					switch (resp) {
+					case LOGIN:
+						login();
+						break;
+					case NEWLOGIN:
+						newlogin();
+						break;
+					case SIGNUP:
+						signup();
+						break;
+					case IDCHECK:
+						idCheck();
+						break;
+					case UserUPDATE:
+						userUpdate();
+						break;
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		private void userUpdate() {
+			try {
+				String result = ois.readUTF();
+				if ("complete".equals(result)) {
+					// 정보수정 완료
+					// 프로필 새로 셋팅
+					JOptionPane.showMessageDialog(NowView, "수정 완료!");
+				} else {
+					// 실패
+					JOptionPane.showMessageDialog(NowView, "수정 실패!");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		private void newlogin() {
+			try {
+				UserDto user = (UserDto) ois.readObject();
+
+				if (user.getNo() != -1) {
+					mainUser = user;
+					mainData = new Vector<GameDataDto>();
+					System.out.println(mainUser);
+					System.out.println("vector size >> " + mainData.size());
+
+					// 정상로그인
+					JOptionPane.showMessageDialog(NowView, "로그인 성공!");
+					Controller c = Controller.getController();
+					c.mainframe.changeView(new MainView());
+				} else {
+					// 로그인 실패
+					mainUser = null;
+					JOptionPane.showMessageDialog(NowView, "아이디와 비밀번호를 확인해 주세요!");
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		private void login() {
+			try {
+				UserDto user = (UserDto) ois.readObject();
+				if (user.getNo() != -1) {
+					Vector<GameDataDto> vector = (Vector) ois.readObject();
+					mainUser = user;
+					mainData = vector;
+					loginSucess = true;
+//					System.out.println(mainUser);
+//					for (GameDataDto data : vector) {
+//						System.out.println(data);
+					// 정상로그인
+					JOptionPane.showMessageDialog(NowView, "로그인 성공!");
+					Controller c = Controller.getController();
+					c.mainframe.changeView(new MainView());
+				} else {
+					mainUser = null;
+					// 로그인 실패
+					JOptionPane.showMessageDialog(NowView, "아이디와 비밀번호를 확인해 주세요!");
+				}
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		private void signup() {
+			try {
+				String result = ois.readUTF();
+				if ("complete".equals(result)) {
+					// 회원가입 성공
+					JOptionPane.showMessageDialog(NowView, "회원가입 성공!");
+				} else {
+					// 실패
+					JOptionPane.showMessageDialog(NowView, "회원가입 실패!");
+
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		public void idCheck() {
+			try {
+				String tf = ois.readUTF();
+				if ("approval".equals(tf)) {
+					// 사용할 수 있는 ID
+
+				} else {
+					// 사용할 수 없는 ID
+
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+}
