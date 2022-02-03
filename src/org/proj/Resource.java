@@ -2,8 +2,12 @@ package org.proj;
 
 import java.util.Vector;
 
-import org.proj.game.LifeGamePanel;
-import org.proj.game.PlusMinus;
+import org.proj.game.card.CardGame;
+import org.proj.game.color.ColorGame;
+import org.proj.game.color.MaxColorPanel;
+import org.proj.game.color.SelectColorPanel;
+import org.proj.game.life.LifeGamePanel;
+import org.proj.game.plusminus.PlusMinus;
 import org.proj.model.GameDataDto;
 import org.proj.model.UserDto;
 import org.proj.view.GameEndPane;
@@ -27,19 +31,30 @@ public class Resource {
 	public static final String CARD = "card";
 	public static final String BALL = "ball";
 	public static final String LIFE = "life";
+	public static final String LIFE2 = "life2";
 	public static final String COLOR = "color";
+	public static final String SelectColor = "selectcolor";
+	public static final String MaxColor = "maxcolor";
 	public static final String RECORD = "record";
 	public static final String PlisMinusRECORD = "plusminusRecord";
 	public static final String CardRECORD = "cardRecord";
 	public static final String LifeRECORD = "lifeRecord";
 	public static final String BallRECORD = "ballRecord";
 	public static final String ColorRECORD = "colorRecord";
+
 	
+
 	public static boolean loginSucess =false;
 	public static boolean updateBtnStatedb = false;
 	public static int gameNum =0;
 	public static int gametrue=0;
 	public static int endGameNum = 2;
+	
+	// 게임이 개별게임인지 종합게임인지 판단 초기값 미니게임
+	public static final String MiniGame = "minigame";
+	public static final String TotGame = "totalgame";
+	public static String GameState = MiniGame;
+	
 	
 	public static UserDto mainUser;
 	public static GameDataDto mainGameData;
@@ -103,10 +118,15 @@ public class Resource {
 //	
 	public static GameView NowView;
 	public static GameView LoginView = new LoginView();
-	public static GameView MainView = new MainView();
+	public static GameView MainView = new MainView();	
 	public static GameView RecordView = new RecordView();
 	public static GameView PlusMinusGAME = new PlusMinus();
 	public static GameView LifeGame = new LifeGamePanel();
+	public static GameView CardGame = new CardGame();
+	public static GameView SelectColorGame = new SelectColorPanel();
+	public static GameView MaxColorGame = new MaxColorPanel();
+	
+	public static ColorGame RandomColorGame = new ColorGame();
 //	
 ////	public static GameContainer PlusMinisRecord = new PlusMinusRecordView();
 //	public static GameContainer PlusMinisRecord;

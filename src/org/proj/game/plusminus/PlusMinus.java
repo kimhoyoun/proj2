@@ -1,4 +1,4 @@
-package org.proj.game;
+package org.proj.game.plusminus;
 
 import static org.proj.Resource.*;
 
@@ -30,7 +30,8 @@ public class PlusMinus extends GameView {
 	JLabel gameEndmsg;
 //	JButton replayBtn;
 	
-	JButton[] choiceBtn; // 4개의 선지
+	JButton[] choiceBtn = new JButton[4]; // 4개의 선지
+	
 	JLabel checkLabel; // 정답일 경우 나오는 체크표시
 	JLabel xLabel; // 오답일 경우 나오는 엑스표시
 //	JButton pauseBtn; // 멈춤 버튼
@@ -42,7 +43,7 @@ public class PlusMinus extends GameView {
 //	int endGameNum = 2;
 
 	public PlusMinus() {
-		
+		pauseBtn.addActionListener(this);
 //		display();
 	}
 
@@ -64,7 +65,7 @@ public class PlusMinus extends GameView {
 		ImageIcon pmicon = new ImageIcon("images/gamebackImg.png");
 		pmbgLabel = new JLabel(pmicon);
 		pmbgLabel.setBounds(210, 100, 600, 500);
-
+		
 		quizLabel = new JLabel(gp.question);
 		quizLabel.setFont(new Font("Gothic", Font.BOLD, 115));
 		quizLabel.setForeground(Color.ORANGE);
@@ -120,7 +121,7 @@ public class PlusMinus extends GameView {
 		choiceBtn[1].addActionListener(this);
 		choiceBtn[2].addActionListener(this);
 		choiceBtn[3].addActionListener(this);
-		pauseBtn.addActionListener(this);
+		
 	}
 	
 //	@Override

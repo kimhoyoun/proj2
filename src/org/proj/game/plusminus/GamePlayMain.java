@@ -1,4 +1,4 @@
-package org.proj.game;
+package org.proj.game.plusminus;
 
 public class GamePlayMain {
 	int answer; // 정답

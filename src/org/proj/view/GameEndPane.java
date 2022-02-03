@@ -65,7 +65,7 @@ public class GameEndPane extends GameView {
 			resultPane.setVisible(false);
 			JOptionPane.showMessageDialog(NowView, "game Replay");
 			resultPane.removeAll();
-//			((GameContainer) NowView).reGame();
+			NowView.removeAll();
 			Controller c = Controller.getController();
 			c.Viewchange(NowView.toString());
 		}
@@ -99,7 +99,13 @@ public class GameEndPane extends GameView {
 			gameNum = 0;
 			gametrue = 0;
 			break;
-		case COLOR:
+		case SelectColor:
+			mainGameData.setTotalGame5(mainGameData.getAnsGame5()+gameNum);
+			mainGameData.setAnsGame5(mainGameData.getAnsGame5()+gametrue);
+			gameNum = 0;
+			gametrue = 0;
+			break;
+		case MaxColor:
 			mainGameData.setTotalGame5(mainGameData.getAnsGame5()+gameNum);
 			mainGameData.setAnsGame5(mainGameData.getAnsGame5()+gametrue);
 			gameNum = 0;

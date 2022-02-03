@@ -12,7 +12,6 @@ import static org.proj.Resource.*;
 
 import java.util.HashMap;
 
-import org.proj.game.PlusMinus;
 import org.proj.model.GameDataDto;
 import org.proj.model.UserDao;
 import org.proj.model.UserDto;
@@ -55,6 +54,9 @@ public class Controller {
 		map.put(RECORD, RecordView);
 		map.put(PlusMinus, PlusMinusGAME);
 		map.put(LIFE, LifeGame);
+		map.put(CARD, CardGame);
+		map.put(SelectColor, SelectColorGame);
+		map.put(MaxColor, MaxColorGame);
 //		map.put(MAINPAGE, MainView);
 		
 	}

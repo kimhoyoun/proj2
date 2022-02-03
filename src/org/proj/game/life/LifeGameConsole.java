@@ -1,4 +1,4 @@
-package org.proj.game;
+package org.proj.game.life;
 
 public class LifeGameConsole {
 	// 답 순서를 담아놓은 배열

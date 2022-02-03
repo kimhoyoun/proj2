@@ -57,7 +57,11 @@ JButton profileOkBtn = new JButton("수정");
 		recordBtn.addActionListener(this);
 		exitBtn.addActionListener(this);
 		pulusminusGameBtn.addActionListener(this);
+		cardGameBtn.addActionListener(this);
+		ballGameBtn.addActionListener(this);
 		lifeGameBtn.addActionListener(this);
+		colorGameBtn.addActionListener(this);
+		
 		settingBtn.addActionListener(this);
 		profileOkBtn.addActionListener(this);
 		profileCancelBtn.addActionListener(this);
@@ -170,7 +174,6 @@ JButton profileOkBtn = new JButton("수정");
 		
 		if(e.getSource() == profileOkBtn) {
 			int yn = JOptionPane.showConfirmDialog(this, "프로필을 수정하시겠습니까?","확인",JOptionPane.YES_NO_OPTION);
-				
 			if(yn == 0) {
 				userNamedb = textname.getText();
 				userPassdb = textpass.getText();
@@ -232,18 +235,38 @@ JButton profileOkBtn = new JButton("수정");
 		
 		
 		if(e.getSource() == recordBtn) {
+			GameState = MiniGame;
 			Controller c = Controller.getController();
 			c.Viewchange(RECORD);
 		}
 		
 		if(e.getSource() == pulusminusGameBtn) {
+			GameState = MiniGame;
 			Controller c = Controller.getController();
 			c.Viewchange(PlusMinus);
 		}
 		
 		if(e.getSource() == lifeGameBtn) {
+			GameState = MiniGame;
 			Controller c = Controller.getController();
 			c.Viewchange(LIFE);
+		}
+		
+		if(e.getSource() == cardGameBtn) {
+			GameState = MiniGame;
+			Controller c = Controller.getController();
+			c.Viewchange(CARD);
+		}
+		
+		if(e.getSource() == colorGameBtn) {
+			GameState = MiniGame;
+			
+			RandomColorGame.setColor();
+			GameView colorGame = RandomColorGame.getColor();
+			
+			Controller c = Controller.getController();
+			c.Viewchange(colorGame.toString());
+			
 		}
 	}
 	public void setUpdateBox() {
