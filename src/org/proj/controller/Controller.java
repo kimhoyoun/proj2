@@ -8,6 +8,7 @@ import static org.proj.Resource.PlusMinus;
 import static org.proj.Resource.PlusMinusGAME;
 import static org.proj.Resource.RECORD;
 import static org.proj.Resource.RecordView;
+import static org.proj.Resource.*;
 
 import java.util.HashMap;
 
@@ -53,6 +54,7 @@ public class Controller {
 		map.put(MainPage, MainView);
 		map.put(RECORD, RecordView);
 		map.put(PlusMinus, PlusMinusGAME);
+		map.put(LIFE, LifeGame);
 //		map.put(MAINPAGE, MainView);
 		
 	}

@@ -67,7 +67,7 @@ public class GameEndPane extends GameView {
 			resultPane.removeAll();
 //			((GameContainer) NowView).reGame();
 			Controller c = Controller.getController();
-			c.Viewchange(PlusMinus);
+			c.Viewchange(NowView.toString());
 		}
 	}
 	

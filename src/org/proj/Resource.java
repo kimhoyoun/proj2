@@ -2,6 +2,7 @@ package org.proj;
 
 import java.util.Vector;
 
+import org.proj.game.LifeGamePanel;
 import org.proj.game.PlusMinus;
 import org.proj.model.GameDataDto;
 import org.proj.model.UserDto;
@@ -105,6 +106,7 @@ public class Resource {
 	public static GameView MainView = new MainView();
 	public static GameView RecordView = new RecordView();
 	public static GameView PlusMinusGAME = new PlusMinus();
+	public static GameView LifeGame = new LifeGamePanel();
 //	
 ////	public static GameContainer PlusMinisRecord = new PlusMinusRecordView();
 //	public static GameContainer PlusMinisRecord;

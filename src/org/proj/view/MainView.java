@@ -57,6 +57,7 @@ JButton profileOkBtn = new JButton("수정");
 		recordBtn.addActionListener(this);
 		exitBtn.addActionListener(this);
 		pulusminusGameBtn.addActionListener(this);
+		lifeGameBtn.addActionListener(this);
 		settingBtn.addActionListener(this);
 		profileOkBtn.addActionListener(this);
 		profileCancelBtn.addActionListener(this);
@@ -238,6 +239,11 @@ JButton profileOkBtn = new JButton("수정");
 		if(e.getSource() == pulusminusGameBtn) {
 			Controller c = Controller.getController();
 			c.Viewchange(PlusMinus);
+		}
+		
+		if(e.getSource() == lifeGameBtn) {
+			Controller c = Controller.getController();
+			c.Viewchange(LIFE);
 		}
 	}
 	public void setUpdateBox() {
