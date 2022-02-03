@@ -16,9 +16,9 @@ import javax.swing.Timer;
 
 import org.proj.RoundJButton;
 import org.proj.controller.Controller;
-import org.proj.view.GameContainer;
+import org.proj.view.GameView;
 
-public class PlusMinus extends GameContainer {
+public class PlusMinus extends GameView {
 	GamePlayMain gp;
 	JLabel bgLabel; // 가장 밑배경(초록잔디)
 	JLabel pmbgLabel; // 게임 배경(하얀색 메모장)
@@ -40,9 +40,10 @@ public class PlusMinus extends GameContainer {
 //	int gameNum =0;
 //	int gametrue=0;
 //	int endGameNum = 2;
+
 	public PlusMinus() {
-	
-		display();
+		
+//		display();
 	}
 
 	@Override
@@ -122,18 +123,18 @@ public class PlusMinus extends GameContainer {
 		pauseBtn.addActionListener(this);
 	}
 	
-	@Override
-	public void reGame() {
-		gp = new GamePlayMain();
-		
-		quizLabel.setText(gp.question);
-		for (int i = 0; i < gp.answerArr.length; i++) {
-			choiceBtn[i].setText(Integer.toString(gp.answerArr[i]));
-			choiceBtn[i].setBackground(Color.orange);
-		}
-		checkLabel.setVisible(false);
-		xLabel.setVisible(false);
-	}
+//	@Override
+//	public void reGame() {
+//		gp = new GamePlayMain();
+//		
+//		quizLabel.setText(gp.question);
+//		for (int i = 0; i < gp.answerArr.length; i++) {
+//			choiceBtn[i].setText(Integer.toString(gp.answerArr[i]));
+//			choiceBtn[i].setBackground(Color.orange);
+//		}
+//		checkLabel.setVisible(false);
+//		xLabel.setVisible(false);
+//	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) { 
@@ -209,7 +210,7 @@ public class PlusMinus extends GameContainer {
 				Controller c = Controller.getController();
 				gameNum = 0;
 				gametrue = 0;
-				c.Viewchange(MAINPAGE);
+				c.Viewchange(MainPage);
 			}
 		}
 		
@@ -223,11 +224,17 @@ public class PlusMinus extends GameContainer {
 						if(gameNum==endGameNum) {
 							resultPane.display();
 						}else {
-							reGame();					
+							Controller c = Controller.getController();
+							c.Viewchange(PlusMinus);					
 						}
 						timer.stop();
 					}
 				});
 				timer.start();
+	}
+	
+	@Override
+	public String toString() {
+		return PlusMinus;
 	}
 }

@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 import org.proj.controller.Controller;
 
-public class GameEndPane extends ViewContainer {
+public class GameEndPane extends GameView {
 	JButton goMainBtn = new JButton("메인화면으로");
 	JButton replayBtn = new JButton("다시시작");
 
@@ -21,6 +21,7 @@ public class GameEndPane extends ViewContainer {
 		replayBtn.addActionListener(this);
 		goMainBtn.addActionListener(this);
 	}
+	
 	@Override
 	public void display() {
 		this.setLayout(null);
@@ -51,25 +52,59 @@ public class GameEndPane extends ViewContainer {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == goMainBtn) {
-			gameNum = 0;
-			gametrue = 0;
+			recordGameData(NowView);
 			resultPane.setVisible(false);
 			JOptionPane.showMessageDialog(NowView, "게임을 종료합니다!");
 			resultPane.removeAll();
 			Controller c = Controller.getController();
-			c.Viewchange(MAINPAGE);
+			c.Viewchange(MainPage);
 		}
 		
 		if(e.getSource() == replayBtn) {
-			gameNum = 0;
-			gametrue = 0;
+			recordGameData(NowView);
 			resultPane.setVisible(false);
 			JOptionPane.showMessageDialog(NowView, "game Replay");
 			resultPane.removeAll();
-			((GameContainer) NowView).reGame();
-//			Controller c = Controller.getController();
-//			c.Viewchange(PLUSMINUS);
+//			((GameContainer) NowView).reGame();
+			Controller c = Controller.getController();
+			c.Viewchange(PlusMinus);
 		}
 	}
-
+	
+	public void recordGameData(GameView view) {
+		String state = view.toString();
+		
+		switch(state) {
+		case PlusMinus:
+			mainGameData.setTotalGame1(mainGameData.getAnsGame1()+gameNum);
+			mainGameData.setAnsGame1(mainGameData.getAnsGame1()+gametrue);
+			gameNum = 0;
+			gametrue = 0;
+			break;
+		case CARD:
+			mainGameData.setTotalGame2(mainGameData.getAnsGame2()+gameNum);
+			mainGameData.setAnsGame2(mainGameData.getAnsGame2()+gametrue);
+			gameNum = 0;
+			gametrue = 0;
+			break;
+		case BALL:
+			mainGameData.setTotalGame3(mainGameData.getAnsGame3()+gameNum);
+			mainGameData.setAnsGame3(mainGameData.getAnsGame3()+gametrue);
+			gameNum = 0;
+			gametrue = 0;
+			break;
+		case LIFE:
+			mainGameData.setTotalGame4(mainGameData.getAnsGame4()+gameNum);
+			mainGameData.setAnsGame4(mainGameData.getAnsGame4()+gametrue);
+			gameNum = 0;
+			gametrue = 0;
+			break;
+		case COLOR:
+			mainGameData.setTotalGame5(mainGameData.getAnsGame5()+gameNum);
+			mainGameData.setAnsGame5(mainGameData.getAnsGame5()+gametrue);
+			gameNum = 0;
+			gametrue = 0;
+			break;
+		}
+	}
 }

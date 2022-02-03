@@ -2,13 +2,14 @@ package org.proj;
 
 import java.util.Vector;
 
-import javax.swing.JPanel;
-
+import org.proj.game.PlusMinus;
 import org.proj.model.GameDataDto;
 import org.proj.model.UserDto;
-import org.proj.view.GameContainer;
 import org.proj.view.GameEndPane;
-import org.proj.view.ViewContainer;
+import org.proj.view.GameView;
+import org.proj.view.LoginView;
+import org.proj.view.MainView;
+import org.proj.view.RecordView;
 
 public class Resource {
 	public static final int FRAME_WIDTH = 1024, FRAME_HEIGHT = 768;
@@ -19,9 +20,9 @@ public class Resource {
 	public static final String UserUPDATE = "update";
 	public static final String LOGOUT = "logout";
 	
-	public static final String LOGINPAGE = "login";
-	public static final String MAINPAGE = "main";
-	public static final String PLUSMINUS = "plusminus";
+	public static final String LoginPage = "login";
+	public static final String MainPage = "main";
+	public static final String PlusMinus = "plusminus";
 	public static final String CARD = "card";
 	public static final String BALL = "ball";
 	public static final String LIFE = "life";
@@ -43,7 +44,7 @@ public class Resource {
 	public static GameDataDto mainGameData;
 	public static Vector<GameDataDto> mainData;
 	
-	public static ViewContainer resultPane = new GameEndPane();
+	public static GameView resultPane = new GameEndPane();
 	
 //	public static JPanel gameResultPane = new JPanel();
 //	
@@ -99,14 +100,11 @@ public class Resource {
 //	
 //	// View
 //	
-	public static ViewContainer NowView;
-//	public static GameContainer loginView = new LoginView();
-//	public static GameContainer MAINVIEW;
-////	public static GameContainer MAINVIEW = new MainView();
-////	public static GameContainer RECORDVIEW = new RecordView();
-////	public static GameContainer PlusMinusGAME = new PlusMinus();
-//	public static GameContainer RECORDVIEW;
-//	public static GameContainer PlusMinusGAME;
+	public static GameView NowView;
+	public static GameView LoginView = new LoginView();
+	public static GameView MainView = new MainView();
+	public static GameView RecordView = new RecordView();
+	public static GameView PlusMinusGAME = new PlusMinus();
 //	
 ////	public static GameContainer PlusMinisRecord = new PlusMinusRecordView();
 //	public static GameContainer PlusMinisRecord;

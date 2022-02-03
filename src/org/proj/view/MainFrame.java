@@ -41,11 +41,12 @@ public class MainFrame extends JFrame{
 //		this.setVisible(true);
 //		NowView = loginView;
 		
-		displayView(new LoginView());
+		displayView(LoginView);
 
 	}
 	
-	public void displayView(ViewContainer gc) {
+	public void displayView(GameView gc) {
+		gc.display();
 		gc.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 		NowView = gc;
 		contentPane.add(gc);
@@ -53,10 +54,12 @@ public class MainFrame extends JFrame{
 	}
 	
 	
-	public void changeView(ViewContainer gc) {
+	public void changeView(GameView gc) {
 //		contentPane.remove(NowView);
 		contentPane.removeAll();
 		contentPane.add(gc);
+		gc.removeAll();
+		gc.display();
 		NowView = gc;
 		gc.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 		revalidate();

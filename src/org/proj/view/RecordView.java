@@ -15,7 +15,7 @@ import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 
 
-public class RecordView extends GameContainer{
+public class RecordView extends GameView{
 	ImageIcon backgroundImg;
 	JLabel background;
 	
@@ -26,9 +26,9 @@ public class RecordView extends GameContainer{
 	 JButton colorRecordBtn = new RoundJButton("Color");
 	JButton backBtn = new RoundJButton("Back");
 	
-	public RecordView() {
-		display();
-	}
+//	public RecordView() {
+//		display();
+//	}
 	
 	@Override
 	public void display() {
@@ -71,7 +71,7 @@ public class RecordView extends GameContainer{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == backBtn) {
 			Controller c = Controller.getController();
-			c.Viewchange(MAINPAGE);
+			c.Viewchange(MainPage);
 		}
 	}
 	

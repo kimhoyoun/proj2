@@ -13,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDate;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -32,6 +33,7 @@ public class GameServer extends JFrame {
 	
 	public static UserDao dao = new UserDao();
 	public static UserDto dto;
+	public static GameDataDto gameDto;
 	public static Vector<GameDataDto> vector;
 	private JTextArea serverState;
 	private ConnectClient cc;
@@ -123,11 +125,11 @@ public class GameServer extends JFrame {
 					case IDCHECK:
 						idCheck();
 						break;
-					case LOGOUT:
-						logout();
-						break;
 					case UserUPDATE:
 						userUpdate();
+						break;
+					case LOGOUT:
+						logout();
 						break;
 					}
 
@@ -174,6 +176,21 @@ public class GameServer extends JFrame {
 						dto = dao.selectOneUser(dto);
 						vector = dao.roadOneGameData(dto);
 						
+						int n=0;
+						String day = LocalDate.now().toString();
+						for (GameDataDto data : vector) {
+							System.out.println(data);
+							if(day.equals(data.getDay())) {
+								n++;
+							}
+						}
+						if(n==0) {
+							System.out.println("오늘 데이터 없음");
+							GameDataDto data = new GameDataDto(dto.getId(), 0,0,0,0,0,0,0,0,0,0,day);
+							dao.insertGameData(data);
+							vector.add(data);
+						}
+						
 					if (dto != null) {
 						if(vector.size()!=0) {
 							oos.writeUTF(LOGIN);
@@ -213,9 +230,10 @@ public class GameServer extends JFrame {
 				dto = (UserDto) ois.readObject();
 				System.out.println(dto);
 				boolean state = dao.insertUser(dto);
+				String date = LocalDate.now().toString();
 				
-//				boolean state2 = dao.insertGameData(new GameDataDto(dto.getId(), 0,0,0,0,0,0,0,0,0,0,""));
-				if (state) {
+				boolean state2 = dao.insertGameData(new GameDataDto(dto.getId(), 0,0,0,0,0,0,0,0,0,0,date));
+				if (state&&state2) {
 					oos.writeUTF(SIGNUP);
 					oos.flush();
 					oos.writeUTF("complete");
@@ -267,6 +285,16 @@ public class GameServer extends JFrame {
 		}
 
 		private void logout() {
+			try {
+				gameDto = (GameDataDto) ois.readObject();
+				dao.updateGameData(gameDto);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}

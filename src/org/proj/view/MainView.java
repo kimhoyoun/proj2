@@ -20,7 +20,7 @@ import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.model.UserDto;
 
-public class MainView extends GameContainer{
+public class MainView extends GameView{
 	ImageIcon backgroundImg;
 	JLabel background;
 	JButton settingBtn = new JButton("!");
@@ -54,7 +54,13 @@ JButton profileOkBtn = new JButton("수정");
 	JTextField textage = new JTextField(15);
 	
 	public MainView() {
-		display();
+		recordBtn.addActionListener(this);
+		exitBtn.addActionListener(this);
+		pulusminusGameBtn.addActionListener(this);
+		settingBtn.addActionListener(this);
+		profileOkBtn.addActionListener(this);
+		profileCancelBtn.addActionListener(this);
+		updateBtn.addActionListener(this);
 	}
 	
 	@Override
@@ -70,9 +76,9 @@ JButton profileOkBtn = new JButton("수정");
 		
 		displaySetting();
 		
-		recordBtn.addActionListener(this);
-		exitBtn.addActionListener(this);
-		pulusminusGameBtn.addActionListener(this);
+//		recordBtn.addActionListener(this);
+//		exitBtn.addActionListener(this);
+//		pulusminusGameBtn.addActionListener(this);
 	}
 	
 	public void displaySetting() {
@@ -117,10 +123,10 @@ JButton profileOkBtn = new JButton("수정");
 		recordBtn.setBounds(FRAME_WIDTH-180, 10,150,80);
 		exitBtn.setBounds(FRAME_WIDTH-180, FRAME_HEIGHT-130,150,80);
 		
-		settingBtn.addActionListener(this);
-		profileOkBtn.addActionListener(this);
-		profileCancelBtn.addActionListener(this);
-		updateBtn.addActionListener(this);
+//		settingBtn.addActionListener(this);
+//		profileOkBtn.addActionListener(this);
+//		profileCancelBtn.addActionListener(this);
+//		updateBtn.addActionListener(this);
 	}
 	
 	@Override
@@ -207,6 +213,23 @@ JButton profileOkBtn = new JButton("수정");
 			repaint();
 		}
 		
+		if(e.getSource() == exitBtn) {
+			int yn = JOptionPane.showConfirmDialog(this, "로그아웃 하시겠습니까?","확인",JOptionPane.YES_NO_OPTION);
+			if(yn == 0) {
+				Controller c = Controller.getController();
+				
+				c.logout(mainGameData);
+				
+				mainUser = null;
+				mainGameData = null;
+				mainData = null;
+				
+				
+				c.Viewchange(LoginPage);
+			}
+		}
+		
+		
 		if(e.getSource() == recordBtn) {
 			Controller c = Controller.getController();
 			c.Viewchange(RECORD);
@@ -214,7 +237,7 @@ JButton profileOkBtn = new JButton("수정");
 		
 		if(e.getSource() == pulusminusGameBtn) {
 			Controller c = Controller.getController();
-			c.Viewchange(PLUSMINUS);
+			c.Viewchange(PlusMinus);
 		}
 	}
 	public void setUpdateBox() {

@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.time.LocalDate;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
@@ -133,7 +134,25 @@ public class ClientSocket {
 		}
 		return true;
 	}
+	
+	// 로그아웃
+	// 게임데이터를 데이터베이스에 저장
+	public void reqLogout(GameDataDto dto) {
+		if(dto == null) {
+			return;
+		}
+		req = LOGOUT;
+		try {
+			oos.writeUTF(req);
+			oos.flush();
+			oos.writeObject(dto);
+			oos.flush();
 
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 	class ClientThread extends Thread {
 		@Override
 		public void run() {
@@ -215,10 +234,23 @@ public class ClientSocket {
 					Vector<GameDataDto> vector = (Vector) ois.readObject();
 					mainUser = user;
 					mainData = vector;
-					loginSucess = true;
-//					System.out.println(mainUser);
-//					for (GameDataDto data : vector) {
-//						System.out.println(data);
+					
+					System.out.println(mainUser);
+					String day = LocalDate.now().toString();
+					for (GameDataDto data : vector) {
+						System.out.println(data);
+						if(day.equals(data.getDay())) {
+							mainGameData = data;
+							System.out.println("데이터 있음");
+						}
+					}
+					
+					if(mainGameData == null) {
+						mainGameData = new GameDataDto(user.getId(), 0,0,0,0,0,0,0,0,0,0,day);
+						vector.add(mainGameData);
+					}
+					System.out.println("===============");
+					System.out.println(mainGameData);
 					// 정상로그인
 					JOptionPane.showMessageDialog(NowView, "로그인 성공!");
 					Controller c = Controller.getController();

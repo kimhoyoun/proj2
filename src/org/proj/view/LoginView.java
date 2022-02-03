@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import org.proj.controller.Controller;
 import org.proj.model.UserDto;
 
-public class LoginView extends GameContainer {
+public class LoginView extends GameView {
 	boolean flag = false;
 	ImageIcon backgroundImg;
 	JLabel background;
@@ -39,8 +39,14 @@ public class LoginView extends GameContainer {
 	JButton signup = new JButton("확인");
 	JButton cancel = new JButton("취소");
 	boolean signupState = false;
+	
 	public LoginView() {
-		display();
+//		display();
+		LoginBtn.addActionListener(this);
+		signupBtn.addActionListener(this);
+		signup.addActionListener(this);
+		cancel.addActionListener(this);
+		idcheck.addActionListener(this);
 	}
 	
 	@Override
@@ -58,11 +64,11 @@ public class LoginView extends GameContainer {
 		login.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
 		newUserPane.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
 		
-		LoginBtn.addActionListener(this);
-		signupBtn.addActionListener(this);
-		signup.addActionListener(this);
-		cancel.addActionListener(this);
-		idcheck.addActionListener(this);
+//		LoginBtn.addActionListener(this);
+//		signupBtn.addActionListener(this);
+//		signup.addActionListener(this);
+//		cancel.addActionListener(this);
+//		idcheck.addActionListener(this);
 	}
 	
 	public void init() {
