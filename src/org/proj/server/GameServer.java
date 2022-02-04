@@ -1,22 +1,29 @@
 package org.proj.server;
 
-import static org.proj.Resource.*;
+import static org.proj.Resource.IDCHECK;
+import static org.proj.Resource.LOGIN;
+import static org.proj.Resource.LOGOUT;
+import static org.proj.Resource.NEWLOGIN;
+import static org.proj.Resource.SIGNUP;
+import static org.proj.Resource.UserUPDATE;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.time.LocalDate;
 import java.util.Vector;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -25,28 +32,49 @@ import org.proj.model.UserDao;
 import org.proj.model.UserDto;
 
 public class GameServer extends JFrame {
-//	public static final String LOGIN = "login";
-//	public static final String NEWLOGIN = "newlogin";
-//	public static final String SIGNUP = "signup";
-//	public static final String IDCHECK = "idcheck";
-//	public static final String LOGOUT = "logout";
-	
+
 	public static UserDao dao = new UserDao();
-	public static UserDto dto;
+	
 	public static GameDataDto gameDto;
 	public static Vector<GameDataDto> vector;
 	private JTextArea serverState;
-	private ConnectClient cc;
+	JPanel rightPane;
+	JPanel[] pArr;
+	JLabel[] idArr;
+	JLabel[] loginStateArr;
+	private static Vector<UserDto> loginUser = new Vector<>();
 
 	public GameServer() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("서버");
-		setSize(300, 400);
+		setSize(400, 500);
+
+		rightPane = new JPanel();
+		rightPane.setBackground(Color.white);;
+		rightPane.setLayout(new GridLayout(10, 1));
+		pArr = new JPanel[10];
+		idArr = new JLabel[10];
+		loginStateArr = new JLabel[10];
+
+		for (int i = 0; i < dao.userVector.size(); i++) {
+			pArr[i] = new JPanel();
+			pArr[i].setBackground(Color.white);
+			idArr[i] = new JLabel(dao.userVector.get(i).getId());
+			idArr[i].setFont(new Font("맑은 고딕", Font.BOLD, 13));
+			loginStateArr[i] = new JLabel("비접속");
+			loginStateArr[i].setFont(new Font("맑은 고딕", Font.BOLD, 13));
+			pArr[i].add(idArr[i]);
+			pArr[i].add(loginStateArr[i]);
+
+			rightPane.add(pArr[i]);
+		}
 
 		Container contentPane = getContentPane();
 		serverState = new JTextArea();
+		serverState.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		serverState.setEditable(false);
 		contentPane.add(new JScrollPane(serverState), BorderLayout.CENTER);
+		contentPane.add(rightPane, BorderLayout.EAST);
 		setVisible(true);
 		this.setLocation(500, 200);
 
@@ -54,10 +82,37 @@ public class GameServer extends JFrame {
 		ConnectClient connect = new ConnectClient();
 		connect.start();
 	}
-
+	
+	public void loginUpdate(){
+		if(loginUser.size()!=0) {
+			
+			for(int i =0; i<loginUser.size(); i++) {
+				UserDto user = loginUser.get(i);
+				for(int j =0; j<dao.userVector.size(); j++) {
+				String userid = user.getId();
+				if(idArr[j].getText().equals(userid)) {
+					loginStateArr[j].setText("접속중");
+					pArr[j].setBackground(Color.green);
+				}else{
+					loginStateArr[j].setText("비접속");
+					pArr[j].setBackground(Color.white);
+				}
+			}
+		}
+		}else {
+			for(int i =0; i<dao.userVector.size(); i++) {
+				loginStateArr[i].setText("비접속");
+				pArr[i].setBackground(Color.white);
+			}
+		}
+		revalidate();
+		repaint();
+		
+	}
 	public static void main(String[] args) {
 		new GameServer();
 	}
+	
 
 	class ConnectClient extends Thread {
 		private ServerSocket listener = null;
@@ -86,30 +141,30 @@ public class GameServer extends JFrame {
 
 	class ServerThread extends Thread {
 		Socket socket = null;
-		private BufferedReader br = null;
-		private BufferedWriter bw = null;
+		private boolean stop;
 		private String userID;
 		private ObjectInputStream ois;
 		private ObjectOutputStream oos;
 		private String guest = "guest" + (int) (Math.random() * 100 + 1);
-		private InputStream is;
-		private OutputStream os;
+		private UserDto dto;
+		
 		// 생성자에 socket을 받아 서버에 접속한 클라이언트의 socket정보를 받아옴.
 		public ServerThread(Socket socket) {
+			this.stop = false;
 			this.socket = socket;
 			try {
 				// 클라이언트와 메세지를 주고받기위해 입출력 스트림 생성
 				oos = new ObjectOutputStream(socket.getOutputStream());
 				ois = new ObjectInputStream(socket.getInputStream());
 			} catch (IOException e) {
-				e.printStackTrace();
+				
 			}
 		}
 
 		// 쓰레드가 시작되면 반복할 코드
 		@Override
 		public void run() {
-			while (true) {
+			while (!stop) {
 				try {
 					// 클라이언트로부터 메세지를 받을때까지 대기하면 받으면 msg 변수에 저장
 					String msg = ois.readUTF();
@@ -133,84 +188,117 @@ public class GameServer extends JFrame {
 						break;
 					}
 
-				} catch (IOException e) {
+				} catch(SocketException e) {
 					e.printStackTrace();
-				} 
+					stop = true;
+				}catch (IOException e) {
+					e.printStackTrace();
+					stop = true;
+				}
 
 			}
+				try {
+					System.out.println("클라이언트 접속 해제");
+					serverState.append(userID + " >> disconnect" + "\n");
+					loginUser.remove(dto);
+					loginUpdate();
+					if(ois != null)	ois.close();
+					if(oos != null) oos.close();
+					
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			
 		}
 
 		private void userUpdate() {
 			try {
-				dto = (UserDto)ois.readObject();
+				dto = (UserDto) ois.readObject();
 				boolean approval = dao.updateUser(dto);
-				
-				if(approval) {
+
+				if (approval) {
 					oos.writeUTF(UserUPDATE);
 					oos.flush();
 					oos.writeUTF("complete");
 					oos.flush();
-					serverState.append(guest + " >> Update Complete "+"\n");
-				}
-				else {
+					serverState.append(userID + " >> Update Complete " + "\n");
+				} else {
 					oos.writeUTF(UserUPDATE);
 					oos.flush();
 					oos.writeUTF("fail");
 					oos.flush();
 				}
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
+		private boolean loginCheck(UserDto dto) {
+			if (loginUser.contains(dto)) {
+				return false;
+			}
+			return true;
+		}
+		
 		private void login() {
 			try {
-				dto = (UserDto)ois.readObject();
+				dto = (UserDto) ois.readObject();
 				boolean approval = dao.loginApproval(dto);
-				
+				// 중복 접속 차단
+
 				if (approval) {
+					boolean duplication = loginCheck(dto);
+					if (duplication) {
 						dto = dao.selectOneUser(dto);
 						vector = dao.roadOneGameData(dto);
-						
-						int n=0;
+						int n = 0;
 						String day = LocalDate.now().toString();
 						for (GameDataDto data : vector) {
 							System.out.println(data);
-							if(day.equals(data.getDay())) {
+							if (day.equals(data.getDay())) {
 								n++;
 							}
 						}
-						if(n==0) {
+						if (n == 0) {
 							System.out.println("오늘 데이터 없음");
-							GameDataDto data = new GameDataDto(dto.getId(), 0,0,0,0,0,0,0,0,0,0,day);
+							GameDataDto data = new GameDataDto(dto.getId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, day);
 							dao.insertGameData(data);
 							vector.add(data);
 						}
-						
-					if (dto != null) {
-						if(vector.size()!=0) {
-							oos.writeUTF(LOGIN);
-							oos.flush();
-							oos.writeObject(dto);
-							oos.flush();
-							oos.writeObject(vector);
-							oos.flush();
-							serverState.append(guest + " >> Login Success! \n");
+
+						if (dto != null) {
+							if (vector.size() != 0) {
+								oos.writeUTF(LOGIN);
+								oos.flush();
+								oos.writeObject(dto);
+								oos.flush();
+								oos.writeObject(vector);
+								oos.flush();
+								loginUser.add(dto);
+								userID = dto.getId();
+								serverState.append(userID + " >> Login Success! \n");
+								loginUpdate();
+							} else {
+								oos.writeUTF(NEWLOGIN);
+								oos.flush();
+								oos.writeObject(dto);
+								oos.flush();
+								serverState.append(guest + " >> Login Success! (No Data) \n");
+							}
 						}
-						else {
-							oos.writeUTF(NEWLOGIN);
-							oos.flush();
-							oos.writeObject(dto);
-							oos.flush();
-							serverState.append(guest + " >> Login Success! (No Data) \n");
-						}
+					}else {
+						System.out.println("중복 접속!");
+						dto = new UserDto(0, null, null, null, 0);
+						oos.writeUTF(LOGIN);
+						oos.flush();
+						oos.writeObject(dto);
+						oos.flush();
+						serverState.append(guest + " >> Login False! (Login Duplication) \n");
 					}
 				} else {
-					dto = new UserDto(-1,null,null,null,0);
+					dto = new UserDto(-1, null, null, null, 0);
 					oos.writeUTF(LOGIN);
 					oos.flush();
 					oos.writeObject(dto);
@@ -231,14 +319,14 @@ public class GameServer extends JFrame {
 				System.out.println(dto);
 				boolean state = dao.insertUser(dto);
 				String date = LocalDate.now().toString();
-				
-				boolean state2 = dao.insertGameData(new GameDataDto(dto.getId(), 0,0,0,0,0,0,0,0,0,0,date));
-				if (state&&state2) {
+
+				boolean state2 = dao.insertGameData(new GameDataDto(dto.getId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, date));
+				if (state && state2) {
 					oos.writeUTF(SIGNUP);
 					oos.flush();
 					oos.writeUTF("complete");
 					oos.flush();
-					serverState.append(guest + " >> Sign Up Complete "+"\n");
+					serverState.append(guest + " >> Sign Up Complete " + "\n");
 				} else {
 					oos.writeUTF(SIGNUP);
 					oos.flush();
@@ -257,7 +345,7 @@ public class GameServer extends JFrame {
 				// userID를 넘겨 받아서 userID에 저장
 				String userID = ois.readUTF();
 				// swing 출력
-				serverState.append(guest + " idckek>> "+userID + "\n");
+				serverState.append(guest + " idckek>> " + userID + "\n");
 				// dao에 그 값을 넣고 id 중복여부 확인하고 결과를 check에 받음 true : id사용가능, false : id 중복
 				boolean check = dao.checkID(userID);
 				if (check) {
@@ -268,20 +356,20 @@ public class GameServer extends JFrame {
 					// idcheck 요청의 결과값
 					oos.writeUTF("approval");
 					oos.flush();
-					serverState.append(guest + " >> ID Check Complete"+"\n");
+					serverState.append(guest + " >> ID Check Complete" + "\n");
 				} else {
-					serverState.append(guest + " >> false" +"\n");
+					serverState.append(guest + " >> false" + "\n");
 					// idcheck 요청의 결과임을 알려주는 메세지
 					oos.writeUTF(IDCHECK);
 					oos.flush();
 					// idcheck 요청의 결과값
 					oos.writeUTF("fail");
 					oos.flush();
-					serverState.append(guest + " >> ID Check Complete"+"\n");
+					serverState.append(guest + " >> ID Check Complete" + "\n");
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-			} 
+			}
 		}
 
 		private void logout() {
@@ -289,10 +377,8 @@ public class GameServer extends JFrame {
 				gameDto = (GameDataDto) ois.readObject();
 				dao.updateGameData(gameDto);
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

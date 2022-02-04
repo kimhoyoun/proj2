@@ -2,12 +2,12 @@ package org.proj.controller;
 
 import static org.proj.Resource.*;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.Vector;
@@ -93,28 +93,6 @@ public class ClientSocket {
 		return true;
 	}
 
-//			public void idCheck(UserDto dto){
-//				// id 중복확인데 대한 요청임을 나타내는 req변수
-//				req = IDCHECK;
-//				// loginView의 회원가입에서 id를 입력하는 TextField의 값을 가져옴.
-//				String userId = textid.getText();
-//				if (userId.length() != 0) {
-//					try {
-//						// 요청하는 것을 서버에 알려주기위해 req를 먼저 보낸다.
-//						oos.writeUTF(req);
-//						oos.flush();
-	//
-//						// 서버에 req를 보낸 후 실제 쓰일 값을 보냄.
-//						oos.writeUTF(userId);
-//						oos.flush();
-//					} catch (IOException e1) {
-//						e1.printStackTrace();
-//					}
-//				} else {
-//					JOptionPane.showMessageDialog(loginView, "ID를 입력하세요!");
-//				}
-//			}
-
 	// 수정
 	public boolean reqUpdate(UserDto dto) {
 		if (dto == null) {
@@ -129,7 +107,6 @@ public class ClientSocket {
 			oos.flush();
 
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		return true;
@@ -149,14 +126,17 @@ public class ClientSocket {
 			oos.flush();
 
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
 	class ClientThread extends Thread {
+		private boolean stop;
+		public ClientThread() {
+			stop = false;
+		}
 		@Override
 		public void run() {
-			while (true) {
+			while (!stop) {
 				try {
 					// 서버로부터 메세지가 오면 클라이언트의 어떤 요청에 대한 결과인지 먼저 판단하기위해
 					// resp에 저장하고 switch로 어떤 요청인지 판단.
@@ -179,9 +159,20 @@ public class ClientSocket {
 						userUpdate();
 						break;
 					}
-				} catch (IOException e) {
+				} catch(SocketException e) {
+					stop = true;
+				}catch (IOException e) {
 					e.printStackTrace();
 				}
+			}
+			
+			try {
+				System.out.println("서버 연결 해제");
+				if(ois != null)	ois.close();
+				if(oos != null) oos.close();
+				
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 		}
 
@@ -230,7 +221,7 @@ public class ClientSocket {
 		private void login() {
 			try {
 				UserDto user = (UserDto) ois.readObject();
-				if (user.getNo() != -1) {
+				if ((user.getNo() != -1)&&(user.getNo() != 0)) {
 					Vector<GameDataDto> vector = (Vector) ois.readObject();
 					mainUser = user;
 					mainData = vector;
@@ -255,16 +246,18 @@ public class ClientSocket {
 					JOptionPane.showMessageDialog(NowView, "로그인 성공!");
 					Controller c = Controller.getController();
 					c.mainframe.changeView(new MainView());
-				} else {
+				} else if(user.getNo() == 0) {
+					mainUser = null;
+					JOptionPane.showMessageDialog(NowView, "이미 접속된 아이디 입니다!");
+				}
+				else {
 					mainUser = null;
 					// 로그인 실패
 					JOptionPane.showMessageDialog(NowView, "아이디와 비밀번호를 확인해 주세요!");
 				}
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

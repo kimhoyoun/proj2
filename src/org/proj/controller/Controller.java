@@ -35,7 +35,7 @@ import org.proj.view.RecordView;
 //public static final String ColorRECORD = "colorRecord";
 
 //public static GameView NowView;
-//public static GameView LoginView = new LoginView();
+//public static GameView LoginView = new LoginView();user8
 //public static GameView MainView = new MainView();
 //public static GameView RecordView = new RecordView();
 //public static GameView PlusMinusGAME = new PlusMinus();
