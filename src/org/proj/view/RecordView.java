@@ -43,6 +43,11 @@ public class RecordView extends GameView{
 		displaySetting();
 		
 		backBtn.addActionListener(this);
+		pulusminusRecordBtn.addActionListener(this);
+		cardRecordBtn.addActionListener(this);
+		ballRecordBtn.addActionListener(this);
+		lifeRecordBtn.addActionListener(this);
+		colorRecordBtn.addActionListener(this);
 	}
 	
 	
@@ -57,7 +62,6 @@ public class RecordView extends GameView{
 		background.add(backBtn);
 		background.add(title);
 //		pulusminusGameBtn.setBounds(getVisibleRect());
-		
 		title.setBounds(30, 20, 200,40);
 		pulusminusRecordBtn.setBounds(FRAME_WIDTH/2-150/2-380, FRAME_HEIGHT/2-160,150,256);
 		cardRecordBtn.setBounds(FRAME_WIDTH/2-150/2-190, FRAME_HEIGHT/2-160,150,256);
@@ -72,6 +76,32 @@ public class RecordView extends GameView{
 		if(e.getSource() == backBtn) {
 			Controller c = Controller.getController();
 			c.Viewchange(MainPage);
+		}
+		
+		if(e.getSource() == pulusminusRecordBtn) {
+			gameRecord = PlusMinus;
+			Controller c = Controller.getController();
+			c.Viewchange(GameRecordPage);
+		}
+		if(e.getSource() == cardRecordBtn) {
+			gameRecord = CARD;
+			Controller c = Controller.getController();
+			c.Viewchange(GameRecordPage);
+		}
+		if(e.getSource() == ballRecordBtn) {
+			gameRecord = BALL;
+			Controller c = Controller.getController();
+			c.Viewchange(GameRecordPage);
+		}
+		if(e.getSource() == lifeRecordBtn) {
+			gameRecord = LIFE;
+			Controller c = Controller.getController();
+			c.Viewchange(GameRecordPage);
+		}
+		if(e.getSource() == colorRecordBtn) {
+			gameRecord = COLOR;
+			Controller c = Controller.getController();
+			c.Viewchange(GameRecordPage);
 		}
 	}
 	

@@ -11,6 +11,7 @@ import org.proj.game.plusminus.PlusMinus;
 import org.proj.model.GameDataDto;
 import org.proj.model.UserDto;
 import org.proj.view.GameEndPane;
+import org.proj.view.GameRecordView;
 import org.proj.view.GameView;
 import org.proj.view.LoginView;
 import org.proj.view.MainView;
@@ -31,11 +32,12 @@ public class Resource {
 	public static final String CARD = "card";
 	public static final String BALL = "ball";
 	public static final String LIFE = "life";
-	public static final String LIFE2 = "life2";
 	public static final String COLOR = "color";
 	public static final String SelectColor = "selectcolor";
 	public static final String MaxColor = "maxcolor";
 	public static final String RECORD = "record";
+	public static final String GameRecordPage = "gamerecord";
+	
 	public static final String PlisMinusRECORD = "plusminusRecord";
 	public static final String CardRECORD = "cardRecord";
 	public static final String LifeRECORD = "lifeRecord";
@@ -43,18 +45,19 @@ public class Resource {
 	public static final String ColorRECORD = "colorRecord";
 
 	
+	public static String gameRecord;
 
 	public static boolean loginSucess =false;
 	public static boolean updateBtnStatedb = false;
 	public static int gameNum =0;
 	public static int gametrue=0;
 	public static int endGameNum = 2;
-	
 	// 게임이 개별게임인지 종합게임인지 판단 초기값 미니게임
 	public static final String MiniGame = "minigame";
 	public static final String TotGame = "totalgame";
 	public static String GameState = MiniGame;
 	
+	public static int underAvgNum;
 	
 	public static UserDto mainUser;
 	public static GameDataDto mainGameData;
@@ -125,6 +128,7 @@ public class Resource {
 	public static GameView CardGame = new CardGame();
 	public static GameView SelectColorGame = new SelectColorPanel();
 	public static GameView MaxColorGame = new MaxColorPanel();
+	public static GameView GameRecord = new GameRecordView();
 	
 	public static ColorGame RandomColorGame = new ColorGame();
 //	

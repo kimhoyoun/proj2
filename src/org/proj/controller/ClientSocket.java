@@ -146,9 +146,9 @@ public class ClientSocket {
 					case LOGIN:
 						login();
 						break;
-					case NEWLOGIN:
-						newlogin();
-						break;
+//					case NEWLOGIN:
+//						newlogin();
+//						break;
 					case SIGNUP:
 						signup();
 						break;
@@ -192,31 +192,31 @@ public class ClientSocket {
 			}
 		}
 
-		private void newlogin() {
-			try {
-				UserDto user = (UserDto) ois.readObject();
-
-				if (user.getNo() != -1) {
-					mainUser = user;
-					mainData = new Vector<GameDataDto>();
-					System.out.println(mainUser);
-					System.out.println("vector size >> " + mainData.size());
-
-					// 정상로그인
-					JOptionPane.showMessageDialog(NowView, "로그인 성공!");
-					Controller c = Controller.getController();
-					c.mainframe.changeView(new MainView());
-				} else {
-					// 로그인 실패
-					mainUser = null;
-					JOptionPane.showMessageDialog(NowView, "아이디와 비밀번호를 확인해 주세요!");
-				}
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+//		private void newlogin() {
+//			try {
+//				UserDto user = (UserDto) ois.readObject();
+//
+//				if (user.getNo() != -1) {
+//					mainUser = user;
+//					mainData = new Vector<GameDataDto>();
+//					System.out.println(mainUser);
+//					System.out.println("vector size >> " + mainData.size());
+//
+//					// 정상로그인
+//					JOptionPane.showMessageDialog(NowView, "로그인 성공!");
+//					Controller c = Controller.getController();
+//					c.mainframe.changeView(new MainView());
+//				} else {
+//					// 로그인 실패
+//					mainUser = null;
+//					JOptionPane.showMessageDialog(NowView, "아이디와 비밀번호를 확인해 주세요!");
+//				}
+//			} catch (ClassNotFoundException e) {
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 
 		private void login() {
 			try {
@@ -238,7 +238,6 @@ public class ClientSocket {
 					
 					if(mainGameData == null) {
 						mainGameData = new GameDataDto(user.getId(), 0,0,0,0,0,0,0,0,0,0,day);
-						vector.add(mainGameData);
 					}
 					System.out.println("===============");
 					System.out.println(mainGameData);

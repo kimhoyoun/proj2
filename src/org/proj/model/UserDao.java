@@ -134,6 +134,7 @@ public class UserDao {
 				conn.rollback();
 				return false;
 			} else {
+				roadUser();
 				return true;
 			}
 		} catch (SQLException e) {
