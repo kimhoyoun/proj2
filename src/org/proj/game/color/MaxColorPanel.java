@@ -23,7 +23,7 @@ import org.proj.controller.Controller;
 import org.proj.view.GameView;
 
 
-public class MaxColorPanel extends GameView  {
+public class MaxColorPanel extends GameView  implements MouseListener{
 	private ImageIcon bgImg;
 	private JLabel bgImgPan;
 	
@@ -40,9 +40,9 @@ public class MaxColorPanel extends GameView  {
 
 	private JPanel colorPan;
 
-	private JButton btn1 = new JButton("btn1");
-	private JButton btn2 = new JButton("btn2");
-	private JButton btn3 = new JButton("btn3");
+	private JButton btn1;
+	private JButton btn2;
+	private JButton btn3;
 	
 	
 	
@@ -52,32 +52,33 @@ public class MaxColorPanel extends GameView  {
 	private JLabel txtTitle;
 	private Font font;
 	Timer timer;
-	GameHowTo ght;
+//	GameHowTo ght;
 	MaxColorConsole mcc;
 	public MaxColorPanel() {
-		btn1.addActionListener(this);
-		btn2.addActionListener(this);
-		btn3.addActionListener(this);
 		pauseBtn.addActionListener(this);
 	}
 	@Override
 	public void display() {
 		mcc = new MaxColorConsole();
 		this.setLayout(null);
-		
 		this.add(resultPane);
 		resultPane.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
 		resultPane.setVisible(false);
-		ght = new GameHowTo();
+		
+//		ght = new GameHowTo();
+		
+		
 		
 		pauseBtn.setBounds(920, 30, 50, 50);
-		pauseBtn.setBorderPainted(false);    // 버튼의 외곽 투명하게 
-		pauseBtn.setContentAreaFilled(false);  // 만들어 주는 것
+		pauseBtn.setBorderPainted(false);   
+		pauseBtn.setContentAreaFilled(false);  
 		this.add(pauseBtn);
+		
+		
 		bgImg = new ImageIcon("images/gamebg.png");
 		bgImgPan = new JLabel(bgImg);
 		bgImgPan.setSize(1024, 768);
-
+		
 		bgSK = new ImageIcon("images/sk.png");
 		bgSKPan = new JLabel(bgSK);
 		bgSKPan.setBounds(150, 150, 720, 425);
@@ -86,7 +87,8 @@ public class MaxColorPanel extends GameView  {
 		checkLabel = new JLabel(checkIcon);
 		xIcon = new ImageIcon("images/x.png");
 		xLabel = new JLabel(xIcon);
-
+		
+		
 		checkLabel.setBounds(670, 65, 150, 150);
 		this.add(checkLabel);
 		checkLabel.setVisible(false);
@@ -106,7 +108,9 @@ public class MaxColorPanel extends GameView  {
 			colorPan.add(b);
 		}
 		
-		
+		 btn1 = new JButton("btn1");
+			  btn2 = new JButton("btn2");
+			 btn3 = new JButton("btn3");
 		color = new Color(0,0,0,0);
 		btn1.setForeground(color);
 		btn2.setForeground(color);
@@ -121,42 +125,50 @@ public class MaxColorPanel extends GameView  {
 		btn1.setBackground(new Color(233, 23, 22));
 		btn2.setBackground(new Color(81, 107, 254));
 		btn3.setBackground(new Color(254, 228, 55));
-		
-		MyMouseListener listener = new MyMouseListener();
+		btn1.addActionListener(this);
+		btn2.addActionListener(this);
+		btn3.addActionListener(this);
+		btn1.addMouseListener(this);
+		btn2.addMouseListener(this);
+		btn3.addMouseListener(this);
+//		MyMouseListener listener = new MyMouseListener();
 //		btn1.addMouseListener(listener);
 //		btn2.addMouseListener(listener);
 //		btn3.addMouseListener(listener);
-		btn1.setEnabled(false);
-		btn2.setEnabled(false);
-		btn3.setEnabled(false);
+//		btn1.setEnabled(false);
+//		btn2.setEnabled(false);
+//		btn3.setEnabled(false);
 		txtTitle = new JLabel("가장 많은 색을 선택해주세요");
 		font = new Font("맑은 고딕", Font.BOLD, 25);
 		txtTitle.setFont(font);
 		txtTitle.setForeground(Color.black);
 		txtTitle.setBounds(215, 50, 500, 100);
-		bgImgPan.add(ght);
-		ght.setBounds(100, 100, 820, 530);
+//		bgImgPan.add(ght);
+//		ght.setBounds(100, 100, 820, 530);
 		bgSKPan.add(colorPan);
 		bgSKPan.add(txtTitle);
 		bgSKPan.add(btn1);
 		bgSKPan.add(btn2);
 		bgSKPan.add(btn3);
 		bgImgPan.add(bgSKPan);
+//		btn1.removeMouseListener(this);
+//		btn2.removeMouseListener(this);
+//		btn3.removeMouseListener(this);
 		
-		ght.exit.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				btn1.addMouseListener(listener);
-				btn2.addMouseListener(listener);
-				btn3.addMouseListener(listener);
-				btn1.setEnabled(true);
-				btn2.setEnabled(true);
-				btn3.setEnabled(true);
-				
-				ght.setVisible(false);
-			}
-		});
+//		ght.exit.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				btn1.addMouseListener(MaxColorPanel.this);
+//				btn2.addMouseListener(MaxColorPanel.this);
+//				btn3.addMouseListener(MaxColorPanel.this);
+//				btn1.setEnabled(true);
+//				btn2.setEnabled(true);
+//				btn3.setEnabled(true);
+//				
+//				ght.setVisible(false);
+//			}
+//		});
 		
 		this.add(bgImgPan);
 	}
@@ -166,8 +178,6 @@ public class MaxColorPanel extends GameView  {
 		
 		
 		JButton btn = (JButton)e.getSource();
-//		System.out.println("text => " + btn.getText());
-//		System.out.println(btn.equals(btn2));
 		if ("btn1".equals(btn.getText())) {
 //			System.out.println("btn1");
 			if ("RED".equals(mcc.ans)) {
@@ -212,7 +222,11 @@ public class MaxColorPanel extends GameView  {
 			}
 		}
 		
-		next();
+		if((e.getSource() instanceof JButton)&&(e.getSource() != pauseBtn)) {
+			System.out.println("버튼");
+			next();
+		}
+		
 		
 		if(e.getSource() == pauseBtn) {
 			int yn = JOptionPane.showConfirmDialog(this, "게임을 종료하시겠습니까? ","확인",JOptionPane.YES_NO_OPTION);
@@ -250,46 +264,79 @@ public class MaxColorPanel extends GameView  {
 				});
 				timer.start();
 	}
-	class MyMouseListener implements MouseListener {
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			btn1 = (JButton) e.getSource();
-			btn1.setBorder(new LineBorder(Color.black, 2));
-			btn2 = (JButton) e.getSource();
-			btn2.setBorder(new LineBorder(Color.black, 2));
-			btn3 = (JButton) e.getSource();
-			btn3.setBorder(new LineBorder(Color.black, 2));
-		}
-		
-		@Override 
-		public void mouseExited(MouseEvent e) {
-			btn1 = (JButton) e.getSource();
-			btn1.setBorder(new LineBorder(Color.black, 0));
-			btn2 = (JButton) e.getSource();
-			btn2.setBorder(new LineBorder(Color.black, 0));
-			btn3 = (JButton) e.getSource();
-			btn3.setBorder(new LineBorder(Color.black, 0));
-		}
-		
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			
-		}
-		
-		@Override
-		public void mousePressed(MouseEvent e) {
-			
-		}
-		
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			
-		}
-	}
+//	class MyMouseListener implements MouseListener {
+//		@Override
+//		public void mouseEntered(MouseEvent e) {
+//			btn1 = (JButton) e.getSource();
+//			btn1.setBorder(new LineBorder(Color.black, 2));
+//			btn2 = (JButton) e.getSource();
+//			btn2.setBorder(new LineBorder(Color.black, 2));
+//			btn3 = (JButton) e.getSource();
+//			btn3.setBorder(new LineBorder(Color.black, 2));
+//		}
+//		
+//		@Override 
+//		public void mouseExited(MouseEvent e) {
+//			btn1 = (JButton) e.getSource();
+//			btn1.setBorder(new LineBorder(Color.black, 0));
+//			btn2 = (JButton) e.getSource();
+//			btn2.setBorder(new LineBorder(Color.black, 0));
+//			btn3 = (JButton) e.getSource();
+//			btn3.setBorder(new LineBorder(Color.black, 0));
+//		}
+//		
+//		@Override
+//		public void mouseClicked(MouseEvent e) {
+//			
+//		}
+//		
+//		@Override
+//		public void mousePressed(MouseEvent e) {
+//			
+//		}
+//		
+//		@Override
+//		public void mouseReleased(MouseEvent e) {
+//			
+//		}
+//	}
 	
 	@Override
 	public String toString() {
 		return MaxColor;
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		btn1 = (JButton) e.getSource();
+		btn1.setBorder(new LineBorder(Color.black, 2));
+		btn2 = (JButton) e.getSource();
+		btn2.setBorder(new LineBorder(Color.black, 2));
+		btn3 = (JButton) e.getSource();
+		btn3.setBorder(new LineBorder(Color.black, 2));
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		btn1 = (JButton) e.getSource();
+		btn1.setBorder(new LineBorder(Color.black, 0));
+		btn2 = (JButton) e.getSource();
+		btn2.setBorder(new LineBorder(Color.black, 0));
+		btn3 = (JButton) e.getSource();
+		btn3.setBorder(new LineBorder(Color.black, 0));
 	}
 
 }

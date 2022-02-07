@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class GraphPanel extends JPanel {
+public class GraphPanel2 extends JPanel {
    private int padding = 35;
    private int labelPadding = 15;// 라벨 패딩
    private Color lineColor = new Color(44, 102, 230, 180);
@@ -39,7 +39,7 @@ public class GraphPanel extends JPanel {
 	   avg.put(90,75);
    }
    
-   public GraphPanel(List<Double> scores, List<String> date, int age) {
+   public GraphPanel2(List<Double> scores, List<String> date, int age) {
       this.scores = scores;
       this.date = date;	
       this.setBackground(Color.white);

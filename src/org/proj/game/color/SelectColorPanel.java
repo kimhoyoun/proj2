@@ -31,11 +31,9 @@ public class SelectColorPanel extends GameView {
 	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
 	JButton pauseBtn = new JButton(pauseIcon);
 	
-	private JButton btn1 = new JButton("btn1");
-	private JButton btn2 = new JButton("btn2");
-	private JButton btn3 = new JButton("btn3");
-	
-	
+	 JButton btn1;
+	 JButton btn2;
+	 JButton btn3;
 	
 	private Color color;
 	private EmptyBorder b1;
@@ -59,10 +57,12 @@ public class SelectColorPanel extends GameView {
 	SelectColorConsole scc;
 	public SelectColorPanel() {
 		pauseBtn.addActionListener(this);
-		btn1.addActionListener(this);
-		btn2.addActionListener(this);
-		btn3.addActionListener(this);
+//		btn1.addActionListener(this);
+//		btn2.addActionListener(this);
+//		btn3.addActionListener(this);
 	}
+	
+	
 	@Override
 	public void display() {
 		scc = new SelectColorConsole();
@@ -76,6 +76,8 @@ public class SelectColorPanel extends GameView {
 		pauseBtn.setBorderPainted(false);    // 버튼의 외곽 투명하게 
 		pauseBtn.setContentAreaFilled(false);  // 만들어 주는 것
 		this.add(pauseBtn);
+		
+		
 		bgImg = new ImageIcon("images/gamebg.png");
 		bgImgPan = new JLabel(bgImg);
 		bgImgPan.setSize(1024, 768);
@@ -84,10 +86,12 @@ public class SelectColorPanel extends GameView {
 		bgSKPan = new JLabel(bgSK);
 		bgSKPan.setBounds(150, 150, 720, 425);
 
-		
-//		btn1.setForeground(scc.col[scc.arrBtn[0]]); // 버튼색과 버튼 텍스트 같게 하기
-//		btn2.setForeground(scc.col[scc.arrBtn[1]]);
-//		btn3.setForeground(scc.col[scc.arrBtn[2]]);
+		 btn1 = new JButton("btn1");
+		  btn2 = new JButton("btn2");
+		  btn3 = new JButton("btn3");
+		btn1.setFocusPainted(false);
+		btn2.setFocusPainted(false);
+		btn3.setFocusPainted(false);
 		color = new Color(0,0,0,0);
 		btn1.setForeground(color);
 		btn2.setForeground(color);
@@ -102,13 +106,16 @@ public class SelectColorPanel extends GameView {
 		btn1.setBackground(scc.col[scc.arrBtn[0]]);
 		btn2.setBackground(scc.col[scc.arrBtn[1]]);
 		btn3.setBackground(scc.col[scc.arrBtn[2]]);
-		
+		btn1.addActionListener(this);
+		btn2.addActionListener(this);
+		btn3.addActionListener(this);
 		
 		MyMouseListener listener = new MyMouseListener();
 		btn1.addMouseListener(listener);
 		btn2.addMouseListener(listener);
 		btn3.addMouseListener(listener);
-
+//		btnSet();
+		
 		checkIcon = new ImageIcon("images/o.png");
 		checkLabel = new JLabel(checkIcon);
 		xIcon = new ImageIcon("images/x.png");
@@ -120,7 +127,8 @@ public class SelectColorPanel extends GameView {
 		xLabel.setBounds(670, 65, 150, 150);
 		this.add(xLabel);
 		xLabel.setVisible(false);
-
+//		checkIconSet();
+		
 		if (scc.ansColor == 0) {
 			txtColor = new JLabel("빨간색");
 		} else if (scc.ansColor == 1) {
@@ -146,19 +154,37 @@ public class SelectColorPanel extends GameView {
 		txtTitle.setFont(font2);
 		txtTitle.setForeground(Color.black);
 		txtTitle.setBounds(220, 25, 500, 100);
+//		answerSet();
 
 		bgSKPan.add(txtTitle);
 		bgSKPan.add(txtColor);
 		bgSKPan.add(btn1);
 		bgSKPan.add(btn2);
 		bgSKPan.add(btn3);
+		
 		bgImgPan.add(bgSKPan);
 		this.add(bgImgPan);
 	}
+	
+	
+	private void answerSet() {
+		
+	}
 
+
+	private void checkIconSet() {
+	
+	}
+
+
+	public void btnSet() {
+		
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton)e.getSource();
+		
 		if ("btn1".equals(btn.getText())) {
 			if (scc.ansColor == scc.arrBtn[0]) {
 				gameNum++;
@@ -173,7 +199,20 @@ public class SelectColorPanel extends GameView {
 				repaint();
 			}
 		}
-
+//		if (e.getSource() == btn1) {
+//			if (scc.ansColor == scc.arrBtn[0]) {
+//				gameNum++;
+//				gametrue++;
+//				checkLabel.setVisible(true);
+//				revalidate();
+//				repaint();
+//			} else {
+//				gameNum++;
+//				xLabel.setVisible(true);
+//				revalidate();
+//				repaint();
+//			}
+//		}
 		if ("btn2".equals(btn.getText())) {
 			if (scc.ansColor == scc.arrBtn[1]) {
 				gameNum++;

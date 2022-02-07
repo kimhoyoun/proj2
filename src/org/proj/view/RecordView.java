@@ -19,12 +19,12 @@ public class RecordView extends GameView{
 	ImageIcon backgroundImg;
 	JLabel background;
 	
-	JButton pulusminusRecordBtn = new RoundJButton("PlusMinus");
-	JButton cardRecordBtn = new RoundJButton("Card");
-	JButton cupRecordBtn = new RoundJButton("Ball");
-	JButton lifeRecordBtn = new RoundJButton("Life");
-	 JButton colorRecordBtn = new RoundJButton("Color");
-	JButton backBtn = new RoundJButton("Back");
+	JButton pulusminusRecordBtn = new JButton(new ImageIcon("images/icon_plusminus.png"));
+	JButton cardRecordBtn = new JButton(new ImageIcon("images/icon_card.png"));
+	JButton cupRecordBtn = new JButton(new ImageIcon("images/icon_cup.png"));
+	JButton lifeRecordBtn = new JButton(new ImageIcon("images/icon_life.png"));
+	JButton colorRecordBtn = new JButton(new ImageIcon("images/icon_color.png"));
+	JButton backBtn = new JButton(new ImageIcon("images/icon_home2.png"));
 	
 	public RecordView() {
 		backBtn.addActionListener(this);
@@ -62,13 +62,27 @@ public class RecordView extends GameView{
 		background.add(title);
 //		pulusminusGameBtn.setBounds(getVisibleRect());
 		title.setBounds(30, 20, 200,40);
+		
+		pulusminusRecordBtn.setBorderPainted(false);    
+		pulusminusRecordBtn.setContentAreaFilled(false);
+		cardRecordBtn.setBorderPainted(false);    
+		cardRecordBtn.setContentAreaFilled(false);
+		cupRecordBtn.setBorderPainted(false);    
+		cupRecordBtn.setContentAreaFilled(false);
+		lifeRecordBtn.setBorderPainted(false);    
+		lifeRecordBtn.setContentAreaFilled(false);
+		colorRecordBtn.setBorderPainted(false);    
+		colorRecordBtn.setContentAreaFilled(false);
+		backBtn.setBorderPainted(false);    
+		backBtn.setContentAreaFilled(false);
+		
 		pulusminusRecordBtn.setBounds(FRAME_WIDTH/2-150/2-380, FRAME_HEIGHT/2-160,150,256);
 		cardRecordBtn.setBounds(FRAME_WIDTH/2-150/2-190, FRAME_HEIGHT/2-160,150,256);
 		cupRecordBtn.setBounds(FRAME_WIDTH/2-150/2, FRAME_HEIGHT/2-160,150,256);
 		lifeRecordBtn.setBounds(FRAME_WIDTH/2-150/2+190, FRAME_HEIGHT/2-160,150,256);
 		colorRecordBtn.setBounds(FRAME_WIDTH/2-150/2+380, FRAME_HEIGHT/2-160,150,256);
 		
-		backBtn.setBounds(30, FRAME_HEIGHT-130,150,80);
+		backBtn.setBounds(10, FRAME_HEIGHT-150,100,100);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

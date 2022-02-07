@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 
 import javax.swing.Action;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class RoundJButton extends JButton{
@@ -30,7 +31,7 @@ public class RoundJButton extends JButton{
 		super(icon);
 		decorate();
 	}
-
+	
 	public RoundJButton(String text, Icon icon) {
 		super(text, icon);
 		decorate();

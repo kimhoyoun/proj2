@@ -16,13 +16,12 @@ import javax.swing.JPanel;
 import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.model.GameDataDto;
-import org.proj.test.GraphPanel;
 import org.proj.test.JavaFXGraph;
 
 public class GameRecordView extends GameView {
 	ImageIcon backgroundImg;
 	JLabel background;
-	JButton backBtn = new RoundJButton("Back");
+	JButton backBtn = new JButton(new ImageIcon("images/icon_record2.png"));
 	GraphPanel graph;
 	JPanel graphPane;
 	JPanel textPane;
@@ -70,9 +69,11 @@ public class GameRecordView extends GameView {
 		background.add(graphPane);
 		background.add(textPane);
 		
+		backBtn.setBorderPainted(false);    
+		backBtn.setContentAreaFilled(false);
 		
 		title.setBounds(FRAME_WIDTH / 2 - 100, 20, 200, 40);
-		backBtn.setBounds(30, FRAME_HEIGHT - 130, 130, 80);
+		backBtn.setBounds(10, FRAME_HEIGHT - 150, 100, 100);
 		graphPane.setBounds(20,80, 730,430);
 		textPane.setBounds(200,530, 730,180);
 		text.setText(String.format("현재 %d대 평균보다 %d번 미달 났습니다!", (mainUser.getAge()/10)*10,underAvgNum));
@@ -85,8 +86,6 @@ public class GameRecordView extends GameView {
 		}
 		int age = (mainUser.getAge()/10)*10;
 		graph = new GraphPanel(score, date, age);
-		
-//		fx.display();
 		
 	}
 	

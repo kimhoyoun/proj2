@@ -7,8 +7,11 @@ import static org.proj.Resource.*;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,24 +26,25 @@ import org.proj.model.UserDto;
 public class MainView extends GameView{
 	ImageIcon backgroundImg;
 	JLabel background;
-	JButton settingBtn = new JButton("!");
-	JButton updateBtn = new JButton("!");
+	JButton settingBtn = new JButton(new ImageIcon("images/icon_setting2.png"));
+	JButton updateBtn = new JButton(new ImageIcon("images/icon_setting3.png"));
 	JButton profileCancelBtn = new JButton("돌아가기");
 	boolean updateBtnStatedb = false;
 	
+	// 수정 시작
 	JPanel profile = new JPanel();
 	
 	JPanel profileUpdate;
 	
-	JButton pulusminusGameBtn = new RoundJButton("PlusMinus");
-	JButton cardGameBtn = new RoundJButton("Card");
-	JButton cupGameBtn = new RoundJButton("Ball");
-	JButton lifeGameBtn = new RoundJButton("Life");
-	JButton colorGameBtn = new RoundJButton("Color");
-	JButton recordBtn = new RoundJButton("Record");
-	JButton exitBtn = new RoundJButton("Exit");
+	JButton pulusminusGameBtn = new JButton(new ImageIcon("images/icon_plusminus.png"));
+	JButton cardGameBtn = new JButton(new ImageIcon("images/icon_card.png"));
+	JButton cupGameBtn = new JButton(new ImageIcon("images/icon_cup.png"));
+	JButton lifeGameBtn = new JButton(new ImageIcon("images/icon_life.png"));
+	JButton colorGameBtn = new JButton(new ImageIcon("images/icon_color.png"));
+	JButton recordBtn = new JButton(new ImageIcon("images/icon_record2.png"));
+	JButton exitBtn = new JButton(new ImageIcon("images/icon_logout2.png"));
 	
-JButton profileOkBtn = new JButton("수정");
+	JButton profileOkBtn = new JButton("수정");
 	String userIddb;
 	String userNamedb;
 	String userPassdb;
@@ -103,6 +107,9 @@ JButton profileOkBtn = new JButton("수정");
 		infotagdb.setBounds(25,35,170,40);
 		settingBtn.setBounds(160,10,30,30);
 		
+		settingBtn.setBorderPainted(false);    
+		settingBtn.setContentAreaFilled(false);
+		
 		background.add(profileUpdate);
 		background.add(profile);
 		background.add(pulusminusGameBtn);
@@ -119,19 +126,33 @@ JButton profileOkBtn = new JButton("수정");
 		profileUpdate.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
 		profileUpdate.setVisible(false);
 		
+		pulusminusGameBtn.setBorderPainted(false);    
+		pulusminusGameBtn.setContentAreaFilled(false);
+		cardGameBtn.setBorderPainted(false);    
+		cardGameBtn.setContentAreaFilled(false);
+		cupGameBtn.setBorderPainted(false);    
+		cupGameBtn.setContentAreaFilled(false);
+		lifeGameBtn.setBorderPainted(false);    
+		lifeGameBtn.setContentAreaFilled(false);
+		colorGameBtn.setBorderPainted(false);    
+		colorGameBtn.setContentAreaFilled(false);
+		recordBtn.setBorderPainted(false);    
+		recordBtn.setContentAreaFilled(false);
+		exitBtn.setBorderPainted(false);    
+		exitBtn.setContentAreaFilled(false);
+		
+		
 		pulusminusGameBtn.setBounds(FRAME_WIDTH/2-150/2-380, FRAME_HEIGHT/2-160,150,256);
 		cardGameBtn.setBounds(FRAME_WIDTH/2-150/2-190, FRAME_HEIGHT/2-160,150,256);
 		cupGameBtn.setBounds(FRAME_WIDTH/2-150/2, FRAME_HEIGHT/2-160,150,256);
 		lifeGameBtn.setBounds(FRAME_WIDTH/2-150/2+190, FRAME_HEIGHT/2-160,150,256);
 		colorGameBtn.setBounds(FRAME_WIDTH/2-150/2+380, FRAME_HEIGHT/2-160,150,256);
 		
-		recordBtn.setBounds(FRAME_WIDTH-180, 10,150,80);
-		exitBtn.setBounds(FRAME_WIDTH-180, FRAME_HEIGHT-130,150,80);
+//		recordBtn.setBounds(FRAME_WIDTH-180, 10,150,80);
+//		exitBtn.setBounds(FRAME_WIDTH-180, FRAME_HEIGHT-130,150,80);
+		recordBtn.setBounds(FRAME_WIDTH-120, 10,100,100);
+		exitBtn.setBounds(FRAME_WIDTH-120, FRAME_HEIGHT-150,100,100);
 		
-//		settingBtn.addActionListener(this);
-//		profileOkBtn.addActionListener(this);
-//		profileCancelBtn.addActionListener(this);
-//		updateBtn.addActionListener(this);
 	}
 	
 	@Override
@@ -340,6 +361,9 @@ JButton profileOkBtn = new JButton("수정");
 		textid.setBounds(100,140, 120, 25);
 		textpass.setBounds(100,180, 120, 25);
 		textage.setBounds(100,220, 120, 25);
+		
+		updateBtn.setBorderPainted(false);    
+		updateBtn.setContentAreaFilled(false);
 		
 		updateBtn.setBounds(250,10,40,40);
 		profileOkBtn.setBounds(10,290,120,50);

@@ -42,16 +42,12 @@ public class PlusMinus extends GameView {
 //	int endGameNum = 2;
 	
 	public PlusMinus() {
-		choiceBtn[0] = new RoundJButton();
-		choiceBtn[1] = new RoundJButton();
-		choiceBtn[2] = new RoundJButton();
-		choiceBtn[3] = new RoundJButton();
-		
+//		choiceBtn[0] = new RoundJButton();
+//		choiceBtn[1] = new RoundJButton();
+//		choiceBtn[2] = new RoundJButton();
+//		choiceBtn[3] = new RoundJButton();
+
 		pauseBtn.addActionListener(this);
-		choiceBtn[0].addActionListener(this);
-		choiceBtn[1].addActionListener(this);
-		choiceBtn[2].addActionListener(this);
-		choiceBtn[3].addActionListener(this);
 //		display();
 	}
 
@@ -81,7 +77,7 @@ public class PlusMinus extends GameView {
 
 		choiceBtn = new JButton[4];
 		for (int i = 0; i < gp.answerArr.length; i++) {
-//			choiceBtn[i] = new RoundJButton();
+			choiceBtn[i] = new RoundJButton();
 			choiceBtn[i].setText(Integer.toString(gp.answerArr[i]));
 			choiceBtn[i].setBackground(Color.orange);
 			choiceBtn[i].setFont(new Font("Gothic", Font.BOLD, 70));
@@ -125,10 +121,10 @@ public class PlusMinus extends GameView {
 
 		this.add(bgLabel);
 
-//		choiceBtn[0].addActionListener(this);
-//		choiceBtn[1].addActionListener(this);
-//		choiceBtn[2].addActionListener(this);
-//		choiceBtn[3].addActionListener(this);
+		choiceBtn[0].addActionListener(this);
+		choiceBtn[1].addActionListener(this);
+		choiceBtn[2].addActionListener(this);
+		choiceBtn[3].addActionListener(this);
 		
 	}
 	
