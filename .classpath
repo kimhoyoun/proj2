@@ -7,5 +7,13 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/hoyou/OneDrive/바탕 화면/수업자료/수업(국비)/Java/work/projectTest2/mariadb-java-client-2.4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hoyou/OneDrive/바탕 화면/수업자료/수업(국비)/Java/jar/javafx-sdk-17.0.1/javafx-sdk-17.0.1/lib/javafx.base.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hoyou/OneDrive/바탕 화면/수업자료/수업(국비)/Java/jar/javafx-sdk-17.0.1/javafx-sdk-17.0.1/lib/javafx.controls.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hoyou/OneDrive/바탕 화면/수업자료/수업(국비)/Java/jar/javafx-sdk-17.0.1/javafx-sdk-17.0.1/lib/javafx.fxml.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hoyou/OneDrive/바탕 화면/수업자료/수업(국비)/Java/jar/javafx-sdk-17.0.1/javafx-sdk-17.0.1/lib/javafx.graphics.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hoyou/OneDrive/바탕 화면/수업자료/수업(국비)/Java/jar/javafx-sdk-17.0.1/javafx-sdk-17.0.1/lib/javafx.media.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hoyou/OneDrive/바탕 화면/수업자료/수업(국비)/Java/jar/javafx-sdk-17.0.1/javafx-sdk-17.0.1/lib/javafx.swing.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hoyou/OneDrive/바탕 화면/수업자료/수업(국비)/Java/jar/javafx-sdk-17.0.1/javafx-sdk-17.0.1/lib/javafx.web.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hoyou/OneDrive/바탕 화면/수업자료/수업(국비)/Java/jar/javafx-sdk-17.0.1/javafx-sdk-17.0.1/lib/javafx-swt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

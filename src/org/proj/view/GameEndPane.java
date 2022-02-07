@@ -87,7 +87,7 @@ public class GameEndPane extends GameView {
 			gameNum = 0;
 			gametrue = 0;
 			break;
-		case BALL:
+		case CUP:
 			mainGameData.setTotalGame3(mainGameData.getAnsGame3()+gameNum);
 			mainGameData.setAnsGame3(mainGameData.getAnsGame3()+gametrue);
 			gameNum = 0;

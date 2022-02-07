@@ -53,8 +53,9 @@ public class Controller {
 		map.put(MainPage, MainView);
 		map.put(RECORD, RecordView);
 		map.put(PlusMinus, PlusMinusGAME);
-		map.put(LIFE, LifeGame);
 		map.put(CARD, CardGame);
+		map.put(CUP, CupGame);
+		map.put(LIFE, LifeGame);
 		map.put(SelectColor, SelectColorGame);
 		map.put(MaxColor, MaxColorGame);
 		map.put(GameRecordPage, GameRecord);

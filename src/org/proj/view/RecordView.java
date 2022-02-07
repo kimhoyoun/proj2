@@ -21,14 +21,19 @@ public class RecordView extends GameView{
 	
 	JButton pulusminusRecordBtn = new RoundJButton("PlusMinus");
 	JButton cardRecordBtn = new RoundJButton("Card");
-	JButton ballRecordBtn = new RoundJButton("Ball");
+	JButton cupRecordBtn = new RoundJButton("Ball");
 	JButton lifeRecordBtn = new RoundJButton("Life");
 	 JButton colorRecordBtn = new RoundJButton("Color");
 	JButton backBtn = new RoundJButton("Back");
 	
-//	public RecordView() {
-//		display();
-//	}
+	public RecordView() {
+		backBtn.addActionListener(this);
+		pulusminusRecordBtn.addActionListener(this);
+		cardRecordBtn.addActionListener(this);
+		cupRecordBtn.addActionListener(this);
+		lifeRecordBtn.addActionListener(this);
+		colorRecordBtn.addActionListener(this);
+	}
 	
 	@Override
 	public void display() {
@@ -42,12 +47,6 @@ public class RecordView extends GameView{
 		
 		displaySetting();
 		
-		backBtn.addActionListener(this);
-		pulusminusRecordBtn.addActionListener(this);
-		cardRecordBtn.addActionListener(this);
-		ballRecordBtn.addActionListener(this);
-		lifeRecordBtn.addActionListener(this);
-		colorRecordBtn.addActionListener(this);
 	}
 	
 	
@@ -56,7 +55,7 @@ public class RecordView extends GameView{
 		title.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 		background.add(pulusminusRecordBtn);
 		background.add(cardRecordBtn);
-		background.add(ballRecordBtn);
+		background.add(cupRecordBtn);
 		background.add(lifeRecordBtn);
 		background.add(colorRecordBtn);
 		background.add(backBtn);
@@ -65,7 +64,7 @@ public class RecordView extends GameView{
 		title.setBounds(30, 20, 200,40);
 		pulusminusRecordBtn.setBounds(FRAME_WIDTH/2-150/2-380, FRAME_HEIGHT/2-160,150,256);
 		cardRecordBtn.setBounds(FRAME_WIDTH/2-150/2-190, FRAME_HEIGHT/2-160,150,256);
-		ballRecordBtn.setBounds(FRAME_WIDTH/2-150/2, FRAME_HEIGHT/2-160,150,256);
+		cupRecordBtn.setBounds(FRAME_WIDTH/2-150/2, FRAME_HEIGHT/2-160,150,256);
 		lifeRecordBtn.setBounds(FRAME_WIDTH/2-150/2+190, FRAME_HEIGHT/2-160,150,256);
 		colorRecordBtn.setBounds(FRAME_WIDTH/2-150/2+380, FRAME_HEIGHT/2-160,150,256);
 		
@@ -88,8 +87,8 @@ public class RecordView extends GameView{
 			Controller c = Controller.getController();
 			c.Viewchange(GameRecordPage);
 		}
-		if(e.getSource() == ballRecordBtn) {
-			gameRecord = BALL;
+		if(e.getSource() == cupRecordBtn) {
+			gameRecord = CUP;
 			Controller c = Controller.getController();
 			c.Viewchange(GameRecordPage);
 		}

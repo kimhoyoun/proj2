@@ -34,7 +34,7 @@ public class MainView extends GameView{
 	
 	JButton pulusminusGameBtn = new RoundJButton("PlusMinus");
 	JButton cardGameBtn = new RoundJButton("Card");
-	JButton ballGameBtn = new RoundJButton("Ball");
+	JButton cupGameBtn = new RoundJButton("Ball");
 	JButton lifeGameBtn = new RoundJButton("Life");
 	JButton colorGameBtn = new RoundJButton("Color");
 	JButton recordBtn = new RoundJButton("Record");
@@ -58,7 +58,7 @@ JButton profileOkBtn = new JButton("수정");
 		exitBtn.addActionListener(this);
 		pulusminusGameBtn.addActionListener(this);
 		cardGameBtn.addActionListener(this);
-		ballGameBtn.addActionListener(this);
+		cupGameBtn.addActionListener(this);
 		lifeGameBtn.addActionListener(this);
 		colorGameBtn.addActionListener(this);
 		
@@ -107,7 +107,7 @@ JButton profileOkBtn = new JButton("수정");
 		background.add(profile);
 		background.add(pulusminusGameBtn);
 		background.add(cardGameBtn);
-		background.add(ballGameBtn);
+		background.add(cupGameBtn);
 		background.add(lifeGameBtn);
 		background.add(colorGameBtn);
 		background.add(recordBtn);
@@ -121,7 +121,7 @@ JButton profileOkBtn = new JButton("수정");
 		
 		pulusminusGameBtn.setBounds(FRAME_WIDTH/2-150/2-380, FRAME_HEIGHT/2-160,150,256);
 		cardGameBtn.setBounds(FRAME_WIDTH/2-150/2-190, FRAME_HEIGHT/2-160,150,256);
-		ballGameBtn.setBounds(FRAME_WIDTH/2-150/2, FRAME_HEIGHT/2-160,150,256);
+		cupGameBtn.setBounds(FRAME_WIDTH/2-150/2, FRAME_HEIGHT/2-160,150,256);
 		lifeGameBtn.setBounds(FRAME_WIDTH/2-150/2+190, FRAME_HEIGHT/2-160,150,256);
 		colorGameBtn.setBounds(FRAME_WIDTH/2-150/2+380, FRAME_HEIGHT/2-160,150,256);
 		
@@ -140,7 +140,7 @@ JButton profileOkBtn = new JButton("수정");
 			
 			pulusminusGameBtn.setEnabled(false);
 			cardGameBtn.setEnabled(false);
-			ballGameBtn.setEnabled(false);
+			cupGameBtn.setEnabled(false);
 			lifeGameBtn.setEnabled(false);
 			colorGameBtn.setEnabled(false);
 			recordBtn.setEnabled(false);
@@ -204,7 +204,7 @@ JButton profileOkBtn = new JButton("수정");
 		if(e.getSource() == profileCancelBtn) {
 			pulusminusGameBtn.setEnabled(true);
 			cardGameBtn.setEnabled(true);
-			ballGameBtn.setEnabled(true);
+			cupGameBtn.setEnabled(true);
 			lifeGameBtn.setEnabled(true);
 			colorGameBtn.setEnabled(true);
 			recordBtn.setEnabled(true);
@@ -246,17 +246,23 @@ JButton profileOkBtn = new JButton("수정");
 			c.Viewchange(PlusMinus);
 		}
 		
+		if(e.getSource() == cardGameBtn) {
+			GameState = MiniGame;
+			Controller c = Controller.getController();
+			c.Viewchange(CARD);
+		}
+		
+		if(e.getSource() == cupGameBtn) {
+			GameState = MiniGame;
+			Controller c = Controller.getController();
+			c.Viewchange(CUP);
+		}
 		if(e.getSource() == lifeGameBtn) {
 			GameState = MiniGame;
 			Controller c = Controller.getController();
 			c.Viewchange(LIFE);
 		}
 		
-		if(e.getSource() == cardGameBtn) {
-			GameState = MiniGame;
-			Controller c = Controller.getController();
-			c.Viewchange(CARD);
-		}
 		
 		if(e.getSource() == colorGameBtn) {
 			GameState = MiniGame;

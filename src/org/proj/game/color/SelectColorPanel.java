@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -26,10 +27,15 @@ public class SelectColorPanel extends GameView {
 
 	private ImageIcon bgSK;
 	private JLabel bgSKPan;
-
-	private JButton btn1;
-	private JButton btn2;
-	private JButton btn3;
+	
+	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
+	JButton pauseBtn = new JButton(pauseIcon);
+	
+	private JButton btn1 = new JButton("btn1");
+	private JButton btn2 = new JButton("btn2");
+	private JButton btn3 = new JButton("btn3");
+	
+	
 	
 	private Color color;
 	private EmptyBorder b1;
@@ -51,7 +57,12 @@ public class SelectColorPanel extends GameView {
 	private int y = (int) (h / 2);
 
 	SelectColorConsole scc;
-	
+	public SelectColorPanel() {
+		pauseBtn.addActionListener(this);
+		btn1.addActionListener(this);
+		btn2.addActionListener(this);
+		btn3.addActionListener(this);
+	}
 	@Override
 	public void display() {
 		scc = new SelectColorConsole();
@@ -61,6 +72,10 @@ public class SelectColorPanel extends GameView {
 		resultPane.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
 		resultPane.setVisible(false);
 		
+		pauseBtn.setBounds(920, 30, 50, 50);
+		pauseBtn.setBorderPainted(false);    // 버튼의 외곽 투명하게 
+		pauseBtn.setContentAreaFilled(false);  // 만들어 주는 것
+		this.add(pauseBtn);
 		bgImg = new ImageIcon("images/gamebg.png");
 		bgImgPan = new JLabel(bgImg);
 		bgImgPan.setSize(1024, 768);
@@ -69,9 +84,7 @@ public class SelectColorPanel extends GameView {
 		bgSKPan = new JLabel(bgSK);
 		bgSKPan.setBounds(150, 150, 720, 425);
 
-		btn1 = new JButton("btn1");
-		btn2 = new JButton("btn2");
-		btn3 = new JButton("btn3");
+		
 //		btn1.setForeground(scc.col[scc.arrBtn[0]]); // 버튼색과 버튼 텍스트 같게 하기
 //		btn2.setForeground(scc.col[scc.arrBtn[1]]);
 //		btn3.setForeground(scc.col[scc.arrBtn[2]]);
@@ -89,9 +102,7 @@ public class SelectColorPanel extends GameView {
 		btn1.setBackground(scc.col[scc.arrBtn[0]]);
 		btn2.setBackground(scc.col[scc.arrBtn[1]]);
 		btn3.setBackground(scc.col[scc.arrBtn[2]]);
-		btn1.addActionListener(this);
-		btn2.addActionListener(this);
-		btn3.addActionListener(this);
+		
 		
 		MyMouseListener listener = new MyMouseListener();
 		btn1.addMouseListener(listener);
@@ -194,6 +205,17 @@ public class SelectColorPanel extends GameView {
 		}
 		
 		next();
+		
+		if(e.getSource() == pauseBtn) {
+			int yn = JOptionPane.showConfirmDialog(this, "게임을 종료하시겠습니까? ","확인",JOptionPane.YES_NO_OPTION);
+			
+			if(yn==0) {
+				Controller c = Controller.getController();
+				gameNum = 0;
+				gametrue = 0;
+				c.Viewchange(MainPage);
+			}
+		}
 	}
 	public void next() {
 		// 딜레이 1.5초 주고 다음게임 시작

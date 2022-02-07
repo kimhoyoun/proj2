@@ -22,13 +22,6 @@ import javax.swing.JOptionPane;
 public class MainFrame extends JFrame{
 	
 	Container contentPane;
-	private Socket socket = null;
-	public ObjectInputStream ois;
-	public ObjectOutputStream oos;
-	public String req;
-	public String resp;
-	public String msg;
-	boolean signupState = false;
 
 	public MainFrame() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -36,11 +29,6 @@ public class MainFrame extends JFrame{
 		contentPane = getContentPane();
 		contentPane.setLayout(null);
 
-//		loginView.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-//		contentPane.add(loginView);
-//		this.setVisible(true);
-//		NowView = loginView;
-		
 		displayView(LoginView);
 
 	}
@@ -55,7 +43,6 @@ public class MainFrame extends JFrame{
 	
 	
 	public void changeView(GameView gc) {
-//		contentPane.remove(NowView);
 		contentPane.removeAll();
 		contentPane.add(gc);
 		gc.removeAll();
@@ -66,7 +53,4 @@ public class MainFrame extends JFrame{
 		repaint();
 	}
 
-//	public static void main(String[] args) {
-//		new MainFrame();
-//	}
 }

@@ -17,6 +17,7 @@ import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.model.GameDataDto;
 import org.proj.test.GraphPanel;
+import org.proj.test.JavaFXGraph;
 
 public class GameRecordView extends GameView {
 	ImageIcon backgroundImg;
@@ -25,6 +26,7 @@ public class GameRecordView extends GameView {
 	GraphPanel graph;
 	JPanel graphPane;
 	JPanel textPane;
+	JavaFXGraph fx = new JavaFXGraph();
 	
 	private List<Double> score;
 	private List<String> date;
@@ -56,6 +58,8 @@ public class GameRecordView extends GameView {
 		text.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		graphPane.add(graph);
 		graph.setBounds(15, 15, 700, 400);
+//		graphPane.add(fx);
+//		fx.setBounds(15, 15, 700, 400);
 		
 		text.setHorizontalAlignment(JLabel.CENTER);
 		textPane.add(text);
@@ -81,6 +85,8 @@ public class GameRecordView extends GameView {
 		}
 		int age = (mainUser.getAge()/10)*10;
 		graph = new GraphPanel(score, date, age);
+		
+//		fx.display();
 		
 	}
 	
@@ -112,7 +118,7 @@ public class GameRecordView extends GameView {
 					score.add(0.0);
 				}
 				break;
-			case BALL:
+			case CUP:
 				if(data.getTotalGame3()!=0) {
 					score.add(((double)data.getAnsGame3()/data.getTotalGame3())*100);
 				}else {

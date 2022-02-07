@@ -54,8 +54,10 @@ public class GraphPanel extends JPanel {
    }
 
    @Override
-   protected void paintComponent(Graphics g) { // 스윙 컴포넌트가 자신의 모양을 그리는 메소드
-	  super.paintComponent(g);
+//   protected void paintComponent(Graphics g) { // 스윙 컴포넌트가 자신의 모양을 그리는 메소드
+   public void paint(Graphics g) {
+//	  super.paintComponent(g);
+	   super.paint(g);
 	  Graphics2D g2 = (Graphics2D) g; // 그림의 외곽선을 부드럽게 하기 (50~51) 줄 세트
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 

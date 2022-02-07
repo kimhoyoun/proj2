@@ -6,6 +6,7 @@ import org.proj.game.card.CardGame;
 import org.proj.game.color.ColorGame;
 import org.proj.game.color.MaxColorPanel;
 import org.proj.game.color.SelectColorPanel;
+import org.proj.game.cup.CupGamePanel;
 import org.proj.game.life.LifeGamePanel;
 import org.proj.game.plusminus.PlusMinus;
 import org.proj.model.GameDataDto;
@@ -30,7 +31,7 @@ public class Resource {
 	public static final String MainPage = "main";
 	public static final String PlusMinus = "plusminus";
 	public static final String CARD = "card";
-	public static final String BALL = "ball";
+	public static final String CUP = "cup";
 	public static final String LIFE = "life";
 	public static final String COLOR = "color";
 	public static final String SelectColor = "selectcolor";
@@ -41,7 +42,7 @@ public class Resource {
 	public static final String PlisMinusRECORD = "plusminusRecord";
 	public static final String CardRECORD = "cardRecord";
 	public static final String LifeRECORD = "lifeRecord";
-	public static final String BallRECORD = "ballRecord";
+	public static final String CupRECORD = "cupRecord";
 	public static final String ColorRECORD = "colorRecord";
 
 	
@@ -125,11 +126,11 @@ public class Resource {
 	public static GameView RecordView = new RecordView();
 	public static GameView PlusMinusGAME = new PlusMinus();
 	public static GameView LifeGame = new LifeGamePanel();
+	public static GameView CupGame = new CupGamePanel();
 	public static GameView CardGame = new CardGame();
 	public static GameView SelectColorGame = new SelectColorPanel();
 	public static GameView MaxColorGame = new MaxColorPanel();
 	public static GameView GameRecord = new GameRecordView();
-	
 	public static ColorGame RandomColorGame = new ColorGame();
 //	
 ////	public static GameContainer PlusMinisRecord = new PlusMinusRecordView();

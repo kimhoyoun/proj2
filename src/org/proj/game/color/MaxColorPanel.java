@@ -13,6 +13,7 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
@@ -22,12 +23,15 @@ import org.proj.controller.Controller;
 import org.proj.view.GameView;
 
 
-public class MaxColorPanel extends GameView {
+public class MaxColorPanel extends GameView  {
 	private ImageIcon bgImg;
 	private JLabel bgImgPan;
-
+	
 	private ImageIcon bgSK;
 	private JLabel bgSKPan;
+	
+	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
+	JButton pauseBtn = new JButton(pauseIcon);
 	
 	private ImageIcon checkIcon;
 	private ImageIcon xIcon;
@@ -36,9 +40,11 @@ public class MaxColorPanel extends GameView {
 
 	private JPanel colorPan;
 
-	private JButton btn1;
-	private JButton btn2;
-	private JButton btn3;
+	private JButton btn1 = new JButton("btn1");
+	private JButton btn2 = new JButton("btn2");
+	private JButton btn3 = new JButton("btn3");
+	
+	
 	
 	private Color color;
 	private EmptyBorder b1;
@@ -46,9 +52,14 @@ public class MaxColorPanel extends GameView {
 	private JLabel txtTitle;
 	private Font font;
 	Timer timer;
-	
+	GameHowTo ght;
 	MaxColorConsole mcc;
-	
+	public MaxColorPanel() {
+		btn1.addActionListener(this);
+		btn2.addActionListener(this);
+		btn3.addActionListener(this);
+		pauseBtn.addActionListener(this);
+	}
 	@Override
 	public void display() {
 		mcc = new MaxColorConsole();
@@ -57,7 +68,12 @@ public class MaxColorPanel extends GameView {
 		this.add(resultPane);
 		resultPane.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
 		resultPane.setVisible(false);
+		ght = new GameHowTo();
 		
+		pauseBtn.setBounds(920, 30, 50, 50);
+		pauseBtn.setBorderPainted(false);    // 버튼의 외곽 투명하게 
+		pauseBtn.setContentAreaFilled(false);  // 만들어 주는 것
+		this.add(pauseBtn);
 		bgImg = new ImageIcon("images/gamebg.png");
 		bgImgPan = new JLabel(bgImg);
 		bgImgPan.setSize(1024, 768);
@@ -90,9 +106,7 @@ public class MaxColorPanel extends GameView {
 			colorPan.add(b);
 		}
 		
-		btn1 = new JButton("btn1");
-		btn2 = new JButton("btn2");
-		btn3 = new JButton("btn3");
+		
 		color = new Color(0,0,0,0);
 		btn1.setForeground(color);
 		btn2.setForeground(color);
@@ -107,31 +121,49 @@ public class MaxColorPanel extends GameView {
 		btn1.setBackground(new Color(233, 23, 22));
 		btn2.setBackground(new Color(81, 107, 254));
 		btn3.setBackground(new Color(254, 228, 55));
-		btn1.addActionListener(this);
-		btn2.addActionListener(this);
-		btn3.addActionListener(this);
+		
 		MyMouseListener listener = new MyMouseListener();
-		btn1.addMouseListener(listener);
-		btn2.addMouseListener(listener);
-		btn3.addMouseListener(listener);
-
+//		btn1.addMouseListener(listener);
+//		btn2.addMouseListener(listener);
+//		btn3.addMouseListener(listener);
+		btn1.setEnabled(false);
+		btn2.setEnabled(false);
+		btn3.setEnabled(false);
 		txtTitle = new JLabel("가장 많은 색을 선택해주세요");
 		font = new Font("맑은 고딕", Font.BOLD, 25);
 		txtTitle.setFont(font);
 		txtTitle.setForeground(Color.black);
 		txtTitle.setBounds(215, 50, 500, 100);
-
+		bgImgPan.add(ght);
+		ght.setBounds(100, 100, 820, 530);
 		bgSKPan.add(colorPan);
 		bgSKPan.add(txtTitle);
 		bgSKPan.add(btn1);
 		bgSKPan.add(btn2);
 		bgSKPan.add(btn3);
 		bgImgPan.add(bgSKPan);
+		
+		ght.exit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btn1.addMouseListener(listener);
+				btn2.addMouseListener(listener);
+				btn3.addMouseListener(listener);
+				btn1.setEnabled(true);
+				btn2.setEnabled(true);
+				btn3.setEnabled(true);
+				
+				ght.setVisible(false);
+			}
+		});
+		
 		this.add(bgImgPan);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		
 		JButton btn = (JButton)e.getSource();
 //		System.out.println("text => " + btn.getText());
@@ -182,6 +214,16 @@ public class MaxColorPanel extends GameView {
 		
 		next();
 		
+		if(e.getSource() == pauseBtn) {
+			int yn = JOptionPane.showConfirmDialog(this, "게임을 종료하시겠습니까? ","확인",JOptionPane.YES_NO_OPTION);
+			
+			if(yn==0) {
+				Controller c = Controller.getController();
+				gameNum = 0;
+				gametrue = 0;
+				c.Viewchange(MainPage);
+			}
+		}
 	}
 	public void next() {
 		// 딜레이 1.5초 주고 다음게임 시작

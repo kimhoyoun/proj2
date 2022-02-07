@@ -31,7 +31,6 @@ public class PlusMinus extends GameView {
 //	JButton replayBtn;
 	
 	JButton[] choiceBtn = new JButton[4]; // 4개의 선지
-	
 	JLabel checkLabel; // 정답일 경우 나오는 체크표시
 	JLabel xLabel; // 오답일 경우 나오는 엑스표시
 //	JButton pauseBtn; // 멈춤 버튼
@@ -41,9 +40,18 @@ public class PlusMinus extends GameView {
 //	int gameNum =0;
 //	int gametrue=0;
 //	int endGameNum = 2;
-
+	
 	public PlusMinus() {
+		choiceBtn[0] = new RoundJButton();
+		choiceBtn[1] = new RoundJButton();
+		choiceBtn[2] = new RoundJButton();
+		choiceBtn[3] = new RoundJButton();
+		
 		pauseBtn.addActionListener(this);
+		choiceBtn[0].addActionListener(this);
+		choiceBtn[1].addActionListener(this);
+		choiceBtn[2].addActionListener(this);
+		choiceBtn[3].addActionListener(this);
 //		display();
 	}
 
@@ -73,7 +81,7 @@ public class PlusMinus extends GameView {
 
 		choiceBtn = new JButton[4];
 		for (int i = 0; i < gp.answerArr.length; i++) {
-			choiceBtn[i] = new RoundJButton();
+//			choiceBtn[i] = new RoundJButton();
 			choiceBtn[i].setText(Integer.toString(gp.answerArr[i]));
 			choiceBtn[i].setBackground(Color.orange);
 			choiceBtn[i].setFont(new Font("Gothic", Font.BOLD, 70));
@@ -117,10 +125,10 @@ public class PlusMinus extends GameView {
 
 		this.add(bgLabel);
 
-		choiceBtn[0].addActionListener(this);
-		choiceBtn[1].addActionListener(this);
-		choiceBtn[2].addActionListener(this);
-		choiceBtn[3].addActionListener(this);
+//		choiceBtn[0].addActionListener(this);
+//		choiceBtn[1].addActionListener(this);
+//		choiceBtn[2].addActionListener(this);
+//		choiceBtn[3].addActionListener(this);
 		
 	}
 	
