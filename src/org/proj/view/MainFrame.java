@@ -44,8 +44,8 @@ public class MainFrame extends JFrame{
 	
 	public void changeView(GameView gc) {
 		contentPane.removeAll();
-		contentPane.add(gc);
 		gc.removeAll();
+		contentPane.add(gc);
 		gc.display();
 		NowView = gc;
 		gc.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);

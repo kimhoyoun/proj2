@@ -28,7 +28,6 @@ public class MainView extends GameView{
 	JLabel background;
 	JButton settingBtn = new JButton(new ImageIcon("images/icon_setting2.png"));
 	JButton updateBtn = new JButton(new ImageIcon("images/icon_setting3.png"));
-	JButton profileCancelBtn = new JButton("돌아가기");
 	boolean updateBtnStatedb = false;
 	
 	// 수정 시작
@@ -44,7 +43,8 @@ public class MainView extends GameView{
 	JButton recordBtn = new JButton(new ImageIcon("images/icon_record2.png"));
 	JButton exitBtn = new JButton(new ImageIcon("images/icon_logout2.png"));
 	
-	JButton profileOkBtn = new JButton("수정");
+	JButton profileOkBtn = new RoundJButton("수정");
+	JButton profileCancelBtn = new RoundJButton("돌아가기");
 	String userIddb;
 	String userNamedb;
 	String userPassdb;
@@ -123,7 +123,7 @@ public class MainView extends GameView{
 		
 		title.setBounds(30, 20, 200,40);
 		profile.setBounds(FRAME_WIDTH/2-100, 10, 200, 80);
-		profileUpdate.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
+		profileUpdate.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-370/2, 300, 370);
 		profileUpdate.setVisible(false);
 		
 		pulusminusGameBtn.setBorderPainted(false);    
@@ -231,6 +231,11 @@ public class MainView extends GameView{
 			recordBtn.setEnabled(true);
 			exitBtn.setEnabled(true);
 			settingBtn.setEnabled(true);
+
+//			// 아이콘 변수를 넣엇고
+//			Btn[i].setDisabledIcon();
+//			// T/F
+//			Btn[i].setEnabled();
 			
 			profileUpdate.setVisible(false);
 			
@@ -333,7 +338,7 @@ public class MainView extends GameView{
 		lblId.setBounds(28,140, 80, 20);
 		lblPass.setBounds(10,180, 100, 20);
 		lblAge.setBounds(48,220, 60, 20);
-
+		
 		profileUpdate.add(textname);
 		profileUpdate.add(textid);
 		profileUpdate.add(textpass);
@@ -366,7 +371,14 @@ public class MainView extends GameView{
 		updateBtn.setContentAreaFilled(false);
 		
 		updateBtn.setBounds(250,10,40,40);
-		profileOkBtn.setBounds(10,290,120,50);
+		profileOkBtn.setBounds(20,290,120,50);
+		
 		profileCancelBtn.setBounds(160,290,120,50);
+		profileOkBtn.setBackground(new Color(82,206,105));
+		profileCancelBtn.setBackground(new Color(82,206,105));
+		profileOkBtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		profileCancelBtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		profileOkBtn.setForeground(Color.white);
+		profileCancelBtn.setForeground(Color.white);
 	}
 }

@@ -25,7 +25,7 @@ public class CupThread extends Thread {
 		int y = 300;
 
 		int roop = 0;
-
+		boolean stop = false;
 		cup[0].now = cup[0].road[0];
 		cup[0].next = cup[0].road[1];
 		cup[1].now = cup[1].road[0];
@@ -37,7 +37,7 @@ public class CupThread extends Thread {
 		int d2 = cup[1].next - cup[1].now;
 		int d3 = cup[2].next - cup[2].now;
 
-		while (true) {
+		while (!stop) {
 
 			if (i < 181) {
 				
@@ -77,6 +77,7 @@ public class CupThread extends Thread {
 				for(int j=0; j<3; j++) {
 					cup[j].setEnabled(true);
 				}
+				stop = true;
 				break;
 			}
 			if (i < 181) {

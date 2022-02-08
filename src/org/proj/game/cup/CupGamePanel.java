@@ -2,9 +2,14 @@ package org.proj.game.cup;
 
 import static org.proj.Resource.MainPage;
 import static org.proj.Resource.PlusMinus;
+import static org.proj.Resource.endGameNum;
 import static org.proj.Resource.gameNum;
 import static org.proj.Resource.gametrue;
+import static org.proj.Resource.resultPane;
+import static org.proj.Resource.CARD;
 import static org.proj.Resource.CUP;
+import static org.proj.Resource.FRAME_HEIGHT;
+import static org.proj.Resource.FRAME_WIDTH;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -32,7 +37,7 @@ public class CupGamePanel extends GameView {
 	ImageIcon xIcon = new ImageIcon("images/x.png");
 	ImageIcon cupBorderIcon = new ImageIcon("images/cup_stroke.png"); // border있는 컵 그림
 
-	 JLabel backLabel = new JLabel(backIcon);;
+	 JLabel backLabel;
 	 JLabel gameBackLabel;
 	 JLabel checkLabel;
 	 JLabel xLabel;
@@ -41,6 +46,7 @@ public class CupGamePanel extends GameView {
 	 JButton playBtn = new JButton("시작하기");
 
 	 Timer timer;
+	 javax.swing.Timer timer2;
 	 javax.swing.Timer otherCupTtimer;
 
 	 int startBtn;
@@ -61,10 +67,15 @@ public class CupGamePanel extends GameView {
 
 	@Override
 	public void display() {
+		click = 0;
 		startBtn = 0;
 		this.setLayout(null);
 		this.setBounds(0, 0, 1024, 768);
 
+		this.add(resultPane);
+		resultPane.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
+		resultPane.setVisible(false);
+		
 		// 엑스 이미지
 		xLabel = new JLabel(xIcon);
 		xLabel.setBounds(750, 20, 150, 150);
@@ -95,7 +106,8 @@ public class CupGamePanel extends GameView {
 //			this.add(cups[i]);
 //		}
 //		
-		
+		backLabel = new JLabel(backIcon);
+		backLabel.setBounds(0, 0, 1024, 768);
 
 		for (int i = 0; i < cups.length; i++) {
 			cups[i] = new Cup();
@@ -105,6 +117,7 @@ public class CupGamePanel extends GameView {
 			cups[i].setEnabled(false);
 			cups[i].setBorderPainted(false); // 버튼 외곽 없애기
 			cups[i].setContentAreaFilled(false);
+			cups[i].setEnabled(true);
 			backLabel.add(cups[i]);
 		}
 		
@@ -135,7 +148,7 @@ public class CupGamePanel extends GameView {
 		gameBackLabel.setBounds(130, 60, 750, 580);
 
 		// 초록 배경
-		backLabel.setBounds(0, 0, 1024, 768);
+		
 
 		backLabel.add(manualLabel);
 		backLabel.add(xLabel);
@@ -320,6 +333,7 @@ public class CupGamePanel extends GameView {
 			cupUp(1);
 			labelBorder(flag, checkLabel, cups[1]);
 			otherCupUp(0, 2);
+			gametrue++;
 		} else if (cups[2].equals(btn)) {
 			if (click == 1) {
 				return;
@@ -337,6 +351,11 @@ public class CupGamePanel extends GameView {
 
 			startBtn++;
 		} 
+		if(!((e.getSource()== pauseBtn)||(e.getSource()==playBtn))) {
+			gameNum++;
+			System.out.println("되나?");
+			next();
+		}
 		
 		if(e.getSource() == pauseBtn) {
 			int yn = JOptionPane.showConfirmDialog(this, "게임을 종료하시겠습니까? ","확인",JOptionPane.YES_NO_OPTION);
@@ -349,6 +368,24 @@ public class CupGamePanel extends GameView {
 			}
 		}
 	}
+	
+	public void next() {
+		// 딜레이 1.5초 주고 다음게임 시작
+		timer2 = new  javax.swing.Timer(2500, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if(gameNum==endGameNum) {
+							resultPane.display();
+						}else {
+							Controller c = Controller.getController();
+							c.Viewchange(CUP);					
+						}
+						timer2.stop();
+					}
+				});
+		timer2.start();
+	}
+	
 	@Override
 	public String toString() {
 		return CUP;
