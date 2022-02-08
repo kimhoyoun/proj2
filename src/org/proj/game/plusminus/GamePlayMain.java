@@ -26,9 +26,9 @@ public class GamePlayMain {
 		int randomSign = (int)(Math.random() * 100000) % 2; // 부호 결정
 		String form = "";
 		if (num1 > num2) { // 연산결과가 음수값이 나오지 않게 하기 위해 조건을 걸어줌
-			form = String.format("%2d %s %2d = ?", num1, sign[randomSign], num2);
+			form = String.format("%2d %s %2d", num1, sign[randomSign], num2);
 		} else {
-			form = String.format("%2d %s %2d = ?", num1, sign[0], num2);
+			form = String.format("%2d %s %2d", num1, sign[0], num2);
 		}
 		return form;
 	}

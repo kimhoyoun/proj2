@@ -45,9 +45,4 @@ public class CupRoad {
 		} // end of for문
 	}
 	
-	public static void main(String[] args) {
-		
-		new CupRoad();
-		
-	}
 }

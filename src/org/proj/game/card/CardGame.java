@@ -27,49 +27,145 @@ import org.proj.view.GameView;
 
 public class CardGame extends GameView {
 
-	static ImageIcon backIcon = new ImageIcon("images/background.png");
-	static ImageIcon gameBackIcon = new ImageIcon("images/gamebackImg.png");
-	static ImageIcon startBackIcon = new ImageIcon("images/startback.png");
-	static ImageIcon pauseIcon = new ImageIcon("images/pause.png");
-	static ImageIcon checkIcon = new ImageIcon("images/checked.png");
-	static JLabel Title; // 횟수 보여주기
-	static JLabel gameBack; // 흰색 배경
-	static JLabel back; // 초록 배경
-	static LineBorder bb = new LineBorder(Color.black, 2, true); // 상단 라벨 테두리 맞추는 용도
-	static EmptyBorder eb = new EmptyBorder(0, 0, 0, 0);
-	static JPanel cardBack; // 카드 넣는 패널
-	static JLabel startCardBack;
-	static JLabel checkLabel;
-	static RoundJButton bottomBtn01; // 시작하기
-	static JButton pauseBtn;
-	static JButton[] Btn = new JButton[12]; // 카드 12개
-	static String[] img = { // 카드 이미지 주소 배열
+	ImageIcon backIcon = new ImageIcon("images/background.png");
+	ImageIcon gameBackIcon = new ImageIcon("images/gamebackImg.png");
+	ImageIcon startBackIcon = new ImageIcon("images/startback.png");
+	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
+	ImageIcon checkIcon = new ImageIcon("images/checked.png");
+	ImageIcon xIcon = new ImageIcon("images/x.png");
+	JLabel Title; // 횟수 보여주기
+	JLabel gameBack; // 흰색 배경
+	JLabel back; // 초록 배경
+	JPanel cardBack; // 카드 넣는 패널
+	JLabel startCardBack;
+	JLabel checkLabel;
+	JLabel xLabel;
+	RoundJButton bottomBtn01 = new RoundJButton("시작하기"); // 시작하기
+	JButton pauseBtn = new JButton(pauseIcon); 
+	JButton howtoBtn = new JButton(); 
+	JButton[] Btn = new JButton[12]; // 카드 12개
+	String[] img = { // 카드 이미지 주소 배열
 			"img01.png", "img02.png", "img03.png", "img04.png", "img05.png", "img06.png", "img01.png", "img02.png",
 			"img03.png", "img04.png", "img05.png", "img06.png" };
 
-	static int sucessCount = 0;
-	static int buttonIndexSave1 = 0; // 먼저 선택된 카드 인덱스 저장
-	static int buttonIndexSave2 = 0; // 두번째 선택된 카드 인덱스 저장
-	static int openCount = 0; // 카드가 2개 뒤집히면 닫히기 전까지 다음 카드 안열리게 하는 변수
-	static int tryCount = 0;
-	static Timer timer;
-	static java.util.Timer countTimer;
-	static int startCount;
+	int sucessCount = 0;
+	int tryCount = 12;
+	int buttonIndexSave1 = 0; // 먼저 선택된 카드 인덱스 저장
+	int buttonIndexSave2 = 0; // 두번째 선택된 카드 인덱스 저장
+	int openCount = 0; // 카드가 2개 뒤집히면 닫히기 전까지 다음 카드 안열리게 하는 변수
+	Timer timer;
+	java.util.Timer countTimer;
+	int startCount;
 
-//	public CardGame() {
-//		display();
-//		
-//	}
+	GameHowTo_card ght = new GameHowTo_card();
+
+	public CardGame() {
+		pauseBtn.addActionListener(this);
+		howtoBtn.addActionListener(this);
+		bottomBtn01.addActionListener(this);
+	}
+	
+	@Override
+	public void display() {
+		sucessCount = 0;
+		tryCount = 12;
+		startCount = 0;
+		this.add(resultPane);
+		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
+		resultPane.setVisible(false);
+		
+		checkLabel = new JLabel(checkIcon);
+		checkLabel.setBounds(710, 20, 150, 150);
+		checkLabel.setVisible(false);
+		
+		xLabel = new JLabel(xIcon);
+		xLabel.setBounds(710, 20, 150, 150);
+		xLabel.setVisible(false);
+		
+		pauseBtn.setBounds(920, 30, 50, 50);
+		pauseBtn.setBorderPainted(false);
+		pauseBtn.setContentAreaFilled(false);
+		
+		howtoBtn.setBounds(850,30,50,50);
+//		howtoBtn.setBorderPainted(false);
+//		howtoBtn.setContentAreaFilled(false);
+		
+		// 시작시 정지화면
+		startCardBack = new JLabel(startBackIcon);
+		startCardBack.setBounds(250, 170, 510, 450);
+		
+		// 시작하기 버튼
+		
+		bottomBtn01.setBorderPainted(false);
+		bottomBtn01.setContentAreaFilled(false);
+		bottomBtn01.setBackground(Color.orange);
+		bottomBtn01.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		bottomBtn01.setBounds(430, 630, 150, 40);
+		
+		cardBack = new JPanel(new GridLayout(4, 3));
+		
+		cardBack.setBounds(251, 170, 505, 450);
+		cardBack.setBackground(Color.white);
+		
+		Title = new JLabel("Card Game");
+		Title.setLayout(null);
+		Title.setForeground(Color.black);
+		Title.setFont(new Font("맑은 고딕", Font.BOLD, 25));
+		Title.setHorizontalAlignment(JLabel.CENTER);
+		Title.setBounds(250, 120, 510, 50);
+		
+		gameBack = new JLabel(gameBackIcon);
+		gameBack.setLayout(null);
+		gameBack.setBounds(220, 50, 570, 650);
+		
+		back = new JLabel(backIcon);
+		
+		
+		back.setLayout(null);
+		back.setBounds(0, 0, 1024, 768);
+		
+		this.setLayout(null);
+		this.setBounds(0, 0, 1024, 768);
+		
+		// 카드 붙이기
+		for (int i = 0; i < 12; i++) {
+			Btn[i] = new JButton();
+			Btn[i].setPreferredSize(new Dimension(100, 150));
+			Btn[i].setFocusPainted(false);
+			Btn[i].setBorder(null);
+			Btn[i].setBackground(Color.white);
+			Btn[i].addActionListener(this);
+			Btn[i].setIcon(chageImage("leaf.png"));
+			Btn[i].setEnabled(false);
+			cardBack.add(Btn[i]);
+		}
+		
+		back.add(ght);
+		
+		back.add(bottomBtn01);
+		back.add(xLabel);
+		back.add(checkLabel);
+		back.add(pauseBtn);
+		back.add(howtoBtn);
+		back.add(startCardBack);
+		back.add(cardBack);
+		back.add(Title);
+		back.add(gameBack);
+		
+		this.add(back);
+		mixCard();
+	}
 
 	// 카드 이미지 변환
-	static ImageIcon chageImage(String filname) {
+	public ImageIcon chageImage(String filname) {
 		ImageIcon icon = new ImageIcon("images/" + filname);
 		Image originImage = icon.getImage();
 		Image changeImage = originImage.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 		ImageIcon icon_new = new ImageIcon(changeImage);
 		return icon_new;
 	}
-
+	
+	
 	// 시작 시 전체 카드 보여주기
 	public void showCardAll() {
 
@@ -130,127 +226,6 @@ public class CardGame extends GameView {
 		}
 	}
 
-	@Override
-	public void display() {
-
-		this.add(resultPane);
-		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
-		resultPane.setVisible(false);
-
-		checkLabel = new JLabel(checkIcon);
-		checkLabel.setBounds(680, 20, 150, 150);
-		checkLabel.setVisible(false);
-
-		pauseBtn = new JButton(pauseIcon);
-		pauseBtn.setBounds(920, 30, 50, 50);
-		pauseBtn.setBorderPainted(false);
-		pauseBtn.setContentAreaFilled(false);
-
-		pauseBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int yn = JOptionPane.showConfirmDialog(CardGame.this,"게임을 종료하시겠습니까? ", "확인", JOptionPane.YES_NO_OPTION);
-
-				if (yn == 0) {
-					Controller c = Controller.getController();
-					gameNum = 0;
-					gametrue = 0;
-					c.Viewchange(MainPage);
-				}
-			}
-		});
-
-		// 시작시 정지화면
-		startCardBack = new JLabel(startBackIcon);
-		startCardBack.setBounds(250, 170, 510, 450);
-
-		// 시작하기 버튼
-		bottomBtn01 = new RoundJButton("시작하기");
-		bottomBtn01.setBorderPainted(false);
-		bottomBtn01.setContentAreaFilled(false);
-		bottomBtn01.setBackground(Color.orange);
-		bottomBtn01.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		bottomBtn01.setBounds(435, 630, 150, 40);
-
-		// 시작하기 버튼 이벤트
-		bottomBtn01.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				if (startCount == 1) {
-					return;
-				}
-
-				startCardBack.setVisible(false);
-
-				for (int i = 0; i < Btn.length; i++) {
-					Btn[i].setEnabled(true);
-				}
-
-				Title.setText("시도 횟수 : " + tryCount);
-
-				showCardAll();
-
-				startCount++;
-
-			} // end of actionPerformed
-
-		});// 시작하기 버튼
-
-		cardBack = new JPanel(new GridLayout(4, 3));
-		cardBack.setBounds(251, 170, 505, 450);
-		cardBack.setBackground(Color.white);
-
-		Title = new JLabel("Card Game");
-		Title.setLayout(null);
-		Title.setForeground(Color.black);
-		Title.setFont(new Font("맑은 고딕", Font.BOLD, 25));
-		Title.setHorizontalAlignment(JLabel.CENTER);
-		// Title.setOpaque(true); JLabel background 컬러를 바꿀 때 사용
-		// Title.setBackground(Color.black);
-		Title.setBounds(250, 120, 510, 50);
-//		Title.setBorder(bb); // 라벨 테두리 잡는 용도
-
-		gameBack = new JLabel(gameBackIcon);
-		gameBack.setLayout(null);
-		gameBack.setBounds(180, 20, 650, 700);
-
-		back = new JLabel(backIcon);
-		back.setLayout(null);
-		back.setBounds(0, 0, 1024, 768);
-
-		// 카드 붙이기
-		for (int i = 0; i < 12; i++) {
-			Btn[i] = new JButton();
-			Btn[i].setPreferredSize(new Dimension(100, 150));
-//			Btn[i].setBorderPainted(false);
-//			Btn[i].setContentAreaFilled(false);
-			Btn[i].setBorder(eb);
-			Btn[i].setBackground(Color.white);
-			Btn[i].addActionListener(this);
-			Btn[i].setIcon(chageImage("leaf.png"));
-			Btn[i].setEnabled(false);
-			cardBack.add(Btn[i]);
-		}
-
-		this.setLayout(null);
-		this.setBackground(Color.black);
-		this.setBounds(0, 0, 1024, 768);
-
-		this.add(bottomBtn01);
-
-		this.add(checkLabel);
-		this.add(pauseBtn);
-		this.add(startCardBack);
-		this.add(cardBack);
-		this.add(Title);
-
-		this.add(gameBack);
-		this.add(back);
-		mixCard();
-	}
 
 	// 그림 맞추기 실패시 카드 되돌리기
 	public void backToQuestion() {
@@ -300,52 +275,95 @@ public class CardGame extends GameView {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		if (openCount == 2) {
-			return;
-		}
-
 		JButton btn = (JButton) e.getSource();
-		int index = getIndex(btn);
-		System.out.println("index " + index);
-		btn.setIcon(chageImage(img[index]));
+		if(e.getSource() == howtoBtn) {
+			ght.setVisible(true);
+		}
+		
+		if (e.getSource() == pauseBtn) { // 정지버튼
+			int yn = JOptionPane.showConfirmDialog(CardGame.this,"게임을 종료하시겠습니까? ", "확인", JOptionPane.YES_NO_OPTION);
 
-		openCount++;
-
-		if (openCount == 1) {
-			buttonIndexSave1 = index;
-
-		} else if (openCount == 2) {
-			buttonIndexSave2 = index;
-
-			if (Btn[buttonIndexSave1] == Btn[buttonIndexSave2]) {
-				tryCount = tryCount;
-			} else {
-				tryCount++;
+			if (yn == 0) {
+				Controller c = Controller.getController();
+				gameNum = 0;
+				gametrue = 0;
+				c.Viewchange(MainPage);
 			}
-			Title.setText("시도 횟수 : " + tryCount);
+		} 
+		
+		if (e.getSource() == bottomBtn01) { // 시작하기 버튼
+			if (startCount == 1) {
+				return;
+			}
 
-			boolean isBingo = checkCard(buttonIndexSave1, buttonIndexSave2);
-			if (isBingo == true) {
-				Btn[buttonIndexSave1].setEnabled(false);
-				Btn[buttonIndexSave2].setEnabled(false);
-				openCount = 0;
-				sucessCount++;
-				if (sucessCount == 6) {
-					gameNum++;
-					gametrue++;
-					checkLabel.setVisible(true);
-					JOptionPane.showMessageDialog(CardGame.this, "수고하셨습니다.");
+			startCardBack.setVisible(false);
 
-					tryCount = 0;
-					sucessCount = 0;
-					startCount = 0;
-					next();
+			for (int i = 0; i < Btn.length; i++) {
+				Btn[i].setEnabled(true);
+			}
+
+			showCardAll();
+
+			startCount++;
+		} 
+		
+		if(!((pauseBtn.equals(btn)||bottomBtn01.equals(btn)||(e.getSource() == howtoBtn)))) {
+			
+			if (openCount == 2) {
+				return;
+			}
+
+			int index = getIndex(btn);
+			System.out.println("index " + index);
+			btn.setIcon(chageImage(img[index]));
+
+			openCount++;
+
+			if (openCount == 1) {
+				buttonIndexSave1 = index;
+
+			} else if (openCount == 2) {
+				buttonIndexSave2 = index;
+
+				if (Btn[buttonIndexSave1] == Btn[buttonIndexSave2]) {
+//					tryCount = tryCount;
+				} else {
+					tryCount--;
 				}
-			} else {
+				Title.setText("남은 횟수 : " + tryCount);
 
-				backToQuestion();
-
+				boolean isBingo = checkCard(buttonIndexSave1, buttonIndexSave2);
+				if (isBingo == true) {
+					Btn[buttonIndexSave1].setEnabled(false);
+					Btn[buttonIndexSave2].setEnabled(false);
+					openCount = 0;
+					sucessCount++;
+					if (sucessCount == 6) {
+						gameNum++;
+						gametrue++;
+						checkLabel.setVisible(true);
+						JOptionPane.showMessageDialog(CardGame.this, "수고하셨습니다.");
+						next();
+					} else if (tryCount == 0) {
+						gameNum++;
+						gametrue++;
+						xLabel.setVisible(true);
+						JOptionPane.showMessageDialog(CardGame.this, "수고하셨습니다.");
+						next();
+					}
+				} else {
+					if (tryCount == 0) {
+						gameNum++;
+						xLabel.setVisible(true);
+						JOptionPane.showMessageDialog(CardGame.this, "수고하셨습니다.");
+						for (int i = 0; i < 12; i++) {
+							Btn[i].setEnabled(false);
+						}
+						next();
+					}
+					backToQuestion();
+				}
+				
 			}
 
 		}

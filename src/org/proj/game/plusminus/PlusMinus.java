@@ -24,23 +24,16 @@ public class PlusMinus extends GameView {
 	JLabel pmbgLabel; // 게임 배경(하얀색 메모장)
 	JLabel quizLabel; // 문제 나오는 곳 라벨( num + num ) 
 
-//	JPanel gameResultPane;
-	JLabel gametruelbl;
-	JLabel gameNumlbl;
-	JLabel gameEndmsg;
-//	JButton replayBtn;
-	
 	JButton[] choiceBtn = new JButton[4]; // 4개의 선지
 	JLabel checkLabel; // 정답일 경우 나오는 체크표시
 	JLabel xLabel; // 오답일 경우 나오는 엑스표시
-//	JButton pauseBtn; // 멈춤 버튼
+
 	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
 	JButton pauseBtn =new JButton(pauseIcon);
-	Timer timer;
-//	int gameNum =0;
-//	int gametrue=0;
-//	int endGameNum = 2;
 	
+	JLabel manualLabel; // 설명부분
+	Timer timer;
+	int click;
 	public PlusMinus() {
 //		choiceBtn[0] = new RoundJButton();
 //		choiceBtn[1] = new RoundJButton();
@@ -53,6 +46,7 @@ public class PlusMinus extends GameView {
 
 	@Override
 	public void display() {
+		click = 0;
 		gp = new GamePlayMain();
 		
 		this.setLayout(null);
@@ -70,6 +64,12 @@ public class PlusMinus extends GameView {
 		pmbgLabel = new JLabel(pmicon);
 		pmbgLabel.setBounds(210, 100, 600, 500);
 		
+		manualLabel = new JLabel("알맞은 숫자를 누르세요");
+		manualLabel.setBounds(320, 310, 400, 50);
+		manualLabel.setHorizontalAlignment(JLabel.CENTER);
+		manualLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		this.add(manualLabel);
+		
 		quizLabel = new JLabel(gp.question);
 		quizLabel.setFont(new Font("Gothic", Font.BOLD, 115));
 		quizLabel.setForeground(Color.ORANGE);
@@ -84,10 +84,10 @@ public class PlusMinus extends GameView {
 			choiceBtn[i].setForeground(Color.WHITE);
 		}
 		
-		choiceBtn[0].setBounds(330, 350, 150, 70);
-		choiceBtn[1].setBounds(550, 350, 150, 70);
-		choiceBtn[2].setBounds(330, 450, 150, 70);
-		choiceBtn[3].setBounds(550, 450, 150, 70);
+		choiceBtn[0].setBounds(320, 380, 150, 70);
+		choiceBtn[1].setBounds(540, 380, 150, 70);
+		choiceBtn[2].setBounds(320, 480, 150, 70);
+		choiceBtn[3].setBounds(540, 480, 150, 70);
 
 		ImageIcon checkIcon = new ImageIcon("images/checked.png");
 		checkLabel = new JLabel(checkIcon);
@@ -99,14 +99,13 @@ public class PlusMinus extends GameView {
 		pauseBtn.setBorderPainted(false);    // 버튼의 외곽 투명하게 
 		pauseBtn.setContentAreaFilled(false);  // 만들어 주는 것
 
-		checkLabel.setBounds(670, 65, 150, 150);
+		checkLabel.setBounds(700, 20, 150, 150);
 		this.add(checkLabel);
 		checkLabel.setVisible(false);
-		xLabel.setBounds(670, 65, 150, 150);
+		xLabel.setBounds(700, 20, 150, 150);
 		this.add(xLabel);
 		xLabel.setVisible(false);
 
-		
 		
 		this.add(pauseBtn);
 		
@@ -128,21 +127,11 @@ public class PlusMinus extends GameView {
 		
 	}
 	
-//	@Override
-//	public void reGame() {
-//		gp = new GamePlayMain();
-//		
-//		quizLabel.setText(gp.question);
-//		for (int i = 0; i < gp.answerArr.length; i++) {
-//			choiceBtn[i].setText(Integer.toString(gp.answerArr[i]));
-//			choiceBtn[i].setBackground(Color.orange);
-//		}
-//		checkLabel.setVisible(false);
-//		xLabel.setVisible(false);
-//	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) { 
+		if(click == 1) {
+			return;
+		}
 		
 		if (e.getSource() == choiceBtn[0]) {
 			gameNum++;
@@ -218,7 +207,7 @@ public class PlusMinus extends GameView {
 				c.Viewchange(MainPage);
 			}
 		}
-		
+		click++;
 	}
 	
 	public void next() {

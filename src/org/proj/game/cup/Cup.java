@@ -17,12 +17,4 @@ public class Cup extends JButton {
 	public int next;
 	public int[] road;
 	
-	
-	public Cup() {
-		
-		cups = new JLabel(cupIcon);
-		cups.setBounds(0, 0, 150, 100);
-		
-		this.setIcon(cupIcon);
-	}
 }

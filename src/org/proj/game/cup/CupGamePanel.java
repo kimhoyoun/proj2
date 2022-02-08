@@ -1,9 +1,13 @@
 package org.proj.game.cup;
 
 import static org.proj.Resource.MainPage;
+import static org.proj.Resource.PlusMinus;
 import static org.proj.Resource.gameNum;
 import static org.proj.Resource.gametrue;
+import static org.proj.Resource.CUP;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Timer;
@@ -19,19 +23,20 @@ import org.proj.view.GameView;
 
 public class CupGamePanel extends GameView {
 
-	 ImageIcon backIcon = new ImageIcon("images/background.png");
-	 ImageIcon gameBagIcon = new ImageIcon("images/cupgamebackImg.png");
-	 ImageIcon cupIcon = new ImageIcon("images/cup.png");
-	 ImageIcon ballIcon = new ImageIcon("images/ball.png");
-	 ImageIcon checkIcon = new ImageIcon("images/checked.png");
-	 ImageIcon pauseIcon = new ImageIcon("images/pause.png");
-	 ImageIcon xIcon = new ImageIcon("images/x.png");
+	ImageIcon backIcon = new ImageIcon("images/background.png");
+	ImageIcon gameBagIcon = new ImageIcon("images/cupgamebackImg.png");
+	ImageIcon cupIcon = new ImageIcon("images/cup.png");
+	ImageIcon ballIcon = new ImageIcon("images/ball.png");
+	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
+	ImageIcon checkIcon = new ImageIcon("images/checked.png");
+	ImageIcon xIcon = new ImageIcon("images/x.png");
+	ImageIcon cupBorderIcon = new ImageIcon("images/cup_stroke.png"); // border있는 컵 그림
 
-	 JLabel backLabel;
+	 JLabel backLabel = new JLabel(backIcon);;
 	 JLabel gameBackLabel;
 	 JLabel checkLabel;
 	 JLabel xLabel;
-
+	 JLabel manualLabel;
 	 JButton pauseBtn = new JButton(pauseIcon);
 	 JButton playBtn = new JButton("시작하기");
 
@@ -49,33 +54,32 @@ public class CupGamePanel extends GameView {
 	 Cup[] cups = new Cup[3];
 
 	public CupGamePanel() {
-		cups[0] = new Cup();
-		cups[1] = new Cup();
-		cups[2] = new Cup();
 		
 		playBtn.addActionListener(this);
 		pauseBtn.addActionListener(this);
-		cups[0].addActionListener(this);
-		cups[1].addActionListener(this);
-		cups[2].addActionListener(this);
 	}
 
 	@Override
 	public void display() {
-
+		startBtn = 0;
 		this.setLayout(null);
 		this.setBounds(0, 0, 1024, 768);
 
 		// 엑스 이미지
 		xLabel = new JLabel(xIcon);
-		xLabel.setBounds(680, 20, 150, 150);
+		xLabel.setBounds(750, 20, 150, 150);
 		xLabel.setVisible(false);
 
 		// 체크 이미지
 		checkLabel = new JLabel(checkIcon);
-		checkLabel.setBounds(680, 20, 150, 150);
+		checkLabel.setBounds(750, 20, 150, 150);
 		checkLabel.setVisible(false);
-
+		
+		manualLabel = new JLabel("공이 들어있는 컵을 선택하세요");
+		manualLabel.setBounds(230, 150, 550, 50);
+		manualLabel.setHorizontalAlignment(JLabel.CENTER);
+		manualLabel.setFont(new Font("맑은 고딕", Font.BOLD, 25));
+		
 		// 일시정지 버튼
 		pauseBtn.setBounds(920, 30, 50, 50);
 		pauseBtn.setBorderPainted(false);
@@ -83,26 +87,39 @@ public class CupGamePanel extends GameView {
 
 		// 시작하기 버튼
 		playBtn.setBounds(435, 530, 150, 50);
-	
-		// 컵 생성
-		for (int i = 0; i < cups.length; i++) {
-			
-			this.add(cups[i]);
-		}
+		playBtn.setBackground(Color.ORANGE);
+		playBtn.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		playBtn.setVisible(true);
+//		// 컵 생성
+//		for (int i = 0; i < cups.length; i++) {
+//			this.add(cups[i]);
+//		}
+//		
+		
 
+		for (int i = 0; i < cups.length; i++) {
+			cups[i] = new Cup();
+			cups[i].setIcon(cupIcon);
+			cups[i].addActionListener(this);
+			cups[i].setDisabledIcon(cupIcon);
+			cups[i].setEnabled(false);
+			cups[i].setBorderPainted(false); // 버튼 외곽 없애기
+			cups[i].setContentAreaFilled(false);
+			backLabel.add(cups[i]);
+		}
+		
 		cups[0].x = 230;
 		cups[1].x = 430;
 		cups[2].x = 630;
-
-		// 컵 위치
+		
 		cups[0].setBounds(cups[0].x, cups[0].y, cups[0].w, cups[0].h);
 		cups[1].setBounds(cups[1].x, cups[1].y, cups[0].w, cups[0].h);
 		cups[2].setBounds(cups[2].x, cups[2].y, cups[0].w, cups[0].h);
-
+		
 		// 공 생성
 		for (int i = 0; i < balls.length; i++) {
 			balls[i] = new JLabel(ballIcon);
-			this.add(balls[i]);
+			backLabel.add(balls[i]);
 			if (!(i == 1)) {
 				balls[i].setVisible(false);
 			}
@@ -115,17 +132,17 @@ public class CupGamePanel extends GameView {
 
 		// 흰색 배경
 		gameBackLabel = new JLabel(gameBagIcon);
-		gameBackLabel.setBounds(50, 20, 900, 700);
+		gameBackLabel.setBounds(130, 60, 750, 580);
 
 		// 초록 배경
-		backLabel = new JLabel(backIcon);
 		backLabel.setBounds(0, 0, 1024, 768);
 
-		this.add(checkLabel);
-		this.add(xLabel);
-		this.add(pauseBtn);
-		this.add(playBtn);
-		this.add(gameBackLabel);
+		backLabel.add(manualLabel);
+		backLabel.add(xLabel);
+		backLabel.add(checkLabel);
+		backLabel.add(pauseBtn);
+		backLabel.add(playBtn);
+		backLabel.add(gameBackLabel);
 		this.add(backLabel);
 	}
 
@@ -274,61 +291,52 @@ public class CupGamePanel extends GameView {
 		cups[1].road = cr.cupRoadArr[1];
 		cups[2].road = cr.cupRoadArr[2];
 
-		CupThread ct = new CupThread(cups[0], cups[1], cups[2], r);
+		CupThread ct = new CupThread(cups, r, manualLabel);
 
 		ct.start();
 	}
-
+	
+	public void labelBorder(boolean flag, JLabel JLabel, JButton JButton) {
+		flag = true;
+		JLabel.setVisible(flag);
+		JButton.setIcon(cupBorderIcon);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(playBtn == e.getSource()) {
-			if (startBtn == 1) {
-				return;
-			}
+		JButton btn = (JButton) e.getSource();
 
-			cupUpDown();
-
-			startBtn++;
-		}
-
-		if (cups[0] == e.getSource()) {
+		if (cups[0] == btn) {
 			if (click == 1) {
 				return;
 			}
 			cupUp(0);
+			labelBorder(flag, xLabel, cups[0]);
 			otherCupUp(1, 2);
-			if (flag == true) {
-				return;
-			}
-			flag = true;
-			xLabel.setVisible(flag);
-		} 
-		
-		if (cups[1] == e.getSource()) {
+		} else if (cups[1].equals(btn)) {
 			if (click == 1) {
 				return;
 			}
 			cupUp(1);
+			labelBorder(flag, checkLabel, cups[1]);
 			otherCupUp(0, 2);
-			if (flag == true) {
-				return;
-			}
-			flag = true;
-			checkLabel.setVisible(flag);
-		} 
-		
-		if (cups[2] == e.getSource()) {
+		} else if (cups[2].equals(btn)) {
 			if (click == 1) {
 				return;
 			}
 			cupUp(2);
+			labelBorder(flag, xLabel, cups[2]);
 			otherCupUp(1, 0);
-			if (flag == true) {
+		} else if(playBtn == btn) {
+			if (startBtn == 1) {
 				return;
 			}
-			flag = true;
-			xLabel.setVisible(flag);
-		}
+			playBtn.setVisible(false);
+			manualLabel.setVisible(false);
+			cupUpDown();
+
+			startBtn++;
+		} 
 		
 		if(e.getSource() == pauseBtn) {
 			int yn = JOptionPane.showConfirmDialog(this, "게임을 종료하시겠습니까? ","확인",JOptionPane.YES_NO_OPTION);
@@ -341,5 +349,8 @@ public class CupGamePanel extends GameView {
 			}
 		}
 	}
-
+	@Override
+	public String toString() {
+		return CUP;
+	}
 }

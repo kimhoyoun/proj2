@@ -1,63 +1,82 @@
 package org.proj.game.cup;
 
-public class CupThread extends Thread {
-	Cup cup1;
-	Cup cup2;
-	Cup cup3;
-	int r;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
-	public CupThread(Cup cup1, Cup cup2, Cup cup3, int r) {
-		this.cup1 = cup1;
-		this.cup2 = cup2;
-		this.cup3 = cup3;
+public class CupThread extends Thread {
+	int r;
+	JLabel manualJLabel;
+	Cup[] cup = new Cup[3];
+	
+	public CupThread(Cup[] cBtn, int r, JLabel manualJLabel) {
+		this.cup = cBtn;
 		this.r = r;
+		this.manualJLabel = manualJLabel;
 	}
 
 	@Override
 	public void run() {
 
 		int i = 0;
-		int cup1x = cup1.x;
-		int cup2x = cup2.x;
-		int cup3x = cup3.x;
+		int cup1x = cup[0].x;
+		int cup2x = cup[1].x;
+		int cup3x = cup[2].x;
 
 		int y = 300;
 
 		int roop = 0;
 
-		cup1.now = cup1.road[0];
-		cup1.next = cup1.road[1];
-		cup2.now = cup2.road[0];
-		cup2.next = cup2.road[1];
-		cup3.now = cup3.road[0];
-		cup3.next = cup3.road[1];
+		cup[0].now = cup[0].road[0];
+		cup[0].next = cup[0].road[1];
+		cup[1].now = cup[1].road[0];
+		cup[1].next = cup[1].road[1];
+		cup[2].now = cup[2].road[0];
+		cup[2].next = cup[2].road[1];
 
-		int d1 = cup1.next - cup1.now;
-		int d2 = cup2.next - cup2.now;
-		int d3 = cup3.next - cup3.now;
+		int d1 = cup[0].next - cup[0].now;
+		int d2 = cup[1].next - cup[1].now;
+		int d3 = cup[2].next - cup[2].now;
 
 		while (true) {
 
 			if (i < 181) {
 				
-				road(cup1, d1, cup1x, i);
-				road(cup2, d2, cup2x, i);
-				road(cup3, d3, cup3x, i);
+				if (d1 != 0) {
+					cup[0].x = (cup1x + d1 * r) - (int) (d1 * r * Math.cos(Math.toRadians(i)));
+					cup[0].y = (y - (int) (d1 * r * 0.8 * Math.sin(Math.toRadians(i))));
+				} else {
+					cup[0].y = (y - (int) (r * Math.sin(i * Math.PI / 180)));
+				}
+				if (d2 != 0) {
+					cup[1].x = (cup2x + d2 * r) - (int) (d2 * r * Math.cos(Math.toRadians(i)));
+					cup[1].y = (y - (int) (d2 * r  * 0.8 * Math.sin(Math.toRadians(i))));
+				} else {
+					cup[1].y = (y - (int) (r * Math.sin(i * Math.PI / 180)));
+				}
+				if (d3 != 0) {
+					cup[2].x = (cup3x + d3 * r) - (int) (d3 * r * Math.cos(Math.toRadians(i)));
+					cup[2].y = (y - (int) (d3 * r  * 0.8 * Math.sin(Math.toRadians(i))));
+				} else {
+					cup[2].y = (y - (int) (r * Math.sin(Math.toRadians(i))));
+				}
 				
 				try {
-					Thread.sleep(1);
+					Thread.sleep(3);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-				cup1.setBounds(cup1.x, cup1.y, cup1.w, cup1.h);
-				cup2.setBounds(cup2.x, cup2.y, cup2.w, cup2.h);
-				cup3.setBounds(cup3.x, cup3.y, cup3.w, cup3.h);
+				cup[0].setBounds(cup[0].x, cup[0].y, cup[0].w, cup[0].h);
+				cup[1].setBounds(cup[1].x, cup[1].y, cup[1].w, cup[1].h);
+				cup[2].setBounds(cup[2].x, cup[2].y, cup[2].w, cup[2].h);
 			}
 
 			if (roop == 8) {
-				System.out.println(cup2.x);
+				manualJLabel.setVisible(true);
+				for(int j=0; j<3; j++) {
+					cup[j].setEnabled(true);
+				}
 				break;
 			}
 			if (i < 181) {
@@ -65,36 +84,26 @@ public class CupThread extends Thread {
 			} else if (i == 181) {
 				roop++;
 				
-				cup1x = cup1.x;
-				cup2x = cup2.x;
-				cup3x = cup3.x;
+				cup1x = cup[0].x;
+				cup2x = cup[1].x;
+				cup3x = cup[2].x;
 				
-				cup1.now = cup1.road[roop];
-				cup1.next = cup1.road[roop + 1];
+				cup[0].now = cup[0].road[roop];
+				cup[0].next = cup[0].road[roop + 1];
 
-				cup2.now = cup2.road[roop];
-				cup2.next = cup2.road[roop + 1];
+				cup[1].now = cup[1].road[roop];
+				cup[1].next = cup[1].road[roop + 1];
 
-				cup3.now = cup3.road[roop];
-				cup3.next = cup3.road[roop + 1];
+				cup[2].now = cup[2].road[roop];
+				cup[2].next = cup[2].road[roop + 1];
 
-				d1 = cup1.next - cup1.now;
-				d2 = cup2.next - cup2.now;
-				d3 = cup3.next - cup3.now;
+				d1 = cup[0].next - cup[0].now;
+				d2 = cup[1].next - cup[1].now;
+				d3 = cup[2].next - cup[2].now;
 				
 				i = 0;
 			}
 		} // end of while
 	} // end of run
-	
-	public void road(Cup cup, int d, int x, int i ) {
-		if (d != 0) {
-			cup.x = (x + d * r) - (int) (d * r * Math.cos(Math.toRadians(i)));
-			cup.y = (300 - (int) (d * r * Math.sin(Math.toRadians(i))));
-		} else {
-			cup.y = (300 - (int) (r * Math.sin(Math.toRadians(i))));
-		}
-	}
-	
 	
 }

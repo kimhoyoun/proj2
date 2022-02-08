@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.model.GameDataDto;
-import org.proj.test.JavaFXGraph;
 
 public class GameRecordView extends GameView {
 	ImageIcon backgroundImg;
@@ -25,7 +24,6 @@ public class GameRecordView extends GameView {
 	GraphPanel graph;
 	JPanel graphPane;
 	JPanel textPane;
-	JavaFXGraph fx = new JavaFXGraph();
 	
 	private List<Double> score;
 	private List<String> date;

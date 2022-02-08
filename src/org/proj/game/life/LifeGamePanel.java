@@ -50,7 +50,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 	private JLabel a3;
 	private JLabel a4;
 
-	private JButton title;
+	private JLabel title;
 
 	// 문제의 폰트
 	private Font font1;
@@ -130,6 +130,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 	int a3num = 0;
 	int a4num = 0;
 	
+	// 도전 횟수
 	int lifeRemaining = 2;
 	JLabel life;
 	
@@ -137,15 +138,16 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 
 	JButton submit;
 	static Timer timer;
-
-	JButton title1;
-
+	
+	GameHowTo_lg ght;
+	
 	public LifeGamePanel() {
 		pauseBtn.addActionListener(this);
 	}
 
 	@Override
 	public void display() {
+		ght = new GameHowTo_lg();
 		lgc = new LifeGameConsole();
 		this.setLayout(null);
 
@@ -157,6 +159,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 		pauseBtn.setBorderPainted(false);    // 버튼의 외곽 투명하게 
 		pauseBtn.setContentAreaFilled(false);  // 만들어 주는 것
 		this.add(pauseBtn);
+		
 		// 배경
 		bgImg = new ImageIcon("images/gamebg.png");
 		bgImgPan = new JLabel(bgImg);
@@ -180,8 +183,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 		this.add(xLabel);
 		xLabel.setVisible(false);
 
-		MyMouseListener listener = new MyMouseListener();
-		title = new JButton(lgc.ArrLabel[lgc.k]);
+		title = new JLabel(lgc.ArrLabel[lgc.k]);
 		title.setBounds(350, 30, 300, 80);
 		font3 = new Font("맑은 고딕", Font.BOLD, 28);
 		title.setHorizontalAlignment(JLabel.CENTER);
@@ -190,10 +192,8 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 		title.setBackground(gray);
 		Border c = new LineBorder(new Color(254, 178, 55), 7);
 		title.setBorder(c);
-		title.addMouseListener(listener);
-		title.setFocusPainted(false);
+		title.addMouseListener(this);
 		bgImgPan.add(title);
-		// new Color(254,178,55) 주황 컬러
 
 		// 드래그 앤 드롭
 		a1 = new JLabel(lgc.a[lgc.b[0]]);
@@ -270,42 +270,15 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 		
 		life = new JLabel("도전횟수 : " + lifeRemaining);
 		life.setFont(font1);
-		life.setBounds(50, 30, 200, 80);
+		life.setBounds(100, 50, 150, 50);
+		life.setBackground(Color.white);
+		life.setOpaque(true);
+		life.setHorizontalAlignment(JLabel.CENTER);
 		bgImgPan.add(life);
 		
 		this.add(bgImgPan);
 	}
 
-	class MyMouseListener implements MouseListener {
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			title = (JButton) e.getSource();
-			Border c = new LineBorder(new Color(254, 178, 55), 7);
-			title.setBorder(c);
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			title = (JButton) e.getSource();
-			Border c = new LineBorder(new Color(254, 178, 55), 7);
-			title.setBorder(c);
-		}
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-
-		}
-	}
 
 	String[] s = new String[4];
 
@@ -772,6 +745,10 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == ght.exit) {
+			ght.setVisible(false);
+		}
+		
 		if (e.getSource() == submit) {
 			for (int i = 0; i < 4; i++) {
 				if (s[i] == null) {
@@ -785,7 +762,6 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 					w++;
 				}
 			}
-		}
 
 		if (w == 4) {
 			gameNum++;
@@ -805,7 +781,6 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 //					JOptionPane.showMessageDialog(bgImgPan, "게임 종료합니다!");
 				life.setText("도전횟수 : " + lifeRemaining);
 				gameNum++;
-				lifeRemaining = 2;
 				xLabel.setVisible(true);
 				next();
 			} else if (lifeRemaining == 1) {
@@ -825,10 +800,11 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			ans3.setBackground(gray);
 			ans4.setBackground(gray);
 			w = 0;
+			lifeRemaining = 2;
 			revalidate();
 			repaint();
 		}
-
+	}
 		if (e.getSource() == pauseBtn) {
 			int yn = JOptionPane.showConfirmDialog(this, "게임을 종료하시겠습니까? ", "확인", JOptionPane.YES_NO_OPTION);
 
