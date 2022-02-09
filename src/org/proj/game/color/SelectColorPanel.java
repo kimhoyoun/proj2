@@ -53,10 +53,14 @@ public class SelectColorPanel extends GameView{
 	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
 	JButton pauseBtn = new JButton(pauseIcon);
 	
+	ImageIcon howtoIcon = new ImageIcon("images/HowTo_Btn.png");
+	JButton howtoBtn = new JButton(howtoIcon); 
+	
 	GameHowTo_sc ght = new GameHowTo_sc();
 	
 	public SelectColorPanel() {
 		pauseBtn.addActionListener(this);
+		howtoBtn.addActionListener(this);
 	}
 
 	@Override
@@ -74,7 +78,7 @@ public class SelectColorPanel extends GameView{
 		pauseBtn.setBounds(920, 30, 50, 50);
 		pauseBtn.setBorderPainted(false); 
 		pauseBtn.setContentAreaFilled(false);
-		this.add(pauseBtn);
+		
 		
 		// 배경
 		bgImg = new ImageIcon("images/gamebg.png");
@@ -85,6 +89,11 @@ public class SelectColorPanel extends GameView{
 		bgSK = new ImageIcon("images/sk.png");
 		bgSKPan = new JLabel(bgSK);
 		bgSKPan.setBounds(150, 150, 720, 425);
+		
+		howtoBtn.setBounds(850,30,50,50);
+		howtoBtn.setBorderPainted(false);
+		howtoBtn.setContentAreaFilled(false);
+		
 		
 		// 버튼
 		btn1 = new RoundJButton("btn1");
@@ -164,6 +173,8 @@ public class SelectColorPanel extends GameView{
 		
 		bgSKPan.add(txtTitle);
 		bgSKPan.add(txtColor);
+		bgImgPan.add(pauseBtn);
+		bgImgPan.add(howtoBtn);
 		bgSKPan.add(btn1);
 		bgSKPan.add(btn2);
 		bgSKPan.add(btn3);
@@ -176,6 +187,11 @@ public class SelectColorPanel extends GameView{
 	public void actionPerformed(ActionEvent e) {
 		if(click == 1) {
 			return;
+		}
+		
+		if(e.getSource() == howtoBtn) {
+			howtoState = true;
+			ght.setVisible(true);
 		}
 		
 		if(e.getSource() == ght.exit) {
@@ -240,7 +256,7 @@ public class SelectColorPanel extends GameView{
 				repaint();
 			}
 		}
-		if(!(e.getSource()== pauseBtn||e.getSource() == ght.exit)) {
+		if((e.getSource()!= pauseBtn&&e.getSource() != ght.exit)&&(e.getSource()!=howtoBtn)) {
 			click++;
 			gameNum++;
 			next();

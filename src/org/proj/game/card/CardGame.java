@@ -42,7 +42,9 @@ public class CardGame extends GameView {
 	JLabel xLabel;
 	RoundJButton bottomBtn01 = new RoundJButton("시작하기"); // 시작하기
 	JButton pauseBtn = new JButton(pauseIcon); 
-	JButton howtoBtn = new JButton(); 
+	
+	ImageIcon howtoIcon = new ImageIcon("images/HowTo_Btn.png");
+	JButton howtoBtn = new JButton(howtoIcon); 
 	JButton[] Btn = new JButton[12]; // 카드 12개
 	String[] img = { // 카드 이미지 주소 배열
 			"img01.png", "img02.png", "img03.png", "img04.png", "img05.png", "img06.png", "img01.png", "img02.png",
@@ -87,8 +89,9 @@ public class CardGame extends GameView {
 		pauseBtn.setContentAreaFilled(false);
 		
 		howtoBtn.setBounds(850,30,50,50);
-//		howtoBtn.setBorderPainted(false);
-//		howtoBtn.setContentAreaFilled(false);
+		howtoBtn.setBorderPainted(false);
+		howtoBtn.setContentAreaFilled(false);
+		
 		
 		// 시작시 정지화면
 		startCardBack = new JLabel(startBackIcon);
