@@ -9,6 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 public class GameHowTo_sc extends JPanel implements ActionListener{
 	JPanel pan1 = new JPanel();
@@ -31,31 +33,36 @@ public class GameHowTo_sc extends JPanel implements ActionListener{
 		this.setLayout(null);
 		comm();
 		first();
-		mid();
 		last();
 		prev.addActionListener(this);
 		next.addActionListener(this);
+		
 	}
 
 	public void comm() {
-		bgSK = new ImageIcon("images/howtobg.png");
+		bgSK = new ImageIcon("images/HowTo_background.png");
 		bgSkPan = new JLabel(bgSK);
 		bgSkPan.setBounds(0, 0, 820, 525);
 		bgSkPan.setLayout(null);
 		
 		font1 = new Font("맑은 고딕", Font.PLAIN, 24);
 
-		next = new JButton("다음");
-		next.setBounds(720, 440, 80, 60);
-		prev = new JButton("이전");
-		prev.setBounds(25, 440, 80, 60);
-		exit = new JButton("종료");
-		exit.setBounds(720, 20, 80, 60);
+		next = new JButton(new ImageIcon("images/HowTo_right.png"));
+		next.setFocusPainted(false);
+		next.setBorderPainted(false); 
+		next.setContentAreaFilled(false);
+		next.setBounds(720, 230, 80, 80);
+		prev = new JButton(new ImageIcon("images/HowTo_left.png"));
+		prev.setFocusPainted(false);
+		prev.setBorderPainted(false); 
+		prev.setContentAreaFilled(false);
+		prev.setBounds(25, 230, 80, 80);
+		exit = new JButton(new ImageIcon("images/HowTo_exit.png"));
+		exit.setFocusPainted(false);
+		exit.setBorderPainted(false); 
+		exit.setContentAreaFilled(false);
+		exit.setBounds(720, 20, 80, 80);
 		
-		next.setBackground(Color.orange);
-		prev.setBackground(Color.pink);
-		exit.setBackground(Color.red);
-
 		prev.setVisible(false); // 수정 (추가) - 한줄만
 		bgSkPan.add(next);
 		bgSkPan.add(prev);
@@ -68,60 +75,41 @@ public class GameHowTo_sc extends JPanel implements ActionListener{
 		pan1.setBounds(130, 50, 570, 440);
 		pan1.setBackground(Color.white);
 		
-		ImageIcon gameImg = new ImageIcon("images/m.png");
+		ImageIcon gameImg = new ImageIcon("images/HowTo_SelectColor_1.png");
 		JLabel gameImgPan = new JLabel(gameImg);
 		gameImgPan.setBounds(10, 10, 550, 300);
 
-		JLabel text = new JLabel("게임 설명 주절주절1");
+		JLabel text = new JLabel("'글자 의미'와 같은 색을 선택해주세요.");
 		text.setFont(font1);
 		text.setHorizontalAlignment(JLabel.CENTER);
 		text.setBounds(10, 320, 550, 120);
 		text.setOpaque(true);
-		text.setBackground(Color.pink);
-
+		text.setBackground(Color.white);
+		Border c = new LineBorder(new Color(137, 170,108), 7);
+		text.setBorder(c);
 		pan1.add(text);
 		pan1.add(gameImgPan);
 		bgSkPan.add(pan1);
 	}
 
-	public void mid() {
-		pan2.setLayout(null);
-		pan2.setBounds(130, 50, 570, 440);
-		pan2.setBackground(Color.white);
-		
-		ImageIcon gameImg = new ImageIcon("images/m.png");
-		JLabel gameImgPan = new JLabel(gameImg);
-		gameImgPan.setBounds(10, 10, 550, 300);
-		
-		JLabel text = new JLabel("게임 설명 주절주2");
-		text.setFont(font1);
-		text.setHorizontalAlignment(JLabel.CENTER);
-		text.setBounds(10, 320, 550, 120);
-		text.setOpaque(true);
-		text.setBackground(Color.pink);
-		
-		pan2.setVisible(false);
-		pan2.add(text);
-		pan2.add(gameImgPan);
-		bgSkPan.add(pan2);
-	}
 
 	public void last() {
 		pan3.setLayout(null);
 		pan3.setBounds(130, 50, 570, 440);
 		pan3.setBackground(Color.white);
 
-		ImageIcon gameImg = new ImageIcon("images/m.png");
+		ImageIcon gameImg = new ImageIcon("images/HowTo_SelectColor_2.png");
 		JLabel gameImgPan = new JLabel(gameImg);
 		gameImgPan.setBounds(10, 10, 550, 300);
 		
-		JLabel text = new JLabel("게임 설명 주절주3");
+		JLabel text = new JLabel("정답은 첫번째에 있는 파란색입니다.");
 		text.setFont(font1);
 		text.setHorizontalAlignment(JLabel.CENTER);
 		text.setBounds(10, 320, 550, 120);
 		text.setOpaque(true);
-		text.setBackground(Color.pink);
-		
+		text.setBackground(Color.white);
+		Border c = new LineBorder(new Color(137, 170,108), 7);
+		text.setBorder(c);
 		pan3.setVisible(false);
 		pan3.add(text);
 		pan3.add(gameImgPan);
@@ -142,23 +130,13 @@ public class GameHowTo_sc extends JPanel implements ActionListener{
 				prev.setVisible(false);
 				next.setVisible(true); 
 				pan1.setVisible(true);
-				pan2.setVisible(false);
 				pan3.setVisible(false);
 				revalidate();
 				repaint();
 			} else if(count == 1) {
 				prev.setVisible(true);
-				next.setVisible(true);
-				pan1.setVisible(false);
-				pan2.setVisible(true);
-				pan3.setVisible(false);
-				revalidate();
-				repaint();
-			} else if(count == 2) {
-				prev.setVisible(true);
 				next.setVisible(false);
 				pan1.setVisible(false);
-				pan2.setVisible(false);
 				pan3.setVisible(true);
 				revalidate();
 				repaint();

@@ -71,7 +71,7 @@ public class PlusMinus extends GameView {
 		this.add(manualLabel);
 		
 		quizLabel = new JLabel(gp.question);
-		quizLabel.setFont(new Font("Gothic", Font.BOLD, 115));
+		quizLabel.setFont(new Font("맑은 고딕", Font.BOLD, 115));
 		quizLabel.setForeground(Color.ORANGE);
 		quizLabel.setBounds(330, 150, 400, 200);
 
@@ -80,7 +80,7 @@ public class PlusMinus extends GameView {
 			choiceBtn[i] = new RoundJButton();
 			choiceBtn[i].setText(Integer.toString(gp.answerArr[i]));
 			choiceBtn[i].setBackground(Color.orange);
-			choiceBtn[i].setFont(new Font("Gothic", Font.BOLD, 70));
+			choiceBtn[i].setFont(new Font("맑은 고딕", Font.BOLD, 70));
 			choiceBtn[i].setForeground(Color.WHITE);
 		}
 		
@@ -134,7 +134,6 @@ public class PlusMinus extends GameView {
 		}
 		
 		if (e.getSource() == choiceBtn[0]) {
-			gameNum++;
 			choiceBtn[0].setBackground(Color.RED);
 			
 			if (gp.answer == Integer.parseInt(choiceBtn[0].getText())) {
@@ -149,10 +148,8 @@ public class PlusMinus extends GameView {
 				repaint();
 			}
 			
-			next();
 		}
 		if (e.getSource() == choiceBtn[1]) {
-			gameNum++;
 			choiceBtn[1].setBackground(Color.RED);
 			if (gp.answer == Integer.parseInt(choiceBtn[1].getText())) {
 				gametrue++;
@@ -164,10 +161,8 @@ public class PlusMinus extends GameView {
 				revalidate();
 				repaint();
 			}
-			next();
 		}
 		if (e.getSource() == choiceBtn[2]) {
-			gameNum++;
 			choiceBtn[2].setBackground(Color.RED);
 			if (gp.answer == Integer.parseInt(choiceBtn[2].getText())) {
 				gametrue++;
@@ -179,10 +174,8 @@ public class PlusMinus extends GameView {
 				revalidate();
 				repaint();
 			}
-			next();
 		}
 		if (e.getSource() == choiceBtn[3]) {
-			gameNum++;
 			choiceBtn[3].setBackground(Color.RED);
 			if (gp.answer == Integer.parseInt(choiceBtn[3].getText())) {
 				gametrue++;
@@ -194,8 +187,14 @@ public class PlusMinus extends GameView {
 				revalidate();
 				repaint();
 			}
+			
+		}
+		
+		if(e.getSource() instanceof JButton && e.getSource() != pauseBtn) {
+			gameNum++;
 			next();
 		}
+		
 		
 		if(e.getSource() == pauseBtn) {
 			int yn = JOptionPane.showConfirmDialog(this, "게임을 종료하시겠습니까? ","확인",JOptionPane.YES_NO_OPTION);

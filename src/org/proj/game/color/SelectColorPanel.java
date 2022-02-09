@@ -44,14 +44,14 @@ public class SelectColorPanel extends GameView implements MouseListener{
 
 	private JLabel txtTitle;
 	private JLabel txtColor;
-
+	boolean howtoState = true;
 	SelectColorConsole scc;
 
 	Timer timer;
 	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
 	JButton pauseBtn = new JButton(pauseIcon);
 	
-	GameHowTo_sc ght;
+	GameHowTo_sc ght = new GameHowTo_sc();
 
 	public SelectColorPanel() {
 		pauseBtn.addActionListener(this);
@@ -108,6 +108,16 @@ public class SelectColorPanel extends GameView implements MouseListener{
 		btn2.addActionListener(this);
 		btn3.addActionListener(this);
 		
+		if(howtoState) {
+			btn1.setEnabled(false);
+			btn2.setEnabled(false);
+			btn3.setEnabled(false);
+		}else {
+			btn1.addMouseListener(SelectColorPanel.this);
+			btn2.addMouseListener(SelectColorPanel.this);
+			btn3.addMouseListener(SelectColorPanel.this);
+		}
+		
 		checkIcon = new ImageIcon("images/o.png");
 		checkLabel = new JLabel(checkIcon);
 		checkLabel.setBounds(670, 65, 150, 150);
@@ -148,9 +158,7 @@ public class SelectColorPanel extends GameView implements MouseListener{
 		txtTitle.setForeground(Color.black);
 		txtTitle.setBounds(220, 25, 500, 100);
 		
-		btn1.setEnabled(false);
-		btn2.setEnabled(false);
-		btn3.setEnabled(false);
+		
 		ght.setBounds(100, 100, 820, 530);
 		bgImgPan.add(ght);
 		ght.exit.addActionListener(this);
@@ -168,6 +176,7 @@ public class SelectColorPanel extends GameView implements MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == ght.exit) {
+			howtoState = false;
 			btn1.addMouseListener(SelectColorPanel.this);
 			btn2.addMouseListener(SelectColorPanel.this);
 			btn3.addMouseListener(SelectColorPanel.this);
@@ -182,13 +191,11 @@ public class SelectColorPanel extends GameView implements MouseListener{
 
 		if ("btn1".equals(btn.getText())) {
 			if (scc.ansColor == scc.arrBtn[0]) {
-				gameNum++;
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
-				gameNum++;
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
@@ -210,13 +217,11 @@ public class SelectColorPanel extends GameView implements MouseListener{
 //		}
 		if ("btn2".equals(btn.getText())) {
 			if (scc.ansColor == scc.arrBtn[1]) {
-				gameNum++;
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
-				gameNum++;
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
@@ -225,20 +230,20 @@ public class SelectColorPanel extends GameView implements MouseListener{
 
 		if ("btn3".equals(btn.getText())) {
 			if (scc.ansColor == scc.arrBtn[2]) {
-				gameNum++;
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
-				gameNum++;
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
 			}
 		}
-
-		next();
+		if(!(e.getSource()== pauseBtn||e.getSource() == ght.exit)) {
+			gameNum++;
+			next();
+		}
 
 		if (e.getSource() == pauseBtn) {
 			int yn = JOptionPane.showConfirmDialog(this, "게임을 종료하시겠습니까? ", "확인", JOptionPane.YES_NO_OPTION);

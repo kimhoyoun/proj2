@@ -157,13 +157,11 @@ public class MaxColorPanel extends GameView implements MouseListener {
 		if ("btn1".equals(btn.getText())) {
 //			System.out.println("btn1");
 			if ("RED".equals(mcc.ans)) {
-				gameNum++;
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
-				gameNum++;
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
@@ -171,13 +169,11 @@ public class MaxColorPanel extends GameView implements MouseListener {
 		} else if ("btn2".equals(btn.getText())) {
 //			System.out.println("btn2");
 			if ("BLUE".equals(mcc.ans)) {
-				gameNum++;
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
-				gameNum++;
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
@@ -185,13 +181,11 @@ public class MaxColorPanel extends GameView implements MouseListener {
 		} else if ("btn3".equals(btn.getText())) {
 //			System.out.println("btn3");
 			if ("YELLOW".equals(mcc.ans)) {
-				gameNum++;
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
-				gameNum++;
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
@@ -200,6 +194,7 @@ public class MaxColorPanel extends GameView implements MouseListener {
 
 		if ((e.getSource() instanceof JButton) && (e.getSource() != pauseBtn)) {
 			System.out.println("버튼");
+			gameNum++;
 			next();
 		}
 

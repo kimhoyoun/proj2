@@ -394,7 +394,7 @@ public class GameServer extends JFrame {
 				dao.updateGameData(gameDto);
 				loginUser.remove(dto);
 				logoutUpdate(userID);
-				serverState.append(userID + " >> ID Check Complete" + "\n");
+				serverState.append(userID + " >> Logout" + "\n");
 //				userID = null;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
