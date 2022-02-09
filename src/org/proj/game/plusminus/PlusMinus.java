@@ -36,13 +36,8 @@ public class PlusMinus extends GameView {
 	int click;
 
 	public PlusMinus() {
-//		choiceBtn[0] = new RoundJButton();
-//		choiceBtn[1] = new RoundJButton();
-//		choiceBtn[2] = new RoundJButton();
-//		choiceBtn[3] = new RoundJButton();
 
 		pauseBtn.addActionListener(this);
-//		display();
 	}
 
 	@Override
@@ -60,19 +55,19 @@ public class PlusMinus extends GameView {
 		bgLabel = new JLabel(bgicon);
 		bgLabel.setBounds(0, 0, 1024, 768);
 
-		ImageIcon pmicon = new ImageIcon("images/gamebackImg.png");
+		ImageIcon pmicon = new ImageIcon("images/sketchbook_PlusMinus.png");
 		pmbgLabel = new JLabel(pmicon);
-		pmbgLabel.setBounds(210, 100, 600, 500);
+		pmbgLabel.setBounds(155, 60, 700, 600);
 
 		manualLabel = new JLabel("알맞은 숫자를 누르세요");
 		manualLabel.setBounds(320, 310, 400, 50);
 		manualLabel.setHorizontalAlignment(JLabel.CENTER);
 		manualLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		this.add(manualLabel);
+		bgLabel.add(manualLabel);
 
 		quizLabel = new JLabel(gp.question);
-		quizLabel.setFont(new Font("맑은 고딕", Font.BOLD, 115));
-		quizLabel.setForeground(Color.ORANGE);
+		quizLabel.setFont(new Font("맑은 고딕", Font.BOLD, 110));
+		quizLabel.setForeground(new Color(255, 127, 0));
 		quizLabel.setBounds(315, 140, 400, 200);
 
 		choiceBtn = new JButton[4];
@@ -99,22 +94,22 @@ public class PlusMinus extends GameView {
 		pauseBtn.setContentAreaFilled(false); // 만들어 주는 것
 
 		checkLabel.setBounds(700, 20, 150, 150);
-		this.add(checkLabel);
+		bgLabel.add(checkLabel);
 		checkLabel.setVisible(false);
 		xLabel.setBounds(700, 20, 150, 150);
-		this.add(xLabel);
+		bgLabel.add(xLabel);
 		xLabel.setVisible(false);
 
-		this.add(pauseBtn);
+		bgLabel.add(pauseBtn);
 
-		this.add(choiceBtn[0]);
-		this.add(choiceBtn[1]);
-		this.add(choiceBtn[2]);
-		this.add(choiceBtn[3]);
+		bgLabel.add(choiceBtn[0]);
+		bgLabel.add(choiceBtn[1]);
+		bgLabel.add(choiceBtn[2]);
+		bgLabel.add(choiceBtn[3]);
 
-		this.add(quizLabel);
+		bgLabel.add(quizLabel);
 
-		this.add(pmbgLabel);
+		bgLabel.add(pmbgLabel);
 
 		this.add(bgLabel);
 
@@ -132,15 +127,16 @@ public class PlusMinus extends GameView {
 		}
 
 		if (e.getSource() == choiceBtn[0]) {
-			choiceBtn[0].setBackground(Color.RED);
 
 			if (gp.answer == Integer.parseInt(choiceBtn[0].getText())) {
 				gametrue++;
+				choiceBtn[0].setBackground(new Color(33, 139, 34));
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 
 			} else {
+				choiceBtn[0].setBackground(new Color(233, 23, 22));
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
@@ -148,39 +144,42 @@ public class PlusMinus extends GameView {
 
 		}
 		if (e.getSource() == choiceBtn[1]) {
-			choiceBtn[1].setBackground(Color.RED);
 			if (gp.answer == Integer.parseInt(choiceBtn[1].getText())) {
+				choiceBtn[1].setBackground(new Color(33, 139, 34));
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
+				choiceBtn[1].setBackground(new Color(233, 23, 22));
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
 			}
 		}
 		if (e.getSource() == choiceBtn[2]) {
-			choiceBtn[2].setBackground(Color.RED);
 			if (gp.answer == Integer.parseInt(choiceBtn[2].getText())) {
+				choiceBtn[2].setBackground(new Color(33, 139, 34));
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
+				choiceBtn[2].setBackground(new Color(233, 23, 22));
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
 			}
 		}
 		if (e.getSource() == choiceBtn[3]) {
-			choiceBtn[3].setBackground(Color.RED);
 			if (gp.answer == Integer.parseInt(choiceBtn[3].getText())) {
+				choiceBtn[3].setBackground(new Color(33, 139, 34));
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
+				choiceBtn[3].setBackground(new Color(233, 23, 22));
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();

@@ -27,12 +27,13 @@ import org.proj.view.GameView;
 
 public class CardGame extends GameView {
 
-	ImageIcon backIcon = new ImageIcon("images/background.png");
-	ImageIcon gameBackIcon = new ImageIcon("images/gamebackImg.png");
+	ImageIcon backIcon = new ImageIcon("images/backgroundImg.png");
+	ImageIcon gameBackIcon = new ImageIcon("images/sketchbook_Card.png");
 	ImageIcon startBackIcon = new ImageIcon("images/startback.png");
 	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
 	ImageIcon checkIcon = new ImageIcon("images/checked.png");
 	ImageIcon xIcon = new ImageIcon("images/x.png");
+	ImageIcon howtoIcon = new ImageIcon("images/HowTo_btn.png");
 	JLabel Title; // 횟수 보여주기
 	JLabel gameBack; // 흰색 배경
 	JLabel back; // 초록 배경
@@ -42,8 +43,6 @@ public class CardGame extends GameView {
 	JLabel xLabel;
 	RoundJButton bottomBtn01 = new RoundJButton("시작하기"); // 시작하기
 	JButton pauseBtn = new JButton(pauseIcon); 
-	
-	ImageIcon howtoIcon = new ImageIcon("images/HowTo_Btn.png");
 	JButton howtoBtn = new JButton(howtoIcon); 
 	JButton[] Btn = new JButton[12]; // 카드 12개
 	String[] img = { // 카드 이미지 주소 배열
@@ -59,7 +58,7 @@ public class CardGame extends GameView {
 	java.util.Timer countTimer;
 	int startCount;
 
-	GameHowTo_card ght = new GameHowTo_card();
+	GameHowTo_card ght = new GameHowTo_card(bottomBtn01);
 
 	public CardGame() {
 		pauseBtn.addActionListener(this);
@@ -137,7 +136,7 @@ public class CardGame extends GameView {
 			Btn[i].setFocusPainted(false);
 			Btn[i].setBorder(null);
 			Btn[i].setBackground(Color.white);
-			Btn[i].addActionListener(this);
+//			Btn[i].addActionListener(this);
 			Btn[i].setIcon(chageImage("leaf.png"));
 			Btn[i].setEnabled(false);
 			cardBack.add(Btn[i]);
@@ -183,7 +182,8 @@ public class CardGame extends GameView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < Btn.length; i++) {
-					Btn[i].setIcon(chageImage("leaf.png"));
+					Btn[i].setIcon(chageImage("card_Leaf.png"));
+					Btn[i].addActionListener(CardGame.this); // 여기
 				}
 				timer.stop();
 			}
@@ -242,8 +242,8 @@ public class CardGame extends GameView {
 
 				openCount = 0;
 
-				Btn[buttonIndexSave1].setIcon(chageImage("leaf.png"));
-				Btn[buttonIndexSave2].setIcon(chageImage("leaf.png"));
+				Btn[buttonIndexSave1].setIcon(chageImage("card_Leaf.png"));
+				Btn[buttonIndexSave2].setIcon(chageImage("card_Leaf.png"));
 
 				timer.stop();
 			}
@@ -281,6 +281,7 @@ public class CardGame extends GameView {
 		JButton btn = (JButton) e.getSource();
 		if(e.getSource() == howtoBtn) {
 			ght.setVisible(true);
+			bottomBtn01.setVisible(false);
 		}
 		
 		if (e.getSource() == pauseBtn) { // 정지버튼

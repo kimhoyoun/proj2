@@ -23,7 +23,7 @@ import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.view.GameView;
 
-public class MaxColorPanel extends GameView implements MouseListener {
+public class MaxColorPanel extends GameView{
 	// 배경
 	private ImageIcon bgImg;
 	private JLabel bgImgPan;
@@ -82,11 +82,11 @@ public class MaxColorPanel extends GameView implements MouseListener {
 		bgImgPan.setSize(1024, 768);
 		bgImgPan.setLayout(null);
 
-		bgSK = new ImageIcon("images/sk.png");
+		bgSK = new ImageIcon("images/sketchbook_Color.png");
 		bgSKPan = new JLabel(bgSK);
 		bgSKPan.setBounds(150, 150, 720, 425);
 
-		checkIcon = new ImageIcon("images/o.png");
+		checkIcon = new ImageIcon("images/checked.png");
 		checkLabel = new JLabel(checkIcon);
 		checkLabel.setBounds(670, 65, 150, 150);
 		this.add(checkLabel);
@@ -131,9 +131,6 @@ public class MaxColorPanel extends GameView implements MouseListener {
 		btn1.addActionListener(this);
 		btn2.addActionListener(this);
 		btn3.addActionListener(this);
-		btn1.addMouseListener(this);
-		btn2.addMouseListener(this);
-		btn3.addMouseListener(this);
 
 		// 제목
 		txtTitle = new JLabel("가장 많은 색을 선택해주세요");
@@ -160,7 +157,6 @@ public class MaxColorPanel extends GameView implements MouseListener {
 
 		JButton btn = (JButton) e.getSource();
 		if ("btn1".equals(btn.getText())) {
-//			System.out.println("btn1");
 			if ("RED".equals(mcc.ans)) {
 				gametrue++;
 				checkLabel.setVisible(true);
@@ -172,7 +168,6 @@ public class MaxColorPanel extends GameView implements MouseListener {
 				repaint();
 			}
 		} else if ("btn2".equals(btn.getText())) {
-//			System.out.println("btn2");
 			if ("BLUE".equals(mcc.ans)) {
 				gametrue++;
 				checkLabel.setVisible(true);
@@ -184,7 +179,6 @@ public class MaxColorPanel extends GameView implements MouseListener {
 				repaint();
 			}
 		} else if ("btn3".equals(btn.getText())) {
-//			System.out.println("btn3");
 			if ("YELLOW".equals(mcc.ans)) {
 				gametrue++;
 				checkLabel.setVisible(true);
@@ -259,42 +253,5 @@ public class MaxColorPanel extends GameView implements MouseListener {
 		return MaxColor;
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		btn1 = (JButton) e.getSource();
-		btn1.setBorder(new LineBorder(Color.black, 2));
-		btn2 = (JButton) e.getSource();
-		btn2.setBorder(new LineBorder(Color.black, 2));
-		btn3 = (JButton) e.getSource();
-		btn3.setBorder(new LineBorder(Color.black, 2));
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		btn1 = (JButton) e.getSource();
-		btn1.setBorder(new LineBorder(Color.black, 0));
-		btn2 = (JButton) e.getSource();
-		btn2.setBorder(new LineBorder(Color.black, 0));
-		btn3 = (JButton) e.getSource();
-		btn3.setBorder(new LineBorder(Color.black, 0));
-	}
 
 }

@@ -32,8 +32,8 @@ import org.proj.view.GameView;
 
 public class CupGamePanel extends GameView {
 
-	ImageIcon backIcon = new ImageIcon("images/background.png");
-	ImageIcon gameBagIcon = new ImageIcon("images/cupgamebackImg.png");
+	ImageIcon backIcon = new ImageIcon("images/backgroundImg.png");
+	ImageIcon gameBagIcon = new ImageIcon("images/sketchbook_Cup.png");
 	ImageIcon cupIcon = new ImageIcon("images/cup.png");
 	ImageIcon ballIcon = new ImageIcon("images/ball.png");
 	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
@@ -105,11 +105,7 @@ public class CupGamePanel extends GameView {
 		playBtn.setBackground(Color.ORANGE);
 		playBtn.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		playBtn.setVisible(true);
-//		// 컵 생성
-//		for (int i = 0; i < cups.length; i++) {
-//			this.add(cups[i]);
-//		}
-//		
+
 		backLabel = new JLabel(backIcon);
 		backLabel.setBounds(0, 0, 1024, 768);
 

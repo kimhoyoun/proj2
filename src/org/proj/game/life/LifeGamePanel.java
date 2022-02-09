@@ -156,6 +156,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 
 	@Override
 	public void display() {
+		// 중복제거
 		while(true) {
 			lgc = new LifeGameConsole();
 			if(count == 0) {
@@ -194,14 +195,15 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 
 		submit = new JButton("제출");
 		submit.setBounds(770, 650, 130, 50);
+		submit.setBackground(new Color(254, 178, 55));
 		font2 = new Font("맑은 고딕", Font.BOLD, 20);
+		submit.setFocusPainted(false);
 		if(howtoState) {
 			submit.setVisible(false); 
 		}else {
 			submit.setVisible(true); 
 		}
 		
-		submit.setFocusPainted(false);
 		submit.setFont(font2);
 		bgImgPan.add(submit);
 		submit.addActionListener(this);

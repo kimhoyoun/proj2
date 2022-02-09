@@ -86,7 +86,7 @@ public class SelectColorPanel extends GameView{
 		bgImgPan.setSize(1024, 768);
 		
 		// 스케치북
-		bgSK = new ImageIcon("images/sk.png");
+		bgSK = new ImageIcon("images/sketchbook_Color.png");
 		bgSKPan = new JLabel(bgSK);
 		bgSKPan.setBounds(150, 150, 720, 425);
 		
@@ -126,7 +126,7 @@ public class SelectColorPanel extends GameView{
 			btn3.setEnabled(false);
 		}
 		
-		checkIcon = new ImageIcon("images/o.png");
+		checkIcon = new ImageIcon("images/checked.png");
 		checkLabel = new JLabel(checkIcon);
 		checkLabel.setBounds(670, 65, 150, 150);
 		this.add(checkLabel);
