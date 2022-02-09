@@ -54,7 +54,7 @@ public class MaxColorPanel extends GameView implements MouseListener {
 	private JLabel txtTitle;
 	private Font font;
 	Timer timer;
-
+	int click=0;
 	MaxColorConsole mcc;
 
 	public MaxColorPanel() {
@@ -63,6 +63,7 @@ public class MaxColorPanel extends GameView implements MouseListener {
 
 	@Override
 	public void display() {
+		click = 0;
 		mcc = new MaxColorConsole();
 		this.setLayout(null);
 
@@ -152,7 +153,10 @@ public class MaxColorPanel extends GameView implements MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		if(click == 1) {
+			return;
+		}
+		
 		JButton btn = (JButton) e.getSource();
 		if ("btn1".equals(btn.getText())) {
 //			System.out.println("btn1");
@@ -194,6 +198,7 @@ public class MaxColorPanel extends GameView implements MouseListener {
 
 		if ((e.getSource() instanceof JButton) && (e.getSource() != pauseBtn)) {
 			System.out.println("버튼");
+			click++;
 			gameNum++;
 			next();
 		}

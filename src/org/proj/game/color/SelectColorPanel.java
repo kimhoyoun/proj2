@@ -45,6 +45,7 @@ public class SelectColorPanel extends GameView implements MouseListener{
 	private JLabel txtTitle;
 	private JLabel txtColor;
 	boolean howtoState = true;
+	int click=0;
 	SelectColorConsole scc;
 
 	Timer timer;
@@ -52,13 +53,14 @@ public class SelectColorPanel extends GameView implements MouseListener{
 	JButton pauseBtn = new JButton(pauseIcon);
 	
 	GameHowTo_sc ght = new GameHowTo_sc();
-
+	
 	public SelectColorPanel() {
 		pauseBtn.addActionListener(this);
 	}
 
 	@Override
 	public void display() {
+		click = 0;
 		scc = new SelectColorConsole();
 		this.setLayout(null);
 		
@@ -175,6 +177,10 @@ public class SelectColorPanel extends GameView implements MouseListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(click == 1) {
+			return;
+		}
+		
 		if(e.getSource() == ght.exit) {
 			howtoState = false;
 			btn1.addMouseListener(SelectColorPanel.this);
@@ -241,6 +247,7 @@ public class SelectColorPanel extends GameView implements MouseListener{
 			}
 		}
 		if(!(e.getSource()== pauseBtn||e.getSource() == ght.exit)) {
+			click++;
 			gameNum++;
 			next();
 		}
