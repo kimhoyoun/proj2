@@ -24,7 +24,7 @@ public class GameRecordView extends GameView {
 	GraphPanel graph;
 	JPanel graphPane;
 	JPanel textPane;
-	
+	JLabel noticelbl;
 	private List<Double> score;
 	private List<String> date;
 	@Override
@@ -42,7 +42,6 @@ public class GameRecordView extends GameView {
 	public void displaySetting() {
 		JLabel title = new JLabel("성적확인");
 		title.setFont(new Font("맑은 고딕", Font.BOLD, 40));
-		graphsetting();
 		graphPane = new JPanel();
 		graphPane.setLayout(null);
 		graphPane.setBackground(new Color(204,236,255,150));
@@ -51,16 +50,21 @@ public class GameRecordView extends GameView {
 		textPane.setLayout(null);
 		textPane.setBackground(new Color(255,255,255,150));
 		
-		JLabel text = new JLabel();
-		text.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		graphPane.add(graph);
-		graph.setBounds(15, 15, 700, 400);
-//		graphPane.add(fx);
-//		fx.setBounds(15, 15, 700, 400);
 		
-		text.setHorizontalAlignment(JLabel.CENTER);
-		textPane.add(text);
-		text.setBounds(15,15,700,150);
+		if(mainData.size()>2) {
+			graphsetting();
+			graphPane.add(graph);
+			graph.setBounds(15, 15, 700, 400);
+			JLabel text = new JLabel();
+			text.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+			text.setHorizontalAlignment(JLabel.CENTER);
+			textPane.add(text);
+			text.setText(String.format("현재 %d대 평균보다 %d번 미달 났습니다!", (mainUser.getAge()/10)*10,underAvgNum));
+			text.setBounds(15,15,700,150);
+		}else {
+			notGraphsetting();
+			
+		}
 		
 		background.add(title);
 		background.add(backBtn);
@@ -74,9 +78,20 @@ public class GameRecordView extends GameView {
 		backBtn.setBounds(10, FRAME_HEIGHT - 150, 100, 100);
 		graphPane.setBounds(20,80, 730,430);
 		textPane.setBounds(200,530, 730,180);
-		text.setText(String.format("현재 %d대 평균보다 %d번 미달 났습니다!", (mainUser.getAge()/10)*10,underAvgNum));
+		
 	}
-
+	
+	public void notGraphsetting() {
+		JLabel noticelbl = new JLabel("<html>출력할 데이터가 부족합니다.<br>3일 이상 게임을 진행해 주세요!<html>", javax.swing.SwingConstants.CENTER);
+		JLabel nodatalbl = new JLabel("No Data", javax.swing.SwingConstants.CENTER);
+		noticelbl.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		nodatalbl.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		graphPane.add(nodatalbl);
+		nodatalbl.setBounds(40,150,650,130);
+		textPane.add(noticelbl);
+		noticelbl.setBounds(15,15,700,150);
+	}
+	
 	public void graphsetting() {
 		getGraphData(gameRecord);
 		if(graph!= null) {
@@ -99,7 +114,12 @@ public class GameRecordView extends GameView {
 	public void getGraphData(String game) {
 		score  = new ArrayList<>();
 		date  = new ArrayList<>();
-		for(GameDataDto data : mainData) {
+		int start = 0;
+		start = (mainData.size()>20) ? mainData.size()-20 : 0;	
+		
+		for(int i = start; i<mainData.size(); i++) {
+			GameDataDto data;
+			data = mainData.get(i);
 			switch(game) {
 			case PlusMinus:
 				if(data.getTotalGame1()!=0) {
@@ -137,7 +157,8 @@ public class GameRecordView extends GameView {
 				}
 				break;
 			}
-			date.add(data.getDay());
+			
+			date.add(data.getDay().substring(5));
 		}
 	}
 	

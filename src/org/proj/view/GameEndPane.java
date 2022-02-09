@@ -73,7 +73,8 @@ public class GameEndPane extends GameView {
 	
 	public void recordGameData(GameView view) {
 		String state = view.toString();
-		
+		if(GameState == MiniGame) {
+			
 		switch(state) {
 		case PlusMinus:
 			mainGameData.setTotalGame1(mainGameData.getAnsGame1()+gameNum);
@@ -112,5 +113,6 @@ public class GameEndPane extends GameView {
 			gametrue = 0;
 			break;
 		}
+	}
 	}
 }

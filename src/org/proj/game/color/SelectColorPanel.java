@@ -280,16 +280,26 @@ public class SelectColorPanel extends GameView{
 			public void actionPerformed(ActionEvent e) {
 				checkLabel.setVisible(false);
 				xLabel.setVisible(false);
-				if (gameNum == endGameNum) {
-					resultPane.display();
-				} else {
-					Controller c = Controller.getController();
-					int n = (int) ((Math.random() * 100000) % 2);
-
-					if (n == 0) {
-						c.Viewchange(SelectColor);
+				if (GameState == MiniGame) {
+					if (gameNum == endGameNum) {
+						resultPane.display();
 					} else {
-						c.Viewchange(MaxColor);
+						Controller c = Controller.getController();
+						int n = (int) ((Math.random() * 100000) % 2);
+
+						if (n == 0) {
+							c.Viewchange(SelectColor);
+						} else {
+							c.Viewchange(MaxColor);
+						}
+					}
+				}else {
+					if (gameNum == 12) {
+						Controller c = Controller.getController();
+						resultPane.display();
+					} else {
+						Controller c = Controller.getController();
+						c.Viewchange(SelectColor);
 					}
 				}
 				timer.stop();

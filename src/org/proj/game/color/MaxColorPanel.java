@@ -55,7 +55,7 @@ public class MaxColorPanel extends GameView implements MouseListener {
 	private JLabel txtTitle;
 	private Font font;
 	Timer timer;
-	int click=0;
+	int click = 0;
 	MaxColorConsole mcc;
 
 	public MaxColorPanel() {
@@ -109,7 +109,7 @@ public class MaxColorPanel extends GameView implements MouseListener {
 			b.setBackground(mcc.col[mcc.arr[i]]);
 			colorPan.add(b);
 		}
-		
+
 		// 버튼
 		btn1 = new RoundJButton("btn1");
 		btn2 = new RoundJButton("btn2");
@@ -134,7 +134,7 @@ public class MaxColorPanel extends GameView implements MouseListener {
 		btn1.addMouseListener(this);
 		btn2.addMouseListener(this);
 		btn3.addMouseListener(this);
-		
+
 		// 제목
 		txtTitle = new JLabel("가장 많은 색을 선택해주세요");
 		font = new Font("맑은 고딕", Font.BOLD, 25);
@@ -154,10 +154,10 @@ public class MaxColorPanel extends GameView implements MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(click == 1) {
+		if (click == 1) {
 			return;
 		}
-		
+
 		JButton btn = (JButton) e.getSource();
 		if ("btn1".equals(btn.getText())) {
 //			System.out.println("btn1");
@@ -205,7 +205,9 @@ public class MaxColorPanel extends GameView implements MouseListener {
 		}
 
 		if (e.getSource() == pauseBtn) {
-			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("게임을 종료하시겠습니까? ", javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+			int yn = JOptionPane.showConfirmDialog(this,
+					new JLabel("게임을 종료하시겠습니까? ", javax.swing.SwingConstants.CENTER), "확인", JOptionPane.YES_NO_OPTION,
+					JOptionPane.PLAIN_MESSAGE);
 
 			if (yn == 0) {
 				Controller c = Controller.getController();
@@ -223,18 +225,29 @@ public class MaxColorPanel extends GameView implements MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				checkLabel.setVisible(false);
 				xLabel.setVisible(false);
-				if (gameNum == endGameNum) {
-					resultPane.display();
-				} else {
-					Controller c = Controller.getController();
-					int n = (int) ((Math.random() * 100000) % 2);
+				if (GameState == MiniGame) {
+					if (gameNum == endGameNum) {
+						resultPane.display();
+					} else {
+						Controller c = Controller.getController();
+						int n = (int) ((Math.random() * 100000) % 2);
 
-					if (n == 0) {
+						if (n == 0) {
+							c.Viewchange(SelectColor);
+						} else {
+							c.Viewchange(MaxColor);
+						}
+					}
+				}else {
+					if (gameNum == 10) {
+						Controller c = Controller.getController();
 						c.Viewchange(SelectColor);
 					} else {
+						Controller c = Controller.getController();
 						c.Viewchange(MaxColor);
 					}
 				}
+
 				timer.stop();
 			}
 		});

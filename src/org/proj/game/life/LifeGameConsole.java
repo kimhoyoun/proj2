@@ -45,64 +45,12 @@ public class LifeGameConsole {
 			for (int i = k; i < k + 1; i++) { // 문항뽑기
 				for (int j = 0; j < 4; j++) { // 문항안 정답 뽑기
 					a[count++] = Arr[i][j]; // 문항 정답을 차례대로 보여준다
-//					System.out.println(a[j]);
 				}
-//				System.out.println();
 			}
 		}
 
-//		public void answer() {
-//			switch (k) {
-//			case 0:
-//				answerArr();
-//				answer[0] = a[0];
-//				break;
-//			case 1:
-//				answerArr();
-//				answer[1] = a[1];
-//				break;
-//			case 2:
-//				answerArr();
-//				answer[2] = a[2];
-//				break;
-//			case 3:
-//				answerArr();
-//				answer[3] = a[3];
-//				break;
-//			case 4:
-//				answerArr();
-//				answer[4] = a[4];
-//				break;
-//			case 5:
-//				answerArr();
-//				answer[5] = a[5];
-//				break;
-//			case 6:
-//				answerArr();
-//				answer[6] = a[6];
-//				break;
-//			case 7:
-//				answerArr();
-//				answer[7] = a[7];
-//				break;
-//			case 8:
-//				answerArr();
-//				answer[8] = a[8];
-//				break;
-//			case 9:
-//				answerArr();
-//				answer[9] = a[9];
-//				break;
-//			case 10:
-//				answerArr();
-//				answer[10] = a[10];
-//				break;
-//			}
-//		}
 
 		public void quiz() {
-//			int[] b = new int[4];
-
 			for (int i = 0; i < 4; i++) {
 				r = (int) (Math.random() * 4);
 				b[i] = r;
@@ -112,15 +60,8 @@ public class LifeGameConsole {
 						break;
 					} 
 				}
-//				System.out.println(a[b[0]]);
 			}
-//			for(int i = 0; i < 4; i++) {
-//				System.out.println(a[b[i]]);
-//			}
 		}
 
-//		public static void main(String[] args) {
-//			new LifeGameConsole();
-//		}
 
 }

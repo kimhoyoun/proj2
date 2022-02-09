@@ -345,20 +345,17 @@ public class CardGame extends GameView {
 						gameNum++;
 						gametrue++;
 						checkLabel.setVisible(true);
-						JOptionPane.showMessageDialog(CardGame.this, "수고하셨습니다.");
 						next();
 					} else if (tryCount == 0) {
 						gameNum++;
 						gametrue++;
 						xLabel.setVisible(true);
-						JOptionPane.showMessageDialog(CardGame.this, "수고하셨습니다.");
 						next();
 					}
 				} else {
 					if (tryCount == 0) {
 						gameNum++;
 						xLabel.setVisible(true);
-						JOptionPane.showMessageDialog(CardGame.this, "수고하셨습니다.");
 						for (int i = 0; i < 12; i++) {
 							Btn[i].setEnabled(false);
 						}
@@ -374,11 +371,22 @@ public class CardGame extends GameView {
 	}
 
 	public void next() {
-		if (gameNum == endGameNum) {
-			resultPane.display();
-		} else {
-			Controller c = Controller.getController();
-			c.Viewchange(CARD);
+		if (GameState == MiniGame) {
+
+			if (gameNum == endGameNum) {
+				resultPane.display();
+			} else {
+				Controller c = Controller.getController();
+				c.Viewchange(CARD);
+			}
+		}else {
+			if (gameNum == 4) {
+				Controller c = Controller.getController();
+				c.Viewchange(CUP);
+			} else {
+				Controller c = Controller.getController();
+				c.Viewchange(CARD);
+			}
 		}
 	}
 

@@ -145,6 +145,10 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 	boolean howtoState = true;
 	GameHowTo_lg ght = new GameHowTo_lg();
 	
+	// 중복제거
+	String prev = null;
+	String now = null;
+	int count = 0;
 	public LifeGamePanel() {
 		pauseBtn.addActionListener(this);
 		howtoBtn.addActionListener(this);
@@ -152,7 +156,26 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 
 	@Override
 	public void display() {
-		lgc = new LifeGameConsole();
+		while(true) {
+			lgc = new LifeGameConsole();
+			if(count == 0) {
+				prev = lgc.ArrLabel[lgc.k];
+				now = lgc.ArrLabel[lgc.k];
+				count++;
+				break;
+			}else {
+				prev = now;
+				now = lgc.ArrLabel[lgc.k];
+				count++;
+			}
+			
+			if(prev.equals(now)) {
+				continue;
+			}else {
+				break;
+			}
+		}
+		
 		this.setLayout(null);
 
 		this.add(resultPane);
@@ -771,6 +794,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == howtoBtn) {
 			ght.setVisible(true);
+			submit.setVisible(false);
 		}
 		
 		if (e.getSource() == ght.exit) {
@@ -812,6 +836,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 				life.setText("도전횟수 : " + lifeRemaining);
 				gameNum++;
 				xLabel.setVisible(true);
+				lifeRemaining = 2;
 				next();
 			} else if (lifeRemaining == 1) {
 				life.setText("도전횟수 : " + lifeRemaining);
@@ -830,7 +855,6 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			ans3.setBackground(gray);
 			ans4.setBackground(gray);
 			w = 0;
-			lifeRemaining = 2;
 			revalidate();
 			repaint();
 		}
@@ -853,11 +877,22 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 		timer = new Timer(1500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (gameNum == endGameNum) {
-					resultPane.display();
-				} else {
-					Controller c = Controller.getController();
-					c.Viewchange(LIFE);
+				if (GameState == MiniGame) {
+
+					if (gameNum == endGameNum) {
+						resultPane.display();
+					} else {
+						Controller c = Controller.getController();
+						c.Viewchange(LIFE);
+					}
+				}else {
+					if (gameNum == 8) {
+						Controller c = Controller.getController();
+						c.Viewchange(MaxColor);
+					} else {
+						Controller c = Controller.getController();
+						c.Viewchange(LIFE);
+					}
 				}
 				timer.stop();
 			}

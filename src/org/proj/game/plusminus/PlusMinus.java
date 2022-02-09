@@ -22,18 +22,19 @@ public class PlusMinus extends GameView {
 	GamePlayMain gp;
 	JLabel bgLabel; // 가장 밑배경(초록잔디)
 	JLabel pmbgLabel; // 게임 배경(하얀색 메모장)
-	JLabel quizLabel; // 문제 나오는 곳 라벨( num + num ) 
+	JLabel quizLabel; // 문제 나오는 곳 라벨( num + num )
 
 	JButton[] choiceBtn = new JButton[4]; // 4개의 선지
 	JLabel checkLabel; // 정답일 경우 나오는 체크표시
 	JLabel xLabel; // 오답일 경우 나오는 엑스표시
 
 	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
-	JButton pauseBtn =new JButton(pauseIcon);
-	
+	JButton pauseBtn = new JButton(pauseIcon);
+
 	JLabel manualLabel; // 설명부분
 	Timer timer;
 	int click;
+
 	public PlusMinus() {
 //		choiceBtn[0] = new RoundJButton();
 //		choiceBtn[1] = new RoundJButton();
@@ -48,14 +49,13 @@ public class PlusMinus extends GameView {
 	public void display() {
 		click = 0;
 		gp = new GamePlayMain();
-		
+
 		this.setLayout(null);
-		
+
 		this.add(resultPane);
-		resultPane.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
+		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
 		resultPane.setVisible(false);
-		
-		
+
 		ImageIcon bgicon = new ImageIcon("images/backgroundImg.png");
 		bgLabel = new JLabel(bgicon);
 		bgLabel.setBounds(0, 0, 1024, 768);
@@ -63,13 +63,13 @@ public class PlusMinus extends GameView {
 		ImageIcon pmicon = new ImageIcon("images/gamebackImg.png");
 		pmbgLabel = new JLabel(pmicon);
 		pmbgLabel.setBounds(210, 100, 600, 500);
-		
+
 		manualLabel = new JLabel("알맞은 숫자를 누르세요");
 		manualLabel.setBounds(320, 310, 400, 50);
 		manualLabel.setHorizontalAlignment(JLabel.CENTER);
 		manualLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		this.add(manualLabel);
-		
+
 		quizLabel = new JLabel(gp.question);
 		quizLabel.setFont(new Font("맑은 고딕", Font.BOLD, 115));
 		quizLabel.setForeground(Color.ORANGE);
@@ -83,7 +83,7 @@ public class PlusMinus extends GameView {
 			choiceBtn[i].setFont(new Font("맑은 고딕", Font.BOLD, 70));
 			choiceBtn[i].setForeground(Color.WHITE);
 		}
-		
+
 		choiceBtn[0].setBounds(320, 380, 150, 70);
 		choiceBtn[1].setBounds(540, 380, 150, 70);
 		choiceBtn[2].setBounds(320, 480, 150, 70);
@@ -93,11 +93,10 @@ public class PlusMinus extends GameView {
 		checkLabel = new JLabel(checkIcon);
 		ImageIcon xIcon = new ImageIcon("images/x.png");
 		xLabel = new JLabel(xIcon);
-		
 
 		pauseBtn.setBounds(920, 30, 50, 50);
-		pauseBtn.setBorderPainted(false);    // 버튼의 외곽 투명하게 
-		pauseBtn.setContentAreaFilled(false);  // 만들어 주는 것
+		pauseBtn.setBorderPainted(false); // 버튼의 외곽 투명하게
+		pauseBtn.setContentAreaFilled(false); // 만들어 주는 것
 
 		checkLabel.setBounds(700, 20, 150, 150);
 		this.add(checkLabel);
@@ -106,9 +105,8 @@ public class PlusMinus extends GameView {
 		this.add(xLabel);
 		xLabel.setVisible(false);
 
-		
 		this.add(pauseBtn);
-		
+
 		this.add(choiceBtn[0]);
 		this.add(choiceBtn[1]);
 		this.add(choiceBtn[2]);
@@ -124,30 +122,30 @@ public class PlusMinus extends GameView {
 		choiceBtn[1].addActionListener(this);
 		choiceBtn[2].addActionListener(this);
 		choiceBtn[3].addActionListener(this);
-		
+
 	}
-	
+
 	@Override
-	public void actionPerformed(ActionEvent e) { 
-		if(click == 1) {
+	public void actionPerformed(ActionEvent e) {
+		if (click == 1) {
 			return;
 		}
-		
+
 		if (e.getSource() == choiceBtn[0]) {
 			choiceBtn[0].setBackground(Color.RED);
-			
+
 			if (gp.answer == Integer.parseInt(choiceBtn[0].getText())) {
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
-				
+
 			} else {
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
 			}
-			
+
 		}
 		if (e.getSource() == choiceBtn[1]) {
 			choiceBtn[1].setBackground(Color.RED);
@@ -187,46 +185,58 @@ public class PlusMinus extends GameView {
 				revalidate();
 				repaint();
 			}
-			
+
 		}
-		
-		if(e.getSource() instanceof JButton && e.getSource() != pauseBtn) {
+
+		if (e.getSource() instanceof JButton && e.getSource() != pauseBtn) {
 			gameNum++;
 			click++;
 			next();
 		}
-		
-		
-		if(e.getSource() == pauseBtn) {
-			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("게임을 종료하시겠습니까? ", javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
-			
-			if(yn==0) {
+
+		if (e.getSource() == pauseBtn) {
+			int yn = JOptionPane.showConfirmDialog(this,
+					new JLabel("게임을 종료하시겠습니까? ", javax.swing.SwingConstants.CENTER), "확인", JOptionPane.YES_NO_OPTION,
+					JOptionPane.PLAIN_MESSAGE);
+
+			if (yn == 0) {
 				Controller c = Controller.getController();
 				gameNum = 0;
 				gametrue = 0;
 				c.Viewchange(MainPage);
 			}
 		}
-		
+
 	}
-	
+
 	public void next() {
 		// 딜레이 1.5초 주고 다음게임 시작
-				timer = new Timer(1500, new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if(gameNum==endGameNum) {
-							resultPane.display();
-						}else {
-							Controller c = Controller.getController();
-							c.Viewchange(PlusMinus);					
-						}
-						timer.stop();
+		timer = new Timer(1500, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (GameState == MiniGame) {
+
+					if (gameNum == endGameNum) {
+						resultPane.display();
+					} else {
+						Controller c = Controller.getController();
+						c.Viewchange(PlusMinus);
 					}
-				});
-				timer.start();
+				}else {
+					if (gameNum == 2) {
+						Controller c = Controller.getController();
+						c.Viewchange(CARD);
+					} else {
+						Controller c = Controller.getController();
+						c.Viewchange(PlusMinus);
+					}
+				}
+				timer.stop();
+			}
+		});
+		timer.start();
 	}
-	
+
 	@Override
 	public String toString() {
 		return PlusMinus;
