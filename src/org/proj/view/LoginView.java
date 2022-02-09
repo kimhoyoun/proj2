@@ -2,6 +2,7 @@ package org.proj.view;
 
 import static org.proj.Resource.FRAME_HEIGHT;
 import static org.proj.Resource.FRAME_WIDTH;
+import static org.proj.Resource.NowView;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -220,7 +221,7 @@ public class LoginView extends GameView {
 				c.login(user);
 
 			} else {
-				JOptionPane.showMessageDialog(this, "ID와 PW를 모두 입력하세요!");
+				JOptionPane.showMessageDialog(this, new JLabel("ID와 PW를 모두 입력하세요!", javax.swing.SwingConstants.CENTER), "로그인",JOptionPane.PLAIN_MESSAGE);
 			}
 		}
 
@@ -232,13 +233,13 @@ public class LoginView extends GameView {
 
 				if (result) {
 					signupState = true;
-					JOptionPane.showMessageDialog(this, "사용할 수 있는 아이디입니다.");
+					JOptionPane.showMessageDialog(this, new JLabel("사용할 수 있는 아이디입니다!", javax.swing.SwingConstants.CENTER), "중복확인",JOptionPane.PLAIN_MESSAGE);
 				} else {
 					signupState = false;
-					JOptionPane.showMessageDialog(this, "사용할 수 없는 아이디입니다.");
+					JOptionPane.showMessageDialog(this, new JLabel("사용할 수 없는 아이디입니다!", javax.swing.SwingConstants.CENTER), "중복확인",JOptionPane.PLAIN_MESSAGE);
 				}
 			}else {
-				JOptionPane.showMessageDialog(this, "아이디를 입력해주세요.");
+				JOptionPane.showMessageDialog(this, new JLabel("아이디를 입력해주세요.", javax.swing.SwingConstants.CENTER), "중복확인",JOptionPane.PLAIN_MESSAGE);
 			}
 		}
 
@@ -252,7 +253,7 @@ public class LoginView extends GameView {
 				try {
 					newAge = Integer.parseInt(textage.getText());
 				} catch (NumberFormatException e0) {
-					JOptionPane.showMessageDialog(this, "나이는 숫자만 입력하세요!");
+					JOptionPane.showMessageDialog(this,  new JLabel("나이는 숫자만 입력하세요!", javax.swing.SwingConstants.CENTER),"회원가입",JOptionPane.PLAIN_MESSAGE);
 				}
 
 				if (newName.length() != 0 && newId.length() != 0 && newPw.length() != 0
@@ -269,10 +270,10 @@ public class LoginView extends GameView {
 					}
 					signupState = false;
 				} else {
-					JOptionPane.showMessageDialog(this, "모든 정보를 입력해 주세요");
+					JOptionPane.showMessageDialog(this,  new JLabel("모든 정보를 입력해 주세요", javax.swing.SwingConstants.CENTER),"회원가입",JOptionPane.PLAIN_MESSAGE);
 				}
 			} else {
-				JOptionPane.showMessageDialog(this, "ID 중복체크를 해주세요!");
+				JOptionPane.showMessageDialog(this,  new JLabel("ID 중복체크를 해주세요!", javax.swing.SwingConstants.CENTER),"회원가입",JOptionPane.PLAIN_MESSAGE);
 			}
 		}
 

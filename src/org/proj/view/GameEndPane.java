@@ -54,7 +54,7 @@ public class GameEndPane extends GameView {
 		if(e.getSource() == goMainBtn) {
 			recordGameData(NowView);
 			resultPane.setVisible(false);
-			JOptionPane.showMessageDialog(NowView, "게임을 종료합니다!");
+			JOptionPane.showMessageDialog(NowView, new JLabel("게임을 종료합니다!", javax.swing.SwingConstants.CENTER),"게임 종료",JOptionPane.PLAIN_MESSAGE);
 			resultPane.removeAll();
 			Controller c = Controller.getController();
 			c.Viewchange(MainPage);
@@ -63,7 +63,7 @@ public class GameEndPane extends GameView {
 		if(e.getSource() == replayBtn) {
 			recordGameData(NowView);
 			resultPane.setVisible(false);
-			JOptionPane.showMessageDialog(NowView, "game Replay");
+			JOptionPane.showMessageDialog(NowView, new JLabel("game Replay", javax.swing.SwingConstants.CENTER),"Replay",JOptionPane.PLAIN_MESSAGE);
 			resultPane.removeAll();
 			NowView.removeAll();
 			Controller c = Controller.getController();

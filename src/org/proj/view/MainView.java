@@ -194,14 +194,14 @@ public class MainView extends GameView{
 		}
 		
 		if(e.getSource() == profileOkBtn) {
-			int yn = JOptionPane.showConfirmDialog(this, "프로필을 수정하시겠습니까?","확인",JOptionPane.YES_NO_OPTION);
+			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("프로필을 수정하시겠습니까?", javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
 			if(yn == 0) {
 				userNamedb = textname.getText();
 				userPassdb = textpass.getText();
 				try {
 					userAgedb = Integer.parseInt(textage.getText());
 				}catch(NumberFormatException e0) {
-					JOptionPane.showMessageDialog(this, "나이는 숫자만 입력하세요!");
+					JOptionPane.showMessageDialog(this, new JLabel("나이는 숫자만 입력하세요!", javax.swing.SwingConstants.CENTER),"정보 수정",JOptionPane.PLAIN_MESSAGE);
 					textage.setText(userAgedb+"");
 					return;
 				}
@@ -217,7 +217,7 @@ public class MainView extends GameView{
 				Controller c = Controller.getController();
 				c.update(user);
 				}else {
-					JOptionPane.showMessageDialog(this, "내용을 전부 입력해주세요");
+					JOptionPane.showMessageDialog(this, new JLabel("내용을 전부 입력해주세요", javax.swing.SwingConstants.CENTER),"정보 수정",JOptionPane.PLAIN_MESSAGE);
 				}
 			}
 		}
@@ -244,7 +244,9 @@ public class MainView extends GameView{
 		}
 		
 		if(e.getSource() == exitBtn) {
-			int yn = JOptionPane.showConfirmDialog(this, "로그아웃 하시겠습니까?","확인",JOptionPane.YES_NO_OPTION);
+			
+			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("로그아웃 하시겠습니까?", javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+
 			if(yn == 0) {
 				Controller c = Controller.getController();
 				

@@ -281,7 +281,7 @@ public class CardGame extends GameView {
 		}
 		
 		if (e.getSource() == pauseBtn) { // 정지버튼
-			int yn = JOptionPane.showConfirmDialog(CardGame.this,"게임을 종료하시겠습니까? ", "확인", JOptionPane.YES_NO_OPTION);
+			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("게임을 종료하시겠습니까? ", javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
 
 			if (yn == 0) {
 				Controller c = Controller.getController();

@@ -2,6 +2,8 @@ package org.proj;
 
 import java.util.Vector;
 
+import javax.swing.JLabel;
+
 import org.proj.game.card.CardGame;
 import org.proj.game.color.ColorGame;
 import org.proj.game.color.MaxColorPanel;

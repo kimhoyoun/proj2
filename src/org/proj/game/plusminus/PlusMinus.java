@@ -73,7 +73,7 @@ public class PlusMinus extends GameView {
 		quizLabel = new JLabel(gp.question);
 		quizLabel.setFont(new Font("맑은 고딕", Font.BOLD, 115));
 		quizLabel.setForeground(Color.ORANGE);
-		quizLabel.setBounds(330, 150, 400, 200);
+		quizLabel.setBounds(315, 140, 400, 200);
 
 		choiceBtn = new JButton[4];
 		for (int i = 0; i < gp.answerArr.length; i++) {
@@ -192,12 +192,13 @@ public class PlusMinus extends GameView {
 		
 		if(e.getSource() instanceof JButton && e.getSource() != pauseBtn) {
 			gameNum++;
+			click++;
 			next();
 		}
 		
 		
 		if(e.getSource() == pauseBtn) {
-			int yn = JOptionPane.showConfirmDialog(this, "게임을 종료하시겠습니까? ","확인",JOptionPane.YES_NO_OPTION);
+			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("게임을 종료하시겠습니까? ", javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
 			
 			if(yn==0) {
 				Controller c = Controller.getController();
@@ -206,7 +207,7 @@ public class PlusMinus extends GameView {
 				c.Viewchange(MainPage);
 			}
 		}
-		click++;
+		
 	}
 	
 	public void next() {

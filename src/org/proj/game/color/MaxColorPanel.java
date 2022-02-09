@@ -19,6 +19,7 @@ import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.view.GameView;
 
@@ -110,9 +111,9 @@ public class MaxColorPanel extends GameView implements MouseListener {
 		}
 		
 		// 버튼
-		btn1 = new JButton("btn1");
-		btn2 = new JButton("btn2");
-		btn3 = new JButton("btn3");
+		btn1 = new RoundJButton("btn1");
+		btn2 = new RoundJButton("btn2");
+		btn3 = new RoundJButton("btn3");
 		color = new Color(0, 0, 0, 0);
 		btn1.setForeground(color);
 		btn2.setForeground(color);
@@ -204,7 +205,7 @@ public class MaxColorPanel extends GameView implements MouseListener {
 		}
 
 		if (e.getSource() == pauseBtn) {
-			int yn = JOptionPane.showConfirmDialog(this, "게임을 종료하시겠습니까? ", "확인", JOptionPane.YES_NO_OPTION);
+			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("게임을 종료하시겠습니까? ", javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
 
 			if (yn == 0) {
 				Controller c = Controller.getController();

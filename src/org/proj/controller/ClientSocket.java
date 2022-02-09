@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.Vector;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import org.proj.model.GameDataDto;
@@ -182,10 +183,10 @@ public class ClientSocket {
 				if ("complete".equals(result)) {
 					// 정보수정 완료
 					// 프로필 새로 셋팅
-					JOptionPane.showMessageDialog(NowView, "수정 완료!");
+					JOptionPane.showMessageDialog(NowView, new JLabel("수정 완료!", javax.swing.SwingConstants.CENTER),"프로필 수정",JOptionPane.PLAIN_MESSAGE);
 				} else {
 					// 실패
-					JOptionPane.showMessageDialog(NowView, "수정 실패!");
+					JOptionPane.showMessageDialog(NowView, new JLabel("수정 실패!", javax.swing.SwingConstants.CENTER),"프로필 수정",JOptionPane.PLAIN_MESSAGE);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -242,17 +243,17 @@ public class ClientSocket {
 					System.out.println("===============");
 					System.out.println(mainGameData);
 					// 정상로그인
-					JOptionPane.showMessageDialog(NowView, "로그인 성공!");
+					JOptionPane.showMessageDialog(NowView, new JLabel("로그인 성공!", javax.swing.SwingConstants.CENTER),"로그인",JOptionPane.PLAIN_MESSAGE);
 					Controller c = Controller.getController();
 					c.mainframe.changeView(new MainView());
 				} else if(user.getNo() == 0) {
 					mainUser = null;
-					JOptionPane.showMessageDialog(NowView, "이미 접속된 아이디 입니다!");
+					JOptionPane.showMessageDialog(NowView,  new JLabel("이미 접속된 아이디 입니다!", javax.swing.SwingConstants.CENTER),"로그인",JOptionPane.PLAIN_MESSAGE);
 				}
 				else {
 					mainUser = null;
 					// 로그인 실패
-					JOptionPane.showMessageDialog(NowView, "아이디와 비밀번호를 확인해 주세요!");
+					JOptionPane.showMessageDialog(NowView,  new JLabel("아이디와 비밀번호를 확인해 주세요!", javax.swing.SwingConstants.CENTER),"로그인",JOptionPane.PLAIN_MESSAGE);
 				}
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
@@ -266,10 +267,10 @@ public class ClientSocket {
 				String result = ois.readUTF();
 				if ("complete".equals(result)) {
 					// 회원가입 성공
-					JOptionPane.showMessageDialog(NowView, "회원가입 성공!");
+					JOptionPane.showMessageDialog(NowView, new JLabel("회원가입 성공!", javax.swing.SwingConstants.CENTER),"회원가입",JOptionPane.PLAIN_MESSAGE);
 				} else {
 					// 실패
-					JOptionPane.showMessageDialog(NowView, "회원가입 실패!");
+					JOptionPane.showMessageDialog(NowView, new JLabel("회원가입 실패!", javax.swing.SwingConstants.CENTER),"회원가입",JOptionPane.PLAIN_MESSAGE);
 
 				}
 			} catch (IOException e) {
