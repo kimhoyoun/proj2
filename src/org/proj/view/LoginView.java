@@ -32,7 +32,7 @@ public class LoginView extends GameView {
 
 	JButton LoginBtn = new RoundJButton("로그인");
 	JButton signupBtn = new RoundJButton("회원가입");
-	ImageIcon passIcon = new ImageIcon("images/eye.png");
+	ImageIcon passIcon = new ImageIcon("images/login/eye.png");
 	JToggleButton passLookBtn = new JToggleButton(passIcon);
 	
 	JTextField inputID = new JTextField(15);
@@ -63,7 +63,7 @@ public class LoginView extends GameView {
 	public void display() {
 		init();
 
-		backgroundImg = new ImageIcon("images/mainBack.png");
+		backgroundImg = new ImageIcon("images/login/mainBack.png");
 		background = new JLabel(backgroundImg);
 
 		background.add(loginbg);

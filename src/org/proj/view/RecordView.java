@@ -19,12 +19,12 @@ public class RecordView extends GameView{
 	ImageIcon backgroundImg;
 	JLabel background;
 	
-	JButton pulusminusRecordBtn = new JButton(new ImageIcon("images/icon_plusminus.png"));
-	JButton cardRecordBtn = new JButton(new ImageIcon("images/icon_card.png"));
-	JButton cupRecordBtn = new JButton(new ImageIcon("images/icon_cup.png"));
-	JButton lifeRecordBtn = new JButton(new ImageIcon("images/icon_life.png"));
-	JButton colorRecordBtn = new JButton(new ImageIcon("images/icon_color.png"));
-	JButton backBtn = new JButton(new ImageIcon("images/icon_home2.png"));
+	JButton pulusminusRecordBtn = new JButton(new ImageIcon("images/record/plusminus.png"));
+	JButton cardRecordBtn = new JButton(new ImageIcon("images/record/card.png"));
+	JButton cupRecordBtn = new JButton(new ImageIcon("images/record/cup.png"));
+	JButton lifeRecordBtn = new JButton(new ImageIcon("images/record/life.png"));
+	JButton colorRecordBtn = new JButton(new ImageIcon("images/record/color.png"));
+	JButton backBtn = new JButton(new ImageIcon("images/record/home.png"));
 	
 	public RecordView() {
 		backBtn.addActionListener(this);
@@ -37,7 +37,7 @@ public class RecordView extends GameView{
 	
 	@Override
 	public void display() {
-		backgroundImg = new ImageIcon("images/mainBack.png");
+		backgroundImg = new ImageIcon("images/record/mainBackground.png");
 		background = new JLabel(backgroundImg);
 		
 		this.setLayout(null);

@@ -20,7 +20,7 @@ import org.proj.model.GameDataDto;
 public class GameRecordView extends GameView {
 	ImageIcon backgroundImg;
 	JLabel background;
-	JButton backBtn = new JButton(new ImageIcon("images/icon_record2.png"));
+	JButton backBtn = new JButton(new ImageIcon("images/recordData/record.png"));
 	GraphPanel graph;
 	JPanel graphPane;
 	JPanel textPane;
@@ -29,7 +29,7 @@ public class GameRecordView extends GameView {
 	private List<String> date;
 	@Override
 	public void display() {
-		backgroundImg = new ImageIcon("images/cloud.png");
+		backgroundImg = new ImageIcon("images/recordData/recordBackground.png");
 		background = new JLabel(backgroundImg);
 		
 		this.setLayout(null);

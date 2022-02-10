@@ -26,8 +26,8 @@ import org.proj.model.UserDto;
 public class MainView extends GameView{
 	ImageIcon backgroundImg;
 	JLabel background;
-	JButton settingBtn = new JButton(new ImageIcon("images/icon_setting2.png"));
-	JButton updateBtn = new JButton(new ImageIcon("images/icon_setting3.png"));
+	JButton settingBtn = new JButton(new ImageIcon("images/main/setting.png"));
+	JButton updateBtn = new JButton(new ImageIcon("images/main/setting2.png"));
 	boolean updateBtnStatedb = false;
 	
 	// 수정 시작
@@ -35,13 +35,13 @@ public class MainView extends GameView{
 	
 	JPanel profileUpdate;
 	
-	JButton pulusminusGameBtn = new JButton(new ImageIcon("images/icon_plusminus.png"));
-	JButton cardGameBtn = new JButton(new ImageIcon("images/icon_card.png"));
-	JButton cupGameBtn = new JButton(new ImageIcon("images/icon_cup.png"));
-	JButton lifeGameBtn = new JButton(new ImageIcon("images/icon_life.png"));
-	JButton colorGameBtn = new JButton(new ImageIcon("images/icon_color.png"));
-	JButton recordBtn = new JButton(new ImageIcon("images/icon_record2.png"));
-	JButton exitBtn = new JButton(new ImageIcon("images/icon_logout2.png"));
+	JButton pulusminusGameBtn = new JButton(new ImageIcon("images/main/plusminus.png"));
+	JButton cardGameBtn = new JButton(new ImageIcon("images/main/card.png"));
+	JButton cupGameBtn = new JButton(new ImageIcon("images/main/cup.png"));
+	JButton lifeGameBtn = new JButton(new ImageIcon("images/main/life.png"));
+	JButton colorGameBtn = new JButton(new ImageIcon("images/main/color.png"));
+	JButton recordBtn = new JButton(new ImageIcon("images/main/record.png"));
+	JButton exitBtn = new JButton(new ImageIcon("images/main/logout.png"));
 	
 	JButton allGameBtn = new RoundJButton("종합게임");
 	
@@ -78,7 +78,7 @@ public class MainView extends GameView{
 	@Override
 	public void display() {
 		
-		backgroundImg = new ImageIcon("images/mainBack.png");
+		backgroundImg = new ImageIcon("images/main/mainBackground.png");
 		background = new JLabel(backgroundImg);
 		
 		this.setLayout(null);

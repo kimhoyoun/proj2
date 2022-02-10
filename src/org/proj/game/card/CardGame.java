@@ -138,7 +138,7 @@ public class CardGame extends GameView {
 			Btn[i].setBorder(null);
 			Btn[i].setBackground(Color.white);
 //			Btn[i].addActionListener(this);
-			Btn[i].setIcon(chageImage("images/card/card_Leaf.png"));
+			Btn[i].setIcon(chageImage("card_Leaf.png"));
 			Btn[i].setEnabled(false);
 			cardBack.add(Btn[i]);
 		}
@@ -183,7 +183,7 @@ public class CardGame extends GameView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < Btn.length; i++) {
-					Btn[i].setIcon(chageImage("images/card/card_Leaf.png"));
+					Btn[i].setIcon(chageImage("card_Leaf.png"));
 					Btn[i].addActionListener(CardGame.this); // 여기
 				}
 				timer.stop();
@@ -243,8 +243,8 @@ public class CardGame extends GameView {
 
 				openCount = 0;
 
-				Btn[buttonIndexSave1].setIcon(chageImage("images/card/card_Leaf.png"));
-				Btn[buttonIndexSave2].setIcon(chageImage("images/card/card_Leaf.png"));
+				Btn[buttonIndexSave1].setIcon(chageImage("card_Leaf.png"));
+				Btn[buttonIndexSave2].setIcon(chageImage("card_Leaf.png"));
 
 				timer.stop();
 			}

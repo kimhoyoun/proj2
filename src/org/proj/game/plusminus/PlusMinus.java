@@ -66,7 +66,8 @@ public class PlusMinus extends GameView {
 		bgLabel.add(manualLabel);
 
 		quizLabel = new JLabel(gp.question);
-		quizLabel.setFont(new Font("맑은 고딕", Font.BOLD, 110));
+		quizLabel.setFont(new Font("맑은 고딕", Font.BOLD, 100));
+		quizLabel.setHorizontalAlignment(JLabel.CENTER);
 		quizLabel.setForeground(new Color(255, 127, 0));
 		quizLabel.setBounds(315, 140, 400, 200);
 
