@@ -28,7 +28,7 @@ public class PlusMinus extends GameView {
 	JLabel checkLabel; // 정답일 경우 나오는 체크표시
 	JLabel xLabel; // 오답일 경우 나오는 엑스표시
 
-	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
+	ImageIcon pauseIcon = new ImageIcon("images/comm/pause.png");
 	JButton pauseBtn = new JButton(pauseIcon);
 
 	JLabel manualLabel; // 설명부분
@@ -51,11 +51,11 @@ public class PlusMinus extends GameView {
 		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
 		resultPane.setVisible(false);
 
-		ImageIcon bgicon = new ImageIcon("images/backgroundImg.png");
+		ImageIcon bgicon = new ImageIcon("images/comm/backgroundImg.png");
 		bgLabel = new JLabel(bgicon);
 		bgLabel.setBounds(0, 0, 1024, 768);
 
-		ImageIcon pmicon = new ImageIcon("images/sketchbook_PlusMinus.png");
+		ImageIcon pmicon = new ImageIcon("images/plusminus/sketchbook_PlusMinus.png");
 		pmbgLabel = new JLabel(pmicon);
 		pmbgLabel.setBounds(155, 60, 700, 600);
 
@@ -84,9 +84,9 @@ public class PlusMinus extends GameView {
 		choiceBtn[2].setBounds(320, 480, 150, 70);
 		choiceBtn[3].setBounds(540, 480, 150, 70);
 
-		ImageIcon checkIcon = new ImageIcon("images/checked.png");
+		ImageIcon checkIcon = new ImageIcon("images/comm/checked.png");
 		checkLabel = new JLabel(checkIcon);
-		ImageIcon xIcon = new ImageIcon("images/x.png");
+		ImageIcon xIcon = new ImageIcon("images/comm/x.png");
 		xLabel = new JLabel(xIcon);
 
 		pauseBtn.setBounds(920, 30, 50, 50);

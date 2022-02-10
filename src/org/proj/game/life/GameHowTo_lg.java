@@ -41,24 +41,24 @@ public class GameHowTo_lg extends JPanel implements ActionListener{
 	}
 
 	public void comm() {
-		bgSK = new ImageIcon("images/HowTo_background.png");
+		bgSK = new ImageIcon("images/comm/HowTo_background.png");
 		bgSkPan = new JLabel(bgSK);
 		bgSkPan.setBounds(0, 0, 820, 525);
 		bgSkPan.setLayout(null);
 		
 		font1 = new Font("맑은 고딕", Font.PLAIN, 24);
 
-		next = new JButton(new ImageIcon("images/HowTo_right.png"));
+		next = new JButton(new ImageIcon("images/comm/HowTo_right.png"));
 		next.setFocusPainted(false);
 		next.setBorderPainted(false); 
 		next.setContentAreaFilled(false);
 		next.setBounds(720, 230, 80, 80);
-		prev = new JButton(new ImageIcon("images/HowTo_left.png"));
+		prev = new JButton(new ImageIcon("images/comm/HowTo_left.png"));
 		prev.setFocusPainted(false);
 		prev.setBorderPainted(false); 
 		prev.setContentAreaFilled(false);
 		prev.setBounds(25, 230, 80, 80);
-		exit = new JButton(new ImageIcon("images/HowTo_exit.png"));
+		exit = new JButton(new ImageIcon("images/comm/HowTo_exit.png"));
 		exit.setFocusPainted(false);
 		exit.setBorderPainted(false); 
 		exit.setContentAreaFilled(false);
@@ -76,7 +76,7 @@ public class GameHowTo_lg extends JPanel implements ActionListener{
 		pan1.setBounds(130, 50, 570, 440);
 		pan1.setBackground(Color.white);
 		
-		ImageIcon gameImg = new ImageIcon("images/HowTo_LifeGame_1.png");
+		ImageIcon gameImg = new ImageIcon("images/life/HowTo_LifeGame_1.png");
 		JLabel gameImgPan = new JLabel(gameImg);
 		gameImgPan.setBounds(10, 10, 550, 300);
 
@@ -99,7 +99,7 @@ public class GameHowTo_lg extends JPanel implements ActionListener{
 		pan2.setBounds(130, 50, 570, 440);
 		pan2.setBackground(Color.white);
 		
-		ImageIcon gameImg = new ImageIcon("images/HowTo_LifeGame_2.png");
+		ImageIcon gameImg = new ImageIcon("images/life/HowTo_LifeGame_2.png");
 		JLabel gameImgPan = new JLabel(gameImg);
 		gameImgPan.setBounds(10, 10, 550, 300);
 		
@@ -123,7 +123,7 @@ public class GameHowTo_lg extends JPanel implements ActionListener{
 		pan3.setBounds(130, 50, 570, 440);
 		pan3.setBackground(Color.white);
 
-		ImageIcon gameImg = new ImageIcon("images/HowTo_LifeGame_3.png");
+		ImageIcon gameImg = new ImageIcon("images/life/HowTo_LifeGame_3.png");
 		JLabel gameImgPan = new JLabel(gameImg);
 		gameImgPan.setBounds(10, 10, 550, 300);
 		

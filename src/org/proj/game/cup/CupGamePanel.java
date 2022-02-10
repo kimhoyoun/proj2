@@ -32,14 +32,15 @@ import org.proj.view.GameView;
 
 public class CupGamePanel extends GameView {
 
-	ImageIcon backIcon = new ImageIcon("images/backgroundImg.png");
-	ImageIcon gameBagIcon = new ImageIcon("images/sketchbook_Cup.png");
-	ImageIcon cupIcon = new ImageIcon("images/cup.png");
-	ImageIcon ballIcon = new ImageIcon("images/ball.png");
-	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
-	ImageIcon checkIcon = new ImageIcon("images/checked.png");
-	ImageIcon xIcon = new ImageIcon("images/x.png");
-	ImageIcon cupBorderIcon = new ImageIcon("images/cup_stroke.png"); // border있는 컵 그림
+	ImageIcon backIcon = new ImageIcon("images/comm/backgroundImg.png");
+	ImageIcon pauseIcon = new ImageIcon("images/comm/pause.png");
+	ImageIcon checkIcon = new ImageIcon("images/comm/checked.png");
+	ImageIcon xIcon = new ImageIcon("images/comm/x.png");
+	
+	ImageIcon gameBagIcon = new ImageIcon("images/cup/sketchbook_Cup.png");
+	ImageIcon cupIcon = new ImageIcon("images/cup/cup.png");
+	ImageIcon ballIcon = new ImageIcon("images/cup/ball.png");
+	ImageIcon cupBorderIcon = new ImageIcon("images/cup/cup_stroke.png"); // border있는 컵 그림
 
 	 JLabel backLabel;
 	 JLabel gameBackLabel;
@@ -117,7 +118,6 @@ public class CupGamePanel extends GameView {
 			cups[i].setEnabled(false);
 			cups[i].setBorderPainted(false); // 버튼 외곽 없애기
 			cups[i].setContentAreaFilled(false);
-			cups[i].setEnabled(true);
 			backLabel.add(cups[i]);
 		}
 		

@@ -32,7 +32,7 @@ public class MaxColorPanel extends GameView{
 	private JLabel bgSKPan;
 
 	// 정지버튼
-	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
+	ImageIcon pauseIcon = new ImageIcon("images/comm/pause.png");
 	JButton pauseBtn = new JButton(pauseIcon);
 
 	// 정답, 오답
@@ -77,22 +77,22 @@ public class MaxColorPanel extends GameView{
 		pauseBtn.setContentAreaFilled(false);
 		this.add(pauseBtn);
 
-		bgImg = new ImageIcon("images/gamebg.png");
+		bgImg = new ImageIcon("images/comm/backgroundImg.png");
 		bgImgPan = new JLabel(bgImg);
 		bgImgPan.setSize(1024, 768);
 		bgImgPan.setLayout(null);
 
-		bgSK = new ImageIcon("images/sketchbook_Color.png");
+		bgSK = new ImageIcon("images/color/sketchbook_Color.png");
 		bgSKPan = new JLabel(bgSK);
 		bgSKPan.setBounds(150, 150, 720, 425);
 
-		checkIcon = new ImageIcon("images/checked.png");
+		checkIcon = new ImageIcon("images/comm/checked.png");
 		checkLabel = new JLabel(checkIcon);
 		checkLabel.setBounds(670, 65, 150, 150);
 		this.add(checkLabel);
 		checkLabel.setVisible(false);
 
-		xIcon = new ImageIcon("images/x.png");
+		xIcon = new ImageIcon("images/comm/x.png");
 		xLabel = new JLabel(xIcon);
 		xLabel.setBounds(670, 65, 150, 150);
 		this.add(xLabel);

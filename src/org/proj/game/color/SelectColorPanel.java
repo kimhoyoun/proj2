@@ -50,10 +50,10 @@ public class SelectColorPanel extends GameView{
 	SelectColorConsole scc;
 
 	Timer timer;
-	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
+	ImageIcon pauseIcon = new ImageIcon("images/comm/pause.png");
 	JButton pauseBtn = new JButton(pauseIcon);
 	
-	ImageIcon howtoIcon = new ImageIcon("images/HowTo_Btn.png");
+	ImageIcon howtoIcon = new ImageIcon("images/comm/HowTo_Btn.png");
 	JButton howtoBtn = new JButton(howtoIcon); 
 	
 	GameHowTo_sc ght = new GameHowTo_sc();
@@ -81,12 +81,12 @@ public class SelectColorPanel extends GameView{
 		
 		
 		// 배경
-		bgImg = new ImageIcon("images/gamebg.png");
+		bgImg = new ImageIcon("images/comm/backgroundImg.png");
 		bgImgPan = new JLabel(bgImg);
 		bgImgPan.setSize(1024, 768);
 		
 		// 스케치북
-		bgSK = new ImageIcon("images/sketchbook_Color.png");
+		bgSK = new ImageIcon("images/color/sketchbook_Color.png");
 		bgSKPan = new JLabel(bgSK);
 		bgSKPan.setBounds(150, 150, 720, 425);
 		
@@ -126,13 +126,13 @@ public class SelectColorPanel extends GameView{
 			btn3.setEnabled(false);
 		}
 		
-		checkIcon = new ImageIcon("images/checked.png");
+		checkIcon = new ImageIcon("images/comm/checked.png");
 		checkLabel = new JLabel(checkIcon);
 		checkLabel.setBounds(670, 65, 150, 150);
 		this.add(checkLabel);
 		checkLabel.setVisible(false);
 
-		xIcon = new ImageIcon("images/x.png");
+		xIcon = new ImageIcon("images/comm/x.png");
 		xLabel = new JLabel(xIcon);
 		xLabel.setBounds(670, 65, 150, 150);
 		this.add(xLabel);

@@ -28,18 +28,20 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 	private JButton prev;
 	public JButton exit;
 	private JButton cardBtn;
-
+	private JButton[] Btn;
+	
 	private JButton sound;
 
 	private Font font1;
 
 	int count = 0;
 
-	public GameHowTo_card(JButton cardBtn) {
+	public GameHowTo_card(JButton cardBtn, JButton[] Btn) {
 		this.setBackground(new Color(37, 9, 9));
 		this.setLayout(null);
 		this.setBounds(100, 100, 820, 530);
 		this.cardBtn = cardBtn;
+		this.Btn = Btn;
 		cardBtn.setVisible(false);
 		comm();
 		first();
@@ -53,7 +55,7 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 	}
 
 	public void comm() {
-		bgSK = new ImageIcon("images/howtobg.png");
+		bgSK = new ImageIcon("images/comm/HowTo_background.png");
 		bgSkPan = new JLabel(bgSK);
 		bgSkPan.setBounds(0, 0, 820, 525);
 		bgSkPan.setLayout(null);
@@ -61,27 +63,30 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 		font1 = new Font("맑은 고딕", Font.PLAIN, 24);
 
 //		next = new JButton("다음");
-		next = new JButton(new ImageIcon("images/HowTo_right.png"));
+		next = new JButton(new ImageIcon("images/comm/HowTo_right.png"));
 		next.setFocusPainted(false);
 		next.setBorderPainted(false);
 		next.setContentAreaFilled(false);
 		next.setBounds(720, 230, 80, 80);
 
 //		prev = new JButton("이전");
-		prev = new JButton(new ImageIcon("images/HowTo_left.png"));
+		prev = new JButton(new ImageIcon("images/comm/HowTo_left.png"));
 		prev.setFocusPainted(false);
 		prev.setBorderPainted(false);
 		prev.setContentAreaFilled(false);
 		prev.setBounds(25, 230, 80, 80);
 
 //		exit = new JButton("종료");
-		exit = new JButton(new ImageIcon("images/HowTo_exit.png"));
+		exit = new JButton(new ImageIcon("images/comm/HowTo_exit.png"));
 		exit.setFocusPainted(false);
 		exit.setBorderPainted(false);
 		exit.setContentAreaFilled(false);
 		exit.setBounds(720, 20, 80, 80);
 
-		sound = new JButton("음성");
+		sound = new JButton(new ImageIcon("images/comm/HowTo_sound.png"));
+		sound.setFocusPainted(false);
+		sound.setBorderPainted(false);
+		sound.setContentAreaFilled(false);
 		sound.setBounds(20, 20, 80, 80);
 
 		prev.setVisible(false); // 수정 (추가)
@@ -98,7 +103,7 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 		pan1.setBackground(Color.white);
 
 //		ImageIcon gameImg = new ImageIcon("images/cardgame_how1.png");
-		ImageIcon gameImg = new ImageIcon("images/HowTo_Card1.png");
+		ImageIcon gameImg = new ImageIcon("images/card/HowTo_Card1.png");
 		JLabel gameImgPan = new JLabel(gameImg);
 		gameImgPan.setBounds(10, 10, 550, 300);
 
@@ -122,7 +127,7 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 		pan2.setBackground(Color.white);
 
 //		ImageIcon gameImg = new ImageIcon("images/cardgame_how2.png");
-		ImageIcon gameImg = new ImageIcon("images/HowTo_Card2.png");
+		ImageIcon gameImg = new ImageIcon("images/card/HowTo_Card2.png");
 		JLabel gameImgPan = new JLabel(gameImg);
 //		gameImgPan.setBounds(10, 10, 550, 300);
 		gameImgPan.setBounds(10, 10, 550, 390);
@@ -152,7 +157,7 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 		pan3.setBackground(Color.white);
 
 //		ImageIcon gameImg = new ImageIcon("images/cardgame_how3.png");
-		ImageIcon gameImg = new ImageIcon("images/HowTo_Card3.png");
+		ImageIcon gameImg = new ImageIcon("images/card/HowTo_Card3.png");
 		JLabel gameImgPan = new JLabel(gameImg);
 		gameImgPan.setBounds(10, 10, 550, 300);
 
@@ -196,6 +201,9 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 		if (e.getSource() == exit) {
 			this.setVisible(false);
 			cardBtn.setVisible(true);
+			for(int i = 0; i < Btn.length; i++) {
+				Btn[i].setVisible(true);
+			}
 		}
 		if (e.getSource() == sound) {
 			if (count == 0) {

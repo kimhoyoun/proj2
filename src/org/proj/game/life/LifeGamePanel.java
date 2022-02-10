@@ -31,16 +31,17 @@ import org.proj.view.GameView;
 
 public class LifeGamePanel extends GameView implements MouseListener, MouseMotionListener {
 	// 배경
-	private ImageIcon bgImg;
-	private JLabel bgImgPan;
-	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
+	private ImageIcon bgImg = new ImageIcon("images/comm/backgroundImg.png");
+	ImageIcon pauseIcon = new ImageIcon("images/comm/pause.png");
 	JButton pauseBtn = new JButton(pauseIcon);
-	ImageIcon howtoIcon = new ImageIcon("images/HowTo_Btn.png");
+	ImageIcon howtoIcon = new ImageIcon("images/comm/HowTo_btn.png");
 	JButton howtoBtn = new JButton(howtoIcon); 
 	
+	private JLabel bgImgPan;
+
 	// 정답, 오답
-	private ImageIcon checkIcon;
-	private ImageIcon xIcon;
+	private ImageIcon checkIcon = new ImageIcon("images/comm/o.png");
+	private ImageIcon xIcon= new ImageIcon("images/comm/x.png");
 	private JLabel checkLabel;
 	private JLabel xLabel;
 
@@ -189,7 +190,6 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 		this.add(pauseBtn);
 		
 		// 배경
-		bgImg = new ImageIcon("images/gamebg.png");
 		bgImgPan = new JLabel(bgImg);
 		bgImgPan.setSize(1024, 768);
 
@@ -212,9 +212,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 		bgImgPan.add(ght); // 추가
 		ght.exit.addActionListener(this);
 		
-		checkIcon = new ImageIcon("images/o.png");
 		checkLabel = new JLabel(checkIcon);
-		xIcon = new ImageIcon("images/x.png");
 		xLabel = new JLabel(xIcon);
 		checkLabel.setBounds(427, 284, 150, 150);
 		this.add(checkLabel);

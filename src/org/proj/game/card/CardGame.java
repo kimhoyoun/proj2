@@ -27,13 +27,14 @@ import org.proj.view.GameView;
 
 public class CardGame extends GameView {
 
-	ImageIcon backIcon = new ImageIcon("images/backgroundImg.png");
-	ImageIcon gameBackIcon = new ImageIcon("images/sketchbook_Card.png");
-	ImageIcon startBackIcon = new ImageIcon("images/startback.png");
-	ImageIcon pauseIcon = new ImageIcon("images/pause.png");
-	ImageIcon checkIcon = new ImageIcon("images/checked.png");
-	ImageIcon xIcon = new ImageIcon("images/x.png");
-	ImageIcon howtoIcon = new ImageIcon("images/HowTo_btn.png");
+	ImageIcon backIcon = new ImageIcon("images/comm/backgroundImg.png");
+	ImageIcon pauseIcon = new ImageIcon("images/comm/pause.png");
+	ImageIcon checkIcon = new ImageIcon("images/comm/checked.png");
+	ImageIcon xIcon = new ImageIcon("images/comm/x.png");
+	ImageIcon howtoIcon = new ImageIcon("images/comm/HowTo_btn.png");
+
+	ImageIcon gameBackIcon = new ImageIcon("images/card/sketchbook_Card.png");
+	ImageIcon startBackIcon = new ImageIcon("images/card/startback.png");
 	JLabel Title; // 횟수 보여주기
 	JLabel gameBack; // 흰색 배경
 	JLabel back; // 초록 배경
@@ -46,8 +47,8 @@ public class CardGame extends GameView {
 	JButton howtoBtn = new JButton(howtoIcon); 
 	JButton[] Btn = new JButton[12]; // 카드 12개
 	String[] img = { // 카드 이미지 주소 배열
-			"img01.png", "img02.png", "img03.png", "img04.png", "img05.png", "img06.png", "img01.png", "img02.png",
-			"img03.png", "img04.png", "img05.png", "img06.png" };
+			"card1.png", "card2.png", "card3.png", "card4.png", "card5.png", "card6.png", "card1.png", "card2.png",
+			"card3.png", "card4.png", "card5.png", "card6.png" };
 
 	int sucessCount = 0;
 	int tryCount = 12;
@@ -58,7 +59,7 @@ public class CardGame extends GameView {
 	java.util.Timer countTimer;
 	int startCount;
 
-	GameHowTo_card ght = new GameHowTo_card(bottomBtn01);
+	GameHowTo_card ght = new GameHowTo_card(bottomBtn01, Btn);
 
 	public CardGame() {
 		pauseBtn.addActionListener(this);
@@ -137,7 +138,7 @@ public class CardGame extends GameView {
 			Btn[i].setBorder(null);
 			Btn[i].setBackground(Color.white);
 //			Btn[i].addActionListener(this);
-			Btn[i].setIcon(chageImage("leaf.png"));
+			Btn[i].setIcon(chageImage("images/card/card_Leaf.png"));
 			Btn[i].setEnabled(false);
 			cardBack.add(Btn[i]);
 		}
@@ -160,7 +161,7 @@ public class CardGame extends GameView {
 
 	// 카드 이미지 변환
 	public ImageIcon chageImage(String filname) {
-		ImageIcon icon = new ImageIcon("images/" + filname);
+		ImageIcon icon = new ImageIcon("images/card/" + filname);
 		Image originImage = icon.getImage();
 		Image changeImage = originImage.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 		ImageIcon icon_new = new ImageIcon(changeImage);
@@ -182,7 +183,7 @@ public class CardGame extends GameView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < Btn.length; i++) {
-					Btn[i].setIcon(chageImage("card_Leaf.png"));
+					Btn[i].setIcon(chageImage("images/card/card_Leaf.png"));
 					Btn[i].addActionListener(CardGame.this); // 여기
 				}
 				timer.stop();
@@ -242,8 +243,8 @@ public class CardGame extends GameView {
 
 				openCount = 0;
 
-				Btn[buttonIndexSave1].setIcon(chageImage("card_Leaf.png"));
-				Btn[buttonIndexSave2].setIcon(chageImage("card_Leaf.png"));
+				Btn[buttonIndexSave1].setIcon(chageImage("images/card/card_Leaf.png"));
+				Btn[buttonIndexSave2].setIcon(chageImage("images/card/card_Leaf.png"));
 
 				timer.stop();
 			}
@@ -282,6 +283,10 @@ public class CardGame extends GameView {
 		if(e.getSource() == howtoBtn) {
 			ght.setVisible(true);
 			bottomBtn01.setVisible(false);
+
+			for(int i = 0; i < Btn.length; i++) {
+				Btn[i].setVisible(false);
+			}
 		}
 		
 		if (e.getSource() == pauseBtn) { // 정지버튼
@@ -372,24 +377,32 @@ public class CardGame extends GameView {
 	}
 
 	public void next() {
-		if (GameState == MiniGame) {
+		// 딜레이 1.5초 주고 다음게임 시작
+				timer = new Timer(1500, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (GameState == MiniGame) {
 
-			if (gameNum == endGameNum) {
-				resultPane.display();
-			} else {
-				Controller c = Controller.getController();
-				c.Viewchange(CARD);
+							if (gameNum == endGameNum) {
+								resultPane.display();
+							} else {
+								Controller c = Controller.getController();
+								c.Viewchange(CARD);
+							}
+						}else {
+							if (gameNum == 4) {
+								Controller c = Controller.getController();
+								c.Viewchange(CUP);
+							} else {
+								Controller c = Controller.getController();
+								c.Viewchange(CARD);
+							}
+						}
+						timer.stop();
+					}
+				});
+				timer.start();
 			}
-		}else {
-			if (gameNum == 4) {
-				Controller c = Controller.getController();
-				c.Viewchange(CUP);
-			} else {
-				Controller c = Controller.getController();
-				c.Viewchange(CARD);
-			}
-		}
-	}
 
 	@Override
 	public String toString() {
