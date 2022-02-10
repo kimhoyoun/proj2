@@ -98,6 +98,9 @@ public class GameServer extends JFrame {
 	
 	public void logoutUpdate(String user) {
 		for (int i = 0; i < dao.userVector.size(); i++) {
+			if(user == null) {
+				return;
+			}
 			if (user.equals(idArr[i].getText())) {
 				loginStateArr[i].setText("비접속");
 				pArr[i].setBackground(Color.white);

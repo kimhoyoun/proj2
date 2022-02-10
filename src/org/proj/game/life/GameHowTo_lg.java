@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,7 +29,8 @@ public class GameHowTo_lg extends JPanel implements ActionListener{
 	public JButton exit;
 
 	private Font font1;
-	
+	private JButton sound;
+	private Clip clip;
 	int count = 0;
 
 	public GameHowTo_lg() {
@@ -35,9 +40,11 @@ public class GameHowTo_lg extends JPanel implements ActionListener{
 		first();
 		mid();
 		last();
+		
 		prev.addActionListener(this);
 		next.addActionListener(this);
 		exit.addActionListener(this);
+		sound.addActionListener(this);
 	}
 
 	public void comm() {
@@ -64,7 +71,14 @@ public class GameHowTo_lg extends JPanel implements ActionListener{
 		exit.setContentAreaFilled(false);
 		exit.setBounds(720, 20, 80, 80);
 		
+		sound = new JButton(new ImageIcon("images/comm/HowTo_sound.png"));
+		sound.setFocusPainted(false);
+		sound.setBorderPainted(false);
+		sound.setContentAreaFilled(false);
+		sound.setBounds(20, 20, 80, 80);
+		
 		prev.setVisible(false); // 수정 (추가)
+		bgSkPan.add(sound);
 		bgSkPan.add(next);
 		bgSkPan.add(prev);
 		bgSkPan.add(exit);
@@ -141,19 +155,39 @@ public class GameHowTo_lg extends JPanel implements ActionListener{
 		pan3.add(gameImgPan);
 		bgSkPan.add(pan3);
 	}
-
+	public void Play(String fileName) {
+		try {
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(fileName));
+			clip = AudioSystem.getClip();
+			clip.open(ais);
+			clip.start();
+		} catch (Exception ex) {
+		}
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == prev) {
+			this.clip.stop();
 			count--;
 		}
 		if(e.getSource() == next) {
+			this.clip.stop();
 			count++;
 		}
-//		if(e.getSource() == exit) {
-//			this.setVisible(false);
-//		}
-		
+		if(e.getSource() == exit) {
+			if(clip != null) {
+				clip.stop();
+			}
+		}
+		if(e.getSource() == sound) {
+			if(count == 0) {
+				Play("sound/life/life01.wav");
+			} else if(count == 1) {
+				Play("sound/life/life02.wav");
+			} else if(count == 2) {
+				Play("sound/life/life03.wav");
+			}
+		}
 		if(e.getSource() == prev || e.getSource() == next) {
 			if(count == 0) {
 				prev.setVisible(false);

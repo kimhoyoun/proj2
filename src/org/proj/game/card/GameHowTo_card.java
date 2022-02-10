@@ -34,6 +34,8 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 
 	private Font font1;
 
+	private Clip clip;
+	
 	int count = 0;
 
 	public GameHowTo_card(JButton cardBtn, JButton[] Btn) {
@@ -181,8 +183,7 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 	public void Play(String fileName) {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(fileName));
-			Clip clip = AudioSystem.getClip();
-			clip.stop();
+			clip = AudioSystem.getClip();
 			clip.open(ais);
 			clip.start();
 		} catch (Exception ex) {
@@ -192,14 +193,23 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == prev) {
+			if(clip != null) {
+				clip.stop();
+			}
 			count--;
 		}
 		if (e.getSource() == next) {
+			if(clip != null) {
+				clip.stop();
+			}
 			count++;
 		}
 
 		if (e.getSource() == exit) {
 			this.setVisible(false);
+			if(clip != null) {
+				clip.stop();
+			}
 			cardBtn.setVisible(true);
 			for(int i = 0; i < Btn.length; i++) {
 				Btn[i].setVisible(true);
@@ -207,11 +217,11 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == sound) {
 			if (count == 0) {
-				Play("sound/card01.wav");
+				Play("sound/card/card01.wav");
 			} else if (count == 1) {
-				Play("sound/card02.wav");
+				Play("sound/card/card02.wav");
 			} else if (count == 2) {
-				Play("sound/card03.wav");
+				Play("sound/card/card03.wav");
 			}
 		}
 
