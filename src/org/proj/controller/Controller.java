@@ -20,27 +20,6 @@ import org.proj.view.MainFrame;
 import org.proj.view.MainView;
 import org.proj.view.RecordView;
 
-//public static final String LOGINPAGE = "login";
-//public static final String MAINPAGE = "main";
-//public static final String PLUSMINUS = "plusminus";
-//public static final String CARD = "card";
-//public static final String BALL = "ball";
-//public static final String LIFE = "life";
-//public static final String COLOR = "color";
-//public static final String RECORD = "record";
-//public static final String PlisMinusRECORD = "plusminusRecord";
-//public static final String CardRECORD = "cardRecord";
-//public static final String LifeRECORD = "lifeRecord";
-//public static final String BallRECORD = "ballRecord";
-//public static final String ColorRECORD = "colorRecord";
-
-//public static GameView NowView;
-//public static GameView LoginView = new LoginView();user8
-//public static GameView MainView = new MainView();
-//public static GameView RecordView = new RecordView();
-//public static GameView PlusMinusGAME = new PlusMinus();
-////public static GameContainer RECORDVIEW;
-
 public class Controller {
 	private static Controller controller;
 	MainFrame mainframe;
@@ -59,7 +38,6 @@ public class Controller {
 		map.put(SelectColor, SelectColorGame);
 		map.put(MaxColor, MaxColorGame);
 		map.put(GameRecordPage, GameRecord);
-//		map.put(MAINPAGE, MainView);
 		
 	}
 	public Controller() {
@@ -94,20 +72,6 @@ public class Controller {
 		controller = new Controller();
 	}
 
-//	public static final String LOGINPAGE = "login";
-//	public static final String MAINPAGE = "main";
-//	public static final String PLUSMINUS = "plusminus";
-//	public static final String CARD = "card";
-//	public static final String BALL = "ball";
-//	public static final String LIFE = "life";
-//	public static final String COLOR = "color";
-//	public static final String RECORD = "record";
-//	public static final String PlisMinusRECORD = "plusminusRecord";
-//	public static final String CardRECORD = "cardRecord";
-//	public static final String LifeRECORD = "lifeRecord";
-//	public static final String BallRECORD = "ballRecord";
-//	public static final String ColorRECORD = "colorRecord";
-	
 	public void Viewchange(String viewName) {
 			mainframe.changeView(map.get(viewName));
 		}

@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -29,13 +30,13 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 	public JButton exit;
 	private JButton cardBtn;
 	private JButton[] Btn;
-	
-	private JButton sound;
+
+	private JToggleButton soundBtn;
 
 	private Font font1;
 
 	private Clip clip;
-	
+
 	int count = 0;
 
 	public GameHowTo_card(JButton cardBtn, JButton[] Btn) {
@@ -53,7 +54,7 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 		exit.addActionListener(this);
 		prev.addActionListener(this);
 		next.addActionListener(this);
-		sound.addActionListener(this);
+		soundBtn.addActionListener(this);
 	}
 
 	public void comm() {
@@ -85,14 +86,14 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 		exit.setContentAreaFilled(false);
 		exit.setBounds(720, 20, 80, 80);
 
-		sound = new JButton(new ImageIcon("images/comm/HowTo_sound.png"));
-		sound.setFocusPainted(false);
-		sound.setBorderPainted(false);
-		sound.setContentAreaFilled(false);
-		sound.setBounds(20, 20, 80, 80);
+		soundBtn = new JToggleButton(new ImageIcon("images/comm/HowTo_sound.png"));
+		soundBtn.setFocusPainted(false);
+		soundBtn.setBorderPainted(false);
+		soundBtn.setContentAreaFilled(false);
+		soundBtn.setBounds(20, 20, 80, 80);
 
 		prev.setVisible(false); // 수정 (추가)
-		bgSkPan.add(sound);
+		bgSkPan.add(soundBtn);
 		bgSkPan.add(next);
 		bgSkPan.add(prev);
 		bgSkPan.add(exit);
@@ -104,7 +105,6 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 		pan1.setBounds(130, 10, 570, 505);
 		pan1.setBackground(Color.white);
 
-//		ImageIcon gameImg = new ImageIcon("images/cardgame_how1.png");
 		ImageIcon gameImg = new ImageIcon("images/card/HowTo_Card1.png");
 		JLabel gameImgPan = new JLabel(gameImg);
 		gameImgPan.setBounds(10, 10, 550, 300);
@@ -128,20 +128,16 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 		pan2.setBounds(130, 10, 570, 505);
 		pan2.setBackground(Color.white);
 
-//		ImageIcon gameImg = new ImageIcon("images/cardgame_how2.png");
 		ImageIcon gameImg = new ImageIcon("images/card/HowTo_Card2.png");
 		JLabel gameImgPan = new JLabel(gameImg);
-//		gameImgPan.setBounds(10, 10, 550, 300);
 		gameImgPan.setBounds(10, 10, 550, 390);
 
 		JLabel text = new JLabel("<html>같은 그림의 카드 2장을 찾아서 클릭해주세요.<br>카드 2장을 클릭하면 시도횟수가 1회 줄어듭니다.</html>");
 		text.setFont(font1);
 		text.setHorizontalAlignment(JLabel.CENTER);
-//		text.setBounds(10, 320, 550, 70);
 		text.setBounds(10, 410, 550, 80);
 
 		text.setOpaque(true);
-//		text.setBackground(Color.pink);
 		text.setBackground(Color.white); // 추가
 		Border c = new LineBorder(new Color(137, 170, 108), 7);
 		text.setBorder(c);
@@ -154,16 +150,13 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 
 	public void last() {
 		pan3.setLayout(null);
-//		pan3.setBounds(130, 50, 570, 440);
 		pan3.setBounds(130, 10, 570, 505);
 		pan3.setBackground(Color.white);
 
-//		ImageIcon gameImg = new ImageIcon("images/cardgame_how3.png");
 		ImageIcon gameImg = new ImageIcon("images/card/HowTo_Card3.png");
 		JLabel gameImgPan = new JLabel(gameImg);
 		gameImgPan.setBounds(10, 10, 550, 300);
 
-//		JLabel text = new JLabel("<html>같은 그림을 맞추게 되면 카드가 회색으로 변합니다. 12회 안에 모든 카드의 짝을 맞춰주세요.</html>");
 		JLabel text = new JLabel("<html>같은 그림을 맞추면 카드가 회색으로 변합니다.<br>&nbsp&nbsp 12회 안에 모든 카드의 짝을 맞춰주세요.</html>");
 		text.setFont(font1);
 		text.setHorizontalAlignment(JLabel.CENTER);
@@ -193,38 +186,47 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == prev) {
-			if(clip != null) {
+			if (clip != null) {
 				clip.stop();
 			}
+			soundBtn.setSelected(false);
 			count--;
 		}
 		if (e.getSource() == next) {
-			if(clip != null) {
+			if (clip != null) {
 				clip.stop();
 			}
+			soundBtn.setSelected(false);
 			count++;
 		}
 
 		if (e.getSource() == exit) {
 			this.setVisible(false);
-			if(clip != null) {
+			if (clip != null) {
 				clip.stop();
 			}
+			soundBtn.setSelected(false);
 			cardBtn.setVisible(true);
-			for(int i = 0; i < Btn.length; i++) {
+			for (int i = 0; i < Btn.length; i++) {
 				Btn[i].setVisible(true);
 			}
+			
 		}
-		if (e.getSource() == sound) {
-			if (count == 0) {
-				Play("sound/card/card01.wav");
-			} else if (count == 1) {
-				Play("sound/card/card02.wav");
-			} else if (count == 2) {
-				Play("sound/card/card03.wav");
+		
+		if (e.getSource() == soundBtn) {
+			if (soundBtn.isSelected() == true) {
+				if (count == 0) {
+					Play("sound/card/card01.wav");
+				} else if (count == 1) {
+					Play("sound/card/card02.wav");
+				} else if (count == 2) {
+					Play("sound/card/card03.wav");
+				}
+			} else {
+				clip.stop();
 			}
 		}
-
+		
 		if (e.getSource() == prev || e.getSource() == next) {
 			if (count == 0) {
 				prev.setVisible(false);

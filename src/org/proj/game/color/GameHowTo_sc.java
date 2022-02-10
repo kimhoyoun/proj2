@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -27,7 +28,7 @@ public class GameHowTo_sc extends JPanel implements ActionListener {
 	private JButton next;
 	private JButton prev;
 	public JButton exit;
-	public JButton sound;
+	private JToggleButton soundBtn;
 	private Clip clip;
 	private Font font1;
 
@@ -43,7 +44,7 @@ public class GameHowTo_sc extends JPanel implements ActionListener {
 		prev.addActionListener(this);
 		next.addActionListener(this);
 		exit.addActionListener(this);
-		sound.addActionListener(this);
+		soundBtn.addActionListener(this);
 	}
 
 	public void comm() {
@@ -70,14 +71,14 @@ public class GameHowTo_sc extends JPanel implements ActionListener {
 		exit.setContentAreaFilled(false);
 		exit.setBounds(720, 20, 80, 80);
 
-		sound = new JButton(new ImageIcon("images/comm/HowTo_sound.png"));
-		sound.setFocusPainted(false);
-		sound.setBorderPainted(false);
-		sound.setContentAreaFilled(false);
-		sound.setBounds(20, 20, 80, 80);
+		soundBtn = new JToggleButton(new ImageIcon("images/comm/HowTo_sound.png"));
+		soundBtn.setFocusPainted(false);
+		soundBtn.setBorderPainted(false);
+		soundBtn.setContentAreaFilled(false);
+		soundBtn.setBounds(20, 20, 80, 80);
 		
 		prev.setVisible(false); // 수정 (추가) - 한줄만
-		bgSkPan.add(sound);
+		bgSkPan.add(soundBtn);
 		bgSkPan.add(next);
 		bgSkPan.add(prev);
 		bgSkPan.add(exit);
@@ -146,12 +147,14 @@ public class GameHowTo_sc extends JPanel implements ActionListener {
 			if(clip != null) {
 				clip.stop();
 			}
+			soundBtn.setSelected(false);
 			count--;
 		}
 		if (e.getSource() == next) {
 			if(clip != null) {
 				clip.stop();
 			}
+			soundBtn.setSelected(false);
 			count++;
 		}
 		
@@ -159,14 +162,21 @@ public class GameHowTo_sc extends JPanel implements ActionListener {
 			if(clip != null) {
 				clip.stop();
 			}
+			soundBtn.setSelected(false);
 		}
 		
-		if(e.getSource() == sound) {
-			if(count == 0) {
-				Play("sound/color/selectColor01.wav");
-			} else if(count == 1) {
-				Play("sound/color/selectColor02.wav");
-			} 
+		if (e.getSource() == soundBtn) {
+			if (soundBtn.isSelected() == true) {
+				if (count == 0) {
+					Play("sound/color/selectColor01.wav");
+				} else if (count == 1) {
+					Play("sound/color/selectColor02.wav");
+				}
+			} else {
+				if(clip != null) {
+					clip.stop();
+				}
+			}
 		}
 		
 		if (e.getSource() == prev || e.getSource() == next) {
