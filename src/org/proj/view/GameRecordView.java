@@ -161,7 +161,9 @@ public class GameRecordView extends GameView {
 			date.add(data.getDay().substring(5));
 		}
 	}
-	
+	public String toBGM() {
+		return "main.wav";
+	}
 //	public static void main(String[] args) {
 //		JFrame frame = new JFrame("DrawGraph");
 //	    Container contentPane;

@@ -48,6 +48,24 @@ public class Resource {
 	public static final String ColorRECORD = "colorRecord";
 
 	
+	public static BGM bgm = new BGM();
+	// sound
+	public static final String MainBGM = "sound/bgm/main.wav";
+	public static final String RecordBGM = "sound/bgm/record.wav";
+	public static final String PlusminusBGM = "sound/bgm/plusminus.wav";
+	public static final String CardBGM = "sound/bgm/card.wav";
+	public static final String CupBGM = "sound/bgm/cup.wav";
+	public static final String LifeBGM = "sound/bgm/life.wav";
+	public static final String ColorBGM = "sound/bgm/color.wav";
+	public static final String AllGameBGM = "sound/bgm/AllGame.wav";
+
+	public static final String ButtonEffect = "sound/effect/button.wav";
+	public static final String TrueEffect = "sound/effect/true.wav";
+	public static final String FalseEffect = "sound/effect/false.wav";
+	public static final String CountDownEffect = "sound/effect/countdown.wav";
+	public static final String SetLabelEffect = "sound/effect/setlabel.wav";
+	
+	
 	public static String gameRecord;
 
 	public static boolean loginSucess =false;

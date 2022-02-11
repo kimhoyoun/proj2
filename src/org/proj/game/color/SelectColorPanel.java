@@ -128,13 +128,13 @@ public class SelectColorPanel extends GameView{
 		
 		checkIcon = new ImageIcon("images/comm/checked.png");
 		checkLabel = new JLabel(checkIcon);
-		checkLabel.setBounds(670, 65, 150, 150);
+		checkLabel.setBounds(765, 105, 150, 150);
 		this.add(checkLabel);
 		checkLabel.setVisible(false);
 
 		xIcon = new ImageIcon("images/comm/x.png");
 		xLabel = new JLabel(xIcon);
-		xLabel.setBounds(670, 65, 150, 150);
+		xLabel.setBounds(765, 105, 150, 150);
 		this.add(xLabel);
 		xLabel.setVisible(false);
 		
@@ -206,12 +206,15 @@ public class SelectColorPanel extends GameView{
 		JButton btn = (JButton) e.getSource();
 
 		if ("btn1".equals(btn.getText())) {
+			bgm.playEffect("button.wav");
 			if (scc.ansColor == scc.arrBtn[0]) {
 				gametrue++;
+				bgm.playEffect("true.wav");
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
+				bgm.playEffect("false.wav");
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
@@ -232,12 +235,15 @@ public class SelectColorPanel extends GameView{
 //			}
 //		}
 		if ("btn2".equals(btn.getText())) {
+			bgm.playEffect("button.wav");
 			if (scc.ansColor == scc.arrBtn[1]) {
+				bgm.playEffect("true.wav");
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
+				bgm.playEffect("false.wav");
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
@@ -245,12 +251,15 @@ public class SelectColorPanel extends GameView{
 		}
 
 		if ("btn3".equals(btn.getText())) {
+			bgm.playEffect("button.wav");
 			if (scc.ansColor == scc.arrBtn[2]) {
+				bgm.playEffect("true.wav");
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
+				bgm.playEffect("false.wav");
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
@@ -311,5 +320,9 @@ public class SelectColorPanel extends GameView{
 	@Override
 	public String toString() {
 		return SelectColor;
+	}
+	
+	public String toBGM() {
+		return "color.wav";
 	}
 }

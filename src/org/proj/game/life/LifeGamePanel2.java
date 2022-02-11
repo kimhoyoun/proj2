@@ -20,6 +20,7 @@ import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.view.GameView;
 
@@ -193,7 +194,7 @@ public class LifeGamePanel2 extends GameView implements MouseListener, MouseMoti
 		bgImgPan = new JLabel(bgImg);
 		bgImgPan.setSize(1024, 768);
 
-		submit = new JButton("제출");
+		submit = new RoundJButton("제출");
 		submit.setBounds(770, 650, 130, 50);
 		submit.setBackground(new Color(254, 178, 55));
 		font2 = new Font("맑은 고딕", Font.BOLD, 20);
@@ -903,5 +904,11 @@ public class LifeGamePanel2 extends GameView implements MouseListener, MouseMoti
 	@Override
 	public String toString() {
 		return LIFE;
+	}
+
+	@Override
+	public String toBGM() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

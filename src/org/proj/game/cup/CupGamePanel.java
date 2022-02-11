@@ -3,6 +3,7 @@ package org.proj.game.cup;
 import static org.proj.Resource.MainPage;
 import static org.proj.Resource.MiniGame;
 import static org.proj.Resource.PlusMinus;
+import static org.proj.Resource.bgm;
 import static org.proj.Resource.endGameNum;
 import static org.proj.Resource.gameNum;
 import static org.proj.Resource.gametrue;
@@ -27,6 +28,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.view.GameView;
 
@@ -48,7 +50,7 @@ public class CupGamePanel extends GameView {
 	 JLabel xLabel;
 	 JLabel manualLabel;
 	 JButton pauseBtn = new JButton(pauseIcon);
-	 JButton playBtn = new JButton("시작하기");
+	 JButton playBtn = new RoundJButton("시작하기");
 
 	 Timer timer;
 	 javax.swing.Timer timer2;
@@ -311,6 +313,8 @@ public class CupGamePanel extends GameView {
 	
 	public void labelBorder(boolean flag, JLabel JLabel, JButton JButton) {
 		flag = true;
+		
+		
 		JLabel.setVisible(flag);
 		JButton.setIcon(cupBorderIcon);
 	}
@@ -323,6 +327,7 @@ public class CupGamePanel extends GameView {
 			if (click == 1) {
 				return;
 			}
+			bgm.playEffect("false.wav");
 			cupUp(0);
 			labelBorder(flag, xLabel, cups[0]);
 			otherCupUp(1, 2);
@@ -331,6 +336,7 @@ public class CupGamePanel extends GameView {
 				return;
 			}
 			cupUp(1);
+			bgm.playEffect("true.wav");
 			labelBorder(flag, checkLabel, cups[1]);
 			otherCupUp(0, 2);
 			gametrue++;
@@ -338,6 +344,7 @@ public class CupGamePanel extends GameView {
 			if (click == 1) {
 				return;
 			}
+			bgm.playEffect("false.wav");
 			cupUp(2);
 			labelBorder(flag, xLabel, cups[2]);
 			otherCupUp(1, 0);
@@ -400,5 +407,9 @@ public class CupGamePanel extends GameView {
 	@Override
 	public String toString() {
 		return CUP;
+	}
+	
+	public String toBGM() {
+		return "cup.wav";
 	}
 }

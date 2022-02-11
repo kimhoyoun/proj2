@@ -324,5 +324,7 @@ public class LoginView extends GameView {
 		}
 
 	}
-
+	public String toBGM() {
+		return "main.wav";
+	}
 }

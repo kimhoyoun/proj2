@@ -126,10 +126,11 @@ public class PlusMinus extends GameView {
 		if (click == 1) {
 			return;
 		}
-
+		
 		if (e.getSource() == choiceBtn[0]) {
-
+			bgm.playEffect("button.wav");
 			if (gp.answer == Integer.parseInt(choiceBtn[0].getText())) {
+				bgm.playEffect("true.wav");
 				gametrue++;
 				choiceBtn[0].setBackground(new Color(33, 139, 34));
 				checkLabel.setVisible(true);
@@ -137,6 +138,7 @@ public class PlusMinus extends GameView {
 				repaint();
 
 			} else {
+				bgm.playEffect("false.wav");
 				choiceBtn[0].setBackground(new Color(233, 23, 22));
 				xLabel.setVisible(true);
 				revalidate();
@@ -145,27 +147,35 @@ public class PlusMinus extends GameView {
 
 		}
 		if (e.getSource() == choiceBtn[1]) {
+			bgm.playEffect("button.wav");
 			if (gp.answer == Integer.parseInt(choiceBtn[1].getText())) {
+				bgm.playEffect("true.wav");
 				choiceBtn[1].setBackground(new Color(33, 139, 34));
 				gametrue++;
+				
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
+				bgm.playEffect("false.wav");
 				choiceBtn[1].setBackground(new Color(233, 23, 22));
 				xLabel.setVisible(true);
+				
 				revalidate();
 				repaint();
 			}
 		}
 		if (e.getSource() == choiceBtn[2]) {
+			bgm.playEffect("button.wav");
 			if (gp.answer == Integer.parseInt(choiceBtn[2].getText())) {
+				bgm.playEffect("true.wav");
 				choiceBtn[2].setBackground(new Color(33, 139, 34));
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
+				bgm.playEffect("false.wav");
 				choiceBtn[2].setBackground(new Color(233, 23, 22));
 				xLabel.setVisible(true);
 				revalidate();
@@ -173,25 +183,22 @@ public class PlusMinus extends GameView {
 			}
 		}
 		if (e.getSource() == choiceBtn[3]) {
+			bgm.playEffect("button.wav");
 			if (gp.answer == Integer.parseInt(choiceBtn[3].getText())) {
+				bgm.playEffect("true.wav");
 				choiceBtn[3].setBackground(new Color(33, 139, 34));
 				gametrue++;
 				checkLabel.setVisible(true);
 				revalidate();
 				repaint();
 			} else {
+				bgm.playEffect("false.wav");
 				choiceBtn[3].setBackground(new Color(233, 23, 22));
 				xLabel.setVisible(true);
 				revalidate();
 				repaint();
 			}
 
-		}
-
-		if (e.getSource() instanceof JButton && e.getSource() != pauseBtn) {
-			gameNum++;
-			click++;
-			next();
 		}
 
 		if (e.getSource() == pauseBtn) {
@@ -206,12 +213,16 @@ public class PlusMinus extends GameView {
 				c.Viewchange(MainPage);
 			}
 		}
-
+		if (e.getSource() instanceof JButton && e.getSource() != pauseBtn) {
+			gameNum++;
+			click++;
+			next();
+		}
 	}
 
 	public void next() {
 		// 딜레이 1.5초 주고 다음게임 시작
-		timer = new Timer(1500, new ActionListener() {
+		timer = new Timer(2000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (GameState == MiniGame) {
@@ -240,5 +251,9 @@ public class PlusMinus extends GameView {
 	@Override
 	public String toString() {
 		return PlusMinus;
+	}
+	
+	public String toBGM() {
+		return "plusminus.wav";
 	}
 }

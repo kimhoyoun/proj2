@@ -107,7 +107,7 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 
 		ImageIcon gameImg = new ImageIcon("images/card/HowTo_Card1.png");
 		JLabel gameImgPan = new JLabel(gameImg);
-		gameImgPan.setBounds(10, 10, 550, 300);
+		gameImgPan.setBounds(10, 10, 550, 390);
 
 		JLabel text = new JLabel("<html>3초동안 카드를 보여줍니다.<br>카드의 그림을 기억해주세요.<html>");
 		text.setFont(font1);
@@ -155,7 +155,7 @@ public class GameHowTo_card extends JPanel implements ActionListener {
 
 		ImageIcon gameImg = new ImageIcon("images/card/HowTo_Card3.png");
 		JLabel gameImgPan = new JLabel(gameImg);
-		gameImgPan.setBounds(10, 10, 550, 300);
+		gameImgPan.setBounds(10, 10, 550, 390);
 
 		JLabel text = new JLabel("<html>같은 그림을 맞추면 카드가 회색으로 변합니다.<br>&nbsp&nbsp 12회 안에 모든 카드의 짝을 맞춰주세요.</html>");
 		text.setFont(font1);

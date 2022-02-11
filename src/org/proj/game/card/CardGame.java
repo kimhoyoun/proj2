@@ -195,7 +195,7 @@ public class CardGame extends GameView {
 	public void countDown() {
 
 		countTimer = new java.util.Timer();
-
+		bgm.playEffect("countdown.wav");
 		// 3초 카운트
 		countTimer.scheduleAtFixedRate(new TimerTask() {
 
@@ -407,5 +407,9 @@ public class CardGame extends GameView {
 	@Override
 	public String toString() {
 		return CARD;
+	}
+	
+	public String toBGM() {
+		return "card.wav";
 	}
 }

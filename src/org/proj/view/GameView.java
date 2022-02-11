@@ -9,4 +9,6 @@ public abstract class GameView extends JPanel implements ActionListener{
 	public abstract void display();
 
 	public abstract void actionPerformed(ActionEvent e);
+	
+	public abstract String toBGM();
 }

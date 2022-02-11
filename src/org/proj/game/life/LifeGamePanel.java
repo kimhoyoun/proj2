@@ -20,6 +20,7 @@ import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.view.GameView;
 
@@ -122,7 +123,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 		bgImgPan = new JLabel(bgImg);
 		bgImgPan.setSize(1024, 768);
 
-		submit = new JButton("제출");
+		submit = new RoundJButton("제출");
 		submit.setBounds(770, 650, 130, 50);
 		submit.setBackground(new Color(254, 178, 55));
 		Font font2 = new Font("맑은 고딕", Font.BOLD, 20);
@@ -180,7 +181,6 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			label[i].addMouseListener(this);
 			label[i].setBounds(label[i].x, label[i].y, width, height);
 			bgImgPan.add(label[i]);
-
 		}
 
 		// 정답
@@ -219,6 +219,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			if ((centerX > ans[0].getX() && centerX < ans[0].getX() + width)
 					&& (centerY > ans[0].getY() && centerY < ans[0].getY() + height)) {
 				if (!(ans[0].getBackground() == Color.white)) {
+					bgm.playEffect("life.wav");
 					ans[0].setEnabled(false);
 					ans[0].setBackground(Color.white);
 					a.setBounds(ans[0].getX(), ans[0].getY(), width, height);
@@ -233,7 +234,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			} else if ((centerX > ans[1].getX() && centerX < ans[1].getX() + width)
 					&& (centerY > ans[1].getY() && centerY < ans[1].getY() + height)) {
 				if (!(ans[1].getBackground() == Color.white)) {
-
+					bgm.playEffect("life.wav");
 					ans[1].setBackground(Color.white);
 					a.setBounds(ans[1].getX(), ans[1].getY(), width, height);
 					s[1] = a.getText();
@@ -247,6 +248,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			} else if ((centerX > ans[2].getX() && centerX < ans[2].getX() + width)
 					&& (centerY > ans[2].getY() && centerY < ans[2].getY() + height)) {
 				if (!(ans[2].getBackground() == Color.white)) {
+					bgm.playEffect("life.wav");
 					ans[2].setBackground(Color.white);
 					a.setBounds(ans[2].getX(), ans[2].getY(), width, height);
 					s[2] = a.getText();
@@ -260,7 +262,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			} else if ((centerX > ans[3].getX() && centerX < ans[3].getX() + width)
 					&& (centerY > ans[3].getY() && centerY < ans[3].getY() + height)) {
 				if (!(ans[3].getBackground() == Color.white)) {
-
+					bgm.playEffect("life.wav");
 					ans[3].setBackground(Color.white);
 					a.setBounds(ans[3].getX(), ans[3].getY(), width, height);
 					s[3] = a.getText();
@@ -392,6 +394,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			}
 
 			if (w == 4) {
+				bgm.playEffect("true.wav");
 				gameNum++;
 				gametrue++;
 				checkLabel.setVisible(true);
@@ -411,7 +414,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			} else {
 				lifeRemaining--;
 				if (lifeRemaining == 0) {
-//					JOptionPane.showMessageDialog(bgImgPan, "게임 종료합니다!");
+					bgm.playEffect("false.wav");
 					life.setText("도전횟수 : " + lifeRemaining);
 					gameNum++;
 					xLabel.setVisible(true);
@@ -480,5 +483,9 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 	@Override
 	public String toString() {
 		return LIFE;
+	}
+	
+	public String toBGM() {
+		return "life.wav";
 	}
 }

@@ -118,4 +118,7 @@ public class RecordView extends GameView{
 		}
 	}
 	
+	public String toBGM() {
+		return "main.wav";
+	}
 }

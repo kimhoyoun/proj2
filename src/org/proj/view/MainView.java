@@ -26,7 +26,7 @@ import org.proj.model.UserDto;
 public class MainView extends GameView{
 	ImageIcon backgroundImg;
 	JLabel background;
-	JButton settingBtn = new JButton(new ImageIcon("images/main/setting.png"));
+	JButton settingBtn = new JButton(new ImageIcon("images/main/setting1.png"));
 	JButton updateBtn = new JButton(new ImageIcon("images/main/setting2.png"));
 	boolean updateBtnStatedb = false;
 	
@@ -394,5 +394,9 @@ public class MainView extends GameView{
 		profileCancelBtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		profileOkBtn.setForeground(Color.white);
 		profileCancelBtn.setForeground(Color.white);
+	}
+	
+	public String toBGM() {
+		return "main.wav";
 	}
 }
