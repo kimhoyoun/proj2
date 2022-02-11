@@ -73,7 +73,7 @@ public class CardGame extends GameView {
 		tryCount = 12;
 		startCount = 0;
 		this.add(resultPane);
-		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
+//		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
 		resultPane.setVisible(false);
 		
 		checkLabel = new JLabel(checkIcon);
@@ -195,7 +195,6 @@ public class CardGame extends GameView {
 	public void countDown() {
 
 		countTimer = new java.util.Timer();
-		bgm.playEffect("countdown.wav");
 		// 3초 카운트
 		countTimer.scheduleAtFixedRate(new TimerTask() {
 
@@ -350,17 +349,20 @@ public class CardGame extends GameView {
 					if (sucessCount == 6) {
 						gameNum++;
 						gametrue++;
+						bgm.playEffect("true.wav");
 						checkLabel.setVisible(true);
 						next();
 					} else if (tryCount == 0) {
 						gameNum++;
 						gametrue++;
+						bgm.playEffect("false.wav");
 						xLabel.setVisible(true);
 						next();
 					}
 				} else {
 					if (tryCount == 0) {
 						gameNum++;
+						bgm.playEffect("false.wav");
 						xLabel.setVisible(true);
 						for (int i = 0; i < 12; i++) {
 							Btn[i].setEnabled(false);

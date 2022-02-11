@@ -18,8 +18,8 @@ public class BGM{
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File("sound/bgm/"+fileName));
 			clip = AudioSystem.getClip();
 			clip.open(ais);
-			FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(-5.0f);
+//			FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+//			gainControl.setValue(-2.0f);
 			clip.start();
 			if(loop) clip.loop(-1);
 		} catch (Exception ex) {
@@ -44,7 +44,7 @@ public class BGM{
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File("sound/effect/"+effectName));
 			Clip clip = AudioSystem.getClip();
 //			FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-//			gainControl.setValue(-50.0f);
+//			gainControl.setValue(-1.0f);
 			clip.open(ais);
 			clip.start();
 		} catch (Exception ex) {

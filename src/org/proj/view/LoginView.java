@@ -7,6 +7,9 @@ import static org.proj.Resource.NowView;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,7 +24,7 @@ import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.model.UserDto;
 
-public class LoginView extends GameView {
+public class LoginView extends GameView{
 	boolean flag = false;
 	ImageIcon backgroundImg;
 	JLabel background;
@@ -327,4 +330,5 @@ public class LoginView extends GameView {
 	public String toBGM() {
 		return "main.wav";
 	}
+
 }

@@ -205,10 +205,10 @@ public class GameServer extends JFrame {
 					}
 
 				} catch (SocketException e) {
-					e.printStackTrace();
+//					e.printStackTrace();
 					stop = true;
 				} catch (IOException e) {
-					e.printStackTrace();
+//					e.printStackTrace();
 					stop = true;
 				}
 
@@ -224,7 +224,7 @@ public class GameServer extends JFrame {
 					oos.close();
 
 			} catch (IOException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			}
 
 		}

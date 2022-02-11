@@ -111,7 +111,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 		this.setLayout(null);
 
 		this.add(resultPane);
-		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
+//		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
 		resultPane.setVisible(false);
 
 		pauseBtn.setBounds(920, 30, 50, 50);
@@ -219,7 +219,6 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			if ((centerX > ans[0].getX() && centerX < ans[0].getX() + width)
 					&& (centerY > ans[0].getY() && centerY < ans[0].getY() + height)) {
 				if (!(ans[0].getBackground() == Color.white)) {
-					bgm.playEffect("life.wav");
 					ans[0].setEnabled(false);
 					ans[0].setBackground(Color.white);
 					a.setBounds(ans[0].getX(), ans[0].getY(), width, height);
@@ -234,7 +233,6 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			} else if ((centerX > ans[1].getX() && centerX < ans[1].getX() + width)
 					&& (centerY > ans[1].getY() && centerY < ans[1].getY() + height)) {
 				if (!(ans[1].getBackground() == Color.white)) {
-					bgm.playEffect("life.wav");
 					ans[1].setBackground(Color.white);
 					a.setBounds(ans[1].getX(), ans[1].getY(), width, height);
 					s[1] = a.getText();
@@ -248,7 +246,6 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			} else if ((centerX > ans[2].getX() && centerX < ans[2].getX() + width)
 					&& (centerY > ans[2].getY() && centerY < ans[2].getY() + height)) {
 				if (!(ans[2].getBackground() == Color.white)) {
-					bgm.playEffect("life.wav");
 					ans[2].setBackground(Color.white);
 					a.setBounds(ans[2].getX(), ans[2].getY(), width, height);
 					s[2] = a.getText();
@@ -262,7 +259,6 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			} else if ((centerX > ans[3].getX() && centerX < ans[3].getX() + width)
 					&& (centerY > ans[3].getY() && centerY < ans[3].getY() + height)) {
 				if (!(ans[3].getBackground() == Color.white)) {
-					bgm.playEffect("life.wav");
 					ans[3].setBackground(Color.white);
 					a.setBounds(ans[3].getX(), ans[3].getY(), width, height);
 					s[3] = a.getText();

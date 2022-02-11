@@ -71,7 +71,7 @@ public class SelectColorPanel extends GameView{
 		
 		// 결과 알려주는 곳
 		this.add(resultPane);
-		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
+//		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
 		resultPane.setVisible(false);
 		
 		// 정지 버튼
@@ -206,7 +206,6 @@ public class SelectColorPanel extends GameView{
 		JButton btn = (JButton) e.getSource();
 
 		if ("btn1".equals(btn.getText())) {
-			bgm.playEffect("button.wav");
 			if (scc.ansColor == scc.arrBtn[0]) {
 				gametrue++;
 				bgm.playEffect("true.wav");
@@ -235,7 +234,6 @@ public class SelectColorPanel extends GameView{
 //			}
 //		}
 		if ("btn2".equals(btn.getText())) {
-			bgm.playEffect("button.wav");
 			if (scc.ansColor == scc.arrBtn[1]) {
 				bgm.playEffect("true.wav");
 				gametrue++;
@@ -251,7 +249,6 @@ public class SelectColorPanel extends GameView{
 		}
 
 		if ("btn3".equals(btn.getText())) {
-			bgm.playEffect("button.wav");
 			if (scc.ansColor == scc.arrBtn[2]) {
 				bgm.playEffect("true.wav");
 				gametrue++;

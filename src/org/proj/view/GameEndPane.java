@@ -1,22 +1,23 @@
 package org.proj.view;
 
-import static org.proj.Resource.gameNum;
-import static org.proj.Resource.gametrue;
 import static org.proj.Resource.*;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
+import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 
 public class GameEndPane extends GameView {
-	JButton goMainBtn = new JButton("메인화면으로");
-	JButton replayBtn = new JButton("다시시작");
-
+	JButton goMainBtn = new RoundJButton("메인화면으로");
+	JButton replayBtn = new RoundJButton("다시시작");
+	JPanel result;
 	public GameEndPane() {
 		replayBtn.addActionListener(this);
 		goMainBtn.addActionListener(this);
@@ -25,27 +26,48 @@ public class GameEndPane extends GameView {
 	@Override
 	public void display() {
 		this.setLayout(null);
+		this.setBounds(FRAME_WIDTH / 2 - 320 / 2, FRAME_HEIGHT / 2 - 370 / 2, 320, 370);
+		
+		result = new JPanel();
+		result.setBackground(new Color(255, 255, 255, 255));
+		result.setLayout(null);
+		
 		JLabel gameNumlbl = new JLabel("총 도전 횟수 : " + gameNum);
 		JLabel gametruelbl = new JLabel("정답 : " + gametrue);
 		JLabel gameEndmsg = new JLabel("게임결과");
 
-		gameEndmsg.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		gameEndmsg.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 		gameNumlbl.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		gametruelbl.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 
-		this.add(gameEndmsg);
-		this.add(gameNumlbl);
-		this.add(gametruelbl);
-		this.add(replayBtn);
-		this.add(goMainBtn);
+		result.add(gameEndmsg);
+		result.add(gameNumlbl);
+		result.add(gametruelbl);
+		result.add(replayBtn);
+		result.add(goMainBtn);
 
-		replayBtn.setBounds(10, 290, 120, 50);
+		replayBtn.setBackground(new Color(82, 206, 105));
+		replayBtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		replayBtn.setForeground(Color.white);
+		replayBtn.setBorderPainted(false);
+		replayBtn.setContentAreaFilled(false);
+
+		goMainBtn.setBackground(new Color(82, 206, 105));
+		goMainBtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		goMainBtn.setForeground(Color.white);
+		goMainBtn.setBorderPainted(false);
+		goMainBtn.setContentAreaFilled(false);
+		
+		replayBtn.setBounds(20, 290, 120, 50);
 		goMainBtn.setBounds(160, 290, 120, 50);
 
-		gameEndmsg.setBounds(95, 20, 200, 30);
-		gameNumlbl.setBounds(85, 90, 200, 30);
-		gametruelbl.setBounds(120, 150, 100, 30);
+		gameEndmsg.setBounds(75, 55, 200, 40);
+		gameNumlbl.setBounds(85, 140, 200, 30);
+		gametruelbl.setBounds(120, 200, 100, 30);
 		
+		result.setBounds(10,10, 300, 350);
+		
+		this.add(result);
 		this.setVisible(true);
 	}
 

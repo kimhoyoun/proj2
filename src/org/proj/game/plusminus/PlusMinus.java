@@ -128,7 +128,6 @@ public class PlusMinus extends GameView {
 		}
 		
 		if (e.getSource() == choiceBtn[0]) {
-			bgm.playEffect("button.wav");
 			if (gp.answer == Integer.parseInt(choiceBtn[0].getText())) {
 				bgm.playEffect("true.wav");
 				gametrue++;
@@ -147,7 +146,6 @@ public class PlusMinus extends GameView {
 
 		}
 		if (e.getSource() == choiceBtn[1]) {
-			bgm.playEffect("button.wav");
 			if (gp.answer == Integer.parseInt(choiceBtn[1].getText())) {
 				bgm.playEffect("true.wav");
 				choiceBtn[1].setBackground(new Color(33, 139, 34));
@@ -166,7 +164,6 @@ public class PlusMinus extends GameView {
 			}
 		}
 		if (e.getSource() == choiceBtn[2]) {
-			bgm.playEffect("button.wav");
 			if (gp.answer == Integer.parseInt(choiceBtn[2].getText())) {
 				bgm.playEffect("true.wav");
 				choiceBtn[2].setBackground(new Color(33, 139, 34));
@@ -183,7 +180,6 @@ public class PlusMinus extends GameView {
 			}
 		}
 		if (e.getSource() == choiceBtn[3]) {
-			bgm.playEffect("button.wav");
 			if (gp.answer == Integer.parseInt(choiceBtn[3].getText())) {
 				bgm.playEffect("true.wav");
 				choiceBtn[3].setBackground(new Color(33, 139, 34));

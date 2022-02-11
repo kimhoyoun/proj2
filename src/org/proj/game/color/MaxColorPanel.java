@@ -69,7 +69,7 @@ public class MaxColorPanel extends GameView{
 		this.setLayout(null);
 
 		this.add(resultPane);
-		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
+//		resultPane.setBounds(FRAME_WIDTH / 2 - 300 / 2, FRAME_HEIGHT / 2 - 350 / 2, 300, 350);
 		resultPane.setVisible(false);
 
 		pauseBtn.setBounds(920, 30, 50, 50);
@@ -157,7 +157,6 @@ public class MaxColorPanel extends GameView{
 
 		JButton btn = (JButton) e.getSource();
 		if ("btn1".equals(btn.getText())) {
-			bgm.playEffect("button.wav");
 			if ("RED".equals(mcc.ans)) {
 				bgm.playEffect("true.wav");
 				gametrue++;
@@ -171,7 +170,6 @@ public class MaxColorPanel extends GameView{
 				repaint();
 			}
 		} else if ("btn2".equals(btn.getText())) {
-			bgm.playEffect("button.wav");
 			if ("BLUE".equals(mcc.ans)) {
 				bgm.playEffect("true.wav");
 				gametrue++;
@@ -185,7 +183,6 @@ public class MaxColorPanel extends GameView{
 				repaint();
 			}
 		} else if ("btn3".equals(btn.getText())) {
-			bgm.playEffect("button.wav");
 			if ("YELLOW".equals(mcc.ans)) {
 				bgm.playEffect("true.wav");
 				gametrue++;

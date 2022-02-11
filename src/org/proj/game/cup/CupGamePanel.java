@@ -80,7 +80,7 @@ public class CupGamePanel extends GameView {
 		this.setBounds(0, 0, 1024, 768);
 
 		this.add(resultPane);
-		resultPane.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
+//		resultPane.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-350/2, 300, 350);
 		resultPane.setVisible(false);
 		
 		// 엑스 이미지
@@ -360,7 +360,6 @@ public class CupGamePanel extends GameView {
 		} 
 		if(!((e.getSource()== pauseBtn)||(e.getSource()==playBtn))) {
 			gameNum++;
-			System.out.println("되나?");
 			next();
 		}
 		
