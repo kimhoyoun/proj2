@@ -10,6 +10,7 @@ import static org.proj.Resource.UserUPDATE;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.io.IOException;
@@ -26,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 import org.proj.model.GameDataDto;
 import org.proj.model.UserDao;
@@ -47,20 +49,19 @@ public class GameServer extends JFrame {
 	public GameServer() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("서버");
-		setSize(400, 500);
+		setSize(500, 600);
 
 		rightPane = new JPanel();
 		rightPane.setBackground(Color.white);
-		;
-		rightPane.setLayout(new GridLayout(10, 1));
+		rightPane.setLayout(new GridLayout(20, 1,13,13));
 		pArr = new JPanel[10];
 		idArr = new JLabel[10];
 		loginStateArr = new JLabel[10];
-
+		
 		for (int i = 0; i < dao.userVector.size(); i++) {
-			pArr[i] = new JPanel();
+			pArr[i] = new JPanel(new GridLayout(1,2));
 			pArr[i].setBackground(Color.white);
-			idArr[i] = new JLabel(dao.userVector.get(i).getId());
+			idArr[i] = new JLabel(dao.userVector.get(i).getId(),javax.swing.SwingConstants.CENTER);
 			idArr[i].setFont(new Font("맑은 고딕", Font.BOLD, 13));
 			loginStateArr[i] = new JLabel("비접속");
 			loginStateArr[i].setFont(new Font("맑은 고딕", Font.BOLD, 13));
@@ -69,13 +70,13 @@ public class GameServer extends JFrame {
 
 			rightPane.add(pArr[i]);
 		}
-
+		rightPane.setPreferredSize(new Dimension(140,900));
 		Container contentPane = getContentPane();
 		serverState = new JTextArea();
 		serverState.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		serverState.setEditable(false);
 		contentPane.add(new JScrollPane(serverState), BorderLayout.CENTER);
-		contentPane.add(rightPane, BorderLayout.EAST);
+		contentPane.add(new JScrollPane(rightPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.EAST);
 		setVisible(true);
 		this.setLocation(500, 200);
 
@@ -274,7 +275,6 @@ public class GameServer extends JFrame {
 						int n = 0;
 						String day = LocalDate.now().toString();
 						for (GameDataDto data : vector) {
-							System.out.println(data);
 							if (day.equals(data.getDay())) {
 								n++;
 							}
@@ -307,7 +307,6 @@ public class GameServer extends JFrame {
 							}
 						}
 					} else {
-						System.out.println("중복 접속!");
 						dto = new UserDto(0, null, null, null, 0);
 						oos.writeUTF(LOGIN);
 						oos.flush();

@@ -59,7 +59,7 @@ public class GameRecordView extends GameView {
 			text.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 			text.setHorizontalAlignment(JLabel.CENTER);
 			textPane.add(text);
-			text.setText(String.format("현재 %d대 평균보다 %d번 미달 났습니다!", (mainUser.getAge()/10)*10,underAvgNum));
+			text.setText(String.format("%d대 하한치보다 %d번 미달 났습니다!", (mainUser.getAge()/10)*10,underAvgNum));
 			text.setBounds(15,15,700,150);
 		}else {
 			notGraphsetting();

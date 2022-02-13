@@ -33,10 +33,10 @@ public class GraphPanel extends JPanel {
    private static HashMap<Integer, Integer> avg = new HashMap<>();
   
    static {
-	   avg.put(60,90);
-	   avg.put(70,85);
-	   avg.put(80,80);
-	   avg.put(90,75);
+	   avg.put(60,70);
+	   avg.put(70,65);
+	   avg.put(80,60);
+	   avg.put(90,55);
    }
    
    public GraphPanel(List<Double> scores, List<String> date, int age) {
@@ -155,7 +155,7 @@ public class GraphPanel extends JPanel {
          int y2 = (int) ((100-avg.get(age)) * yScale + padding);
          g2.drawLine(x1, y1, x2, y2);
       }
-      String str = age+"대 평균 성공률";
+      String str = age+"대 하한치";
       g2.drawString(str, graphPoints.get(graphPoints.size()-2).x, (int) ((100-avg.get(age)) * yScale + padding) - 4);
    }
 

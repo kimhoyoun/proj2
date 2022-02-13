@@ -230,18 +230,13 @@ public class ClientSocket {
 					System.out.println(mainUser);
 					String day = LocalDate.now().toString();
 					for (GameDataDto data : vector) {
-						System.out.println(data);
 						if(day.equals(data.getDay())) {
 							mainGameData = data;
-							System.out.println("데이터 있음");
 						}
 					}
-					
 					if(mainGameData == null) {
 						mainGameData = new GameDataDto(user.getId(), 0,0,0,0,0,0,0,0,0,0,day);
 					}
-					System.out.println("===============");
-					System.out.println(mainGameData);
 					// 정상로그인
 					JOptionPane.showMessageDialog(NowView, new JLabel("로그인 성공!", javax.swing.SwingConstants.CENTER),"로그인",JOptionPane.PLAIN_MESSAGE);
 					Controller c = Controller.getController();
