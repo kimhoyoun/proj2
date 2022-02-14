@@ -30,27 +30,16 @@ public class GraphPanel extends JPanel {
    private List<Double> scores;
    private List<String> date;
    private int age;
-   private static HashMap<Integer, Integer> avg = new HashMap<>();
-  
-   static {
-	   avg.put(60,70);
-	   avg.put(70,65);
-	   avg.put(80,60);
-	   avg.put(90,55);
-   }
+   private double ageData;
+
    
-   public GraphPanel(List<Double> scores, List<String> date, int age) {
+   public GraphPanel(List<Double> scores, List<String> date, int age, double ageData) {
       this.scores = scores;
       this.date = date;	
       this.setBackground(Color.white);
       this.age = age;
+      this.ageData = ageData;
       
-      underAvgNum = 0;
-      for (int i = 0; i < scores.size(); i++) {
-    	  if(scores.get(i)<avg.get(age)) {
-         	 underAvgNum++;
-          }
-      }
    }
 
    @Override
@@ -69,9 +58,6 @@ public class GraphPanel extends JPanel {
       for (int i = 0; i < scores.size(); i++) {
          int x1 = (int) (i * xScale + padding + labelPadding);
          int y1 = (int) ((100 - scores.get(i)) * yScale + padding);
-         if(scores.get(i)<avg.get(age)) {
-        	 underAvgNum++;
-         }
          graphPoints.add(new Point(x1, y1));
       }
 
@@ -150,13 +136,13 @@ public class GraphPanel extends JPanel {
       for (int i = 0; i < graphPoints.size() - 1; i++) {
          int x1 = graphPoints.get(i).x;
          // 80은 평균점수
-         int y1 = (int) ((100-avg.get(age)) * yScale + padding);
+         int y1 = (int) ((100-ageData) * yScale + padding);
          int x2 = graphPoints.get(i + 1).x;
-         int y2 = (int) ((100-avg.get(age)) * yScale + padding);
+         int y2 = (int) ((100-ageData) * yScale + padding);
          g2.drawLine(x1, y1, x2, y2);
       }
-      String str = age+"대 하한치";
-      g2.drawString(str, graphPoints.get(graphPoints.size()-2).x, (int) ((100-avg.get(age)) * yScale + padding) - 4);
+      String str = age+"대 위험수준";
+      g2.drawString(str, graphPoints.get(graphPoints.size()-2).x, (int) ((100-ageData) * yScale + padding) - 4);
    }
 
 //   private static void createAndShowGui() {

@@ -58,7 +58,7 @@ public class CardGame extends GameView {
 	Timer timer;
 	java.util.Timer countTimer;
 	int startCount;
-
+	boolean end = false;
 	GameHowTo_card ght = new GameHowTo_card(bottomBtn01, Btn);
 
 	public CardGame() {
@@ -69,6 +69,7 @@ public class CardGame extends GameView {
 	
 	@Override
 	public void display() {
+		end = false;
 		sucessCount = 0;
 		tryCount = 12;
 		startCount = 0;
@@ -278,6 +279,9 @@ public class CardGame extends GameView {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(end) {
+			return;
+		}
 		JButton btn = (JButton) e.getSource();
 		if(e.getSource() == howtoBtn) {
 			ght.setVisible(true);
@@ -347,12 +351,14 @@ public class CardGame extends GameView {
 					openCount = 0;
 					sucessCount++;
 					if (sucessCount == 6) {
+						end = true;
 						gameNum++;
 						gametrue++;
 						bgm.playEffect("true.wav");
 						checkLabel.setVisible(true);
 						next();
 					} else if (tryCount == 0) {
+						end = true;
 						gameNum++;
 						gametrue++;
 						bgm.playEffect("false.wav");
@@ -361,6 +367,7 @@ public class CardGame extends GameView {
 					}
 				} else {
 					if (tryCount == 0) {
+						end = true;
 						gameNum++;
 						bgm.playEffect("false.wav");
 						xLabel.setVisible(true);

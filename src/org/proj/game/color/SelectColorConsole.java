@@ -6,19 +6,10 @@ import java.util.Scanner;
 import javax.swing.Icon;
 
 public class SelectColorConsole {
-	// 색깔 상수
-//	private static final int RED = 0;
-//	private static final int BLUE = 1;
-//	private static final int YELLOW = 2;
-//	private static final int ORANGE = 3;
-
 	// 글자에 입힐 색깔(스윙)
 	Color[] col = { new Color(233,23,22), new Color(255,127,0), new Color(254,228,55), new Color(33,139,34),
 			new Color(81,107,254), new Color(255,126,250), new Color(168,64,255)};
 	
-	// 글자
-//	static String[] cs2 = { "RED", "BLUE", "YELLOW", "ORANGE" };
-
 	// 색깔의 배열
 	 int[] arrBtn = new int[3]; // 버튼의 배열
 	 int[] arrTxt = new int[7]; // 글자의 배열
@@ -141,7 +132,7 @@ public class SelectColorConsole {
 //		} else if(num == 5) {
 //			return "PINK";
 //		} else  {
-//			return "MAGENTA"; // 보라색으로 수정시 수정해주기
+//			return "MAGENTA";
 //		}
 //	}
 	
@@ -160,7 +151,7 @@ public class SelectColorConsole {
 		} else if(num == 5) {
 			return "분홍색";
 		} else  {
-			return "자주색"; // 보라색으로 수정시 수정해주기
+			return "보라색";
 		} 
 	}
 

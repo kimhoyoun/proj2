@@ -24,12 +24,6 @@ import org.proj.RoundJButton;
 import org.proj.controller.Controller;
 import org.proj.view.GameView;
 
-// 해결해야하는 부분
-// 정답칸에 4개가 다들어가는 오류 잡기
-// 드래그앤드롭 드래그하면 오답일시 제자리로 돌리기 (4개 다했을때 판별하기)
-// 드래그앤드롭 드래그하면 정답일시 체크표시 나오게하기
-// 같은 문제가 연속으로 나오는 중복검사 하기
-
 public class LifeGamePanel extends GameView implements MouseListener, MouseMotionListener {
 	// 배경
 	private ImageIcon bgImg = new ImageIcon("images/comm/backgroundImg.png");
@@ -74,7 +68,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 
 	LifeLabel[] label = new LifeLabel[4];
 	String[] s = new String[4];
-
+	int click;
 	public LifeGamePanel() {
 		pauseBtn.addActionListener(this);
 		howtoBtn.addActionListener(this);
@@ -82,11 +76,11 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 
 	@Override
 	public void display() {
+		click = 0;
 		// 중복제거
 		String prev = null;
 		String now = null;
 		int count = 0;
-
 		// 중복제거
 		while (true) {
 			lgc = new LifeGameConsole();
@@ -363,6 +357,9 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(click == 1) {
+			return;
+		}
 		if (e.getSource() == howtoBtn) {
 			ght.setVisible(true);
 			submit.setVisible(false);
@@ -390,6 +387,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 			}
 
 			if (w == 4) {
+				click++;
 				bgm.playEffect("true.wav");
 				gameNum++;
 				gametrue++;
@@ -413,6 +411,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 					bgm.playEffect("false.wav");
 					life.setText("도전횟수 : " + lifeRemaining);
 					gameNum++;
+					click++;
 					xLabel.setVisible(true);
 					lifeRemaining = 2;
 					next();

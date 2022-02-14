@@ -3,11 +3,6 @@ package org.proj.game.color;
 import java.awt.Color;
 
 public class MaxColorConsole {
-	// 색깔 상수
-	private final int RED = 0;
-	private final int BLUE = 1;
-	private final int YELLOW = 2;
-	
 	Color[] col = {new Color(233,23,22), new Color(81,107,254), new Color(254,228,55)};
 
 	// 색이 콘솔창에 찍힌 수 (= count)

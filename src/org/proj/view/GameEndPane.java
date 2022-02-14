@@ -85,7 +85,7 @@ public class GameEndPane extends GameView {
 		if(e.getSource() == replayBtn) {
 			recordGameData(NowView);
 			resultPane.setVisible(false);
-			JOptionPane.showMessageDialog(NowView, new JLabel("game Replay", javax.swing.SwingConstants.CENTER),"Replay",JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(NowView, new JLabel("다시 시작합니다!", javax.swing.SwingConstants.CENTER),"Replay",JOptionPane.PLAIN_MESSAGE);
 			resultPane.removeAll();
 			NowView.removeAll();
 			Controller c = Controller.getController();

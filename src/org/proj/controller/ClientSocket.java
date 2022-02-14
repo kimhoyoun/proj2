@@ -130,6 +130,22 @@ public class ClientSocket {
 			e1.printStackTrace();
 		}
 	}
+	
+	public void reqIdCheck(String userid) {
+		if(userid == null) {
+			return;
+		}
+		req = IDCHECK;
+		try {
+			oos.writeUTF(req);
+			oos.flush();
+			oos.writeUTF(userid);
+			oos.flush();
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 	class ClientThread extends Thread {
 		private boolean stop;
 		public ClientThread() {
@@ -278,10 +294,12 @@ public class ClientSocket {
 				String tf = ois.readUTF();
 				if ("approval".equals(tf)) {
 					// 사용할 수 있는 ID
-
+					Controller c = Controller.getController();
+					c.respIdCheck(true);
 				} else {
 					// 사용할 수 없는 ID
-
+					Controller c = Controller.getController();
+					c.respIdCheck(false);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

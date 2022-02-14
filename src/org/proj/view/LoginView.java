@@ -253,15 +253,15 @@ public class LoginView extends GameView{
 			String checkid = textid.getText();
 			if (checkid.length() != 0) {
 				Controller c = Controller.getController();
-				boolean result = c.idcheck(checkid);
+				c.idcheck(checkid);
 
-				if (result) {
-					signupState = true;
-					JOptionPane.showMessageDialog(this, new JLabel("사용할 수 있는 아이디입니다!", javax.swing.SwingConstants.CENTER), "중복확인",JOptionPane.PLAIN_MESSAGE);
-				} else {
-					signupState = false;
-					JOptionPane.showMessageDialog(this, new JLabel("사용할 수 없는 아이디입니다!", javax.swing.SwingConstants.CENTER), "중복확인",JOptionPane.PLAIN_MESSAGE);
-				}
+//				if (result) {
+//					signupState = true;
+//					JOptionPane.showMessageDialog(this, new JLabel("사용할 수 있는 아이디입니다!", javax.swing.SwingConstants.CENTER), "중복확인",JOptionPane.PLAIN_MESSAGE);
+//				} else {
+//					signupState = false;
+//					JOptionPane.showMessageDialog(this, new JLabel("사용할 수 없는 아이디입니다!", javax.swing.SwingConstants.CENTER), "중복확인",JOptionPane.PLAIN_MESSAGE);
+//				}
 			}else {
 				JOptionPane.showMessageDialog(this, new JLabel("아이디를 입력해주세요.", javax.swing.SwingConstants.CENTER), "중복확인",JOptionPane.PLAIN_MESSAGE);
 			}
@@ -326,6 +326,16 @@ public class LoginView extends GameView{
 			repaint();
 		}
 
+	}
+	
+	public void respidcheck(boolean approval) {
+		if(approval) {
+			signupState = true;
+			JOptionPane.showMessageDialog(this, new JLabel("사용할 수 있는 아이디입니다!", javax.swing.SwingConstants.CENTER), "중복확인",JOptionPane.PLAIN_MESSAGE);
+		}else {
+			signupState = false;
+			JOptionPane.showMessageDialog(this, new JLabel("사용할 수 없는 아이디입니다!", javax.swing.SwingConstants.CENTER), "중복확인",JOptionPane.PLAIN_MESSAGE);
+		}
 	}
 	public String toBGM() {
 		return "main.wav";

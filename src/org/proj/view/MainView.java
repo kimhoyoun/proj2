@@ -95,8 +95,8 @@ public class MainView extends GameView{
 	
 	public void displaySetting() {
 		setUpdateBox();
-		JLabel title = new JLabel("메인화면");
-		title.setFont(new Font("맑은 고딕", Font.BOLD, 40));
+//		JLabel title = new JLabel("메인화면");
+//		title.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 
 		idtagdb.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		infotagdb.setFont(new Font("맑은 고딕", Font.BOLD, 13));
@@ -124,9 +124,11 @@ public class MainView extends GameView{
 		background.add(exitBtn);
 
 		background.add(allGameBtn);
-		background.add(title);
+//		background.add(title);
+//		
+//		title.setBounds(30, 20, 200,40);
 		
-		title.setBounds(30, 20, 200,40);
+		allGameBtn.setFont(new Font("맑은 고딕",Font.BOLD, 20));
 		profile.setBounds(FRAME_WIDTH/2-100, 10, 200, 80);
 		profileUpdate.setBounds(FRAME_WIDTH/2-300/2, FRAME_HEIGHT/2-370/2, 300, 370);
 		profileUpdate.setVisible(false);
