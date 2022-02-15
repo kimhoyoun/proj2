@@ -43,23 +43,28 @@ public class GameEndPane extends GameView {
 		result.add(gameEndmsg);
 		result.add(gameNumlbl);
 		result.add(gametruelbl);
-		result.add(replayBtn);
 		result.add(goMainBtn);
-
-		replayBtn.setBackground(new Color(82, 206, 105));
-		replayBtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		replayBtn.setForeground(Color.white);
-		replayBtn.setBorderPainted(false);
-		replayBtn.setContentAreaFilled(false);
 
 		goMainBtn.setBackground(new Color(82, 206, 105));
 		goMainBtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		goMainBtn.setForeground(Color.white);
 		goMainBtn.setBorderPainted(false);
 		goMainBtn.setContentAreaFilled(false);
-		
+
+		if(GameState == MiniGame) {
+		result.add(replayBtn);
+		replayBtn.setBackground(new Color(82, 206, 105));
+		replayBtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		replayBtn.setForeground(Color.white);
+		replayBtn.setBorderPainted(false);
+		replayBtn.setContentAreaFilled(false);
 		replayBtn.setBounds(20, 290, 120, 50);
+		
 		goMainBtn.setBounds(160, 290, 120, 50);
+		}
+		else {
+			goMainBtn.setBounds(20, 290, 260, 50);
+		}
 
 		gameEndmsg.setBounds(75, 55, 200, 40);
 		gameNumlbl.setBounds(85, 140, 200, 30);
