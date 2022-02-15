@@ -56,6 +56,7 @@ public class CardGame extends GameView {
 	int buttonIndexSave2 = 0; // 두번째 선택된 카드 인덱스 저장
 	int openCount = 0; // 카드가 2개 뒤집히면 닫히기 전까지 다음 카드 안열리게 하는 변수
 	Timer timer;
+	Timer timer2;
 	java.util.Timer countTimer;
 	int startCount;
 	boolean end = false;
@@ -387,7 +388,7 @@ public class CardGame extends GameView {
 
 	public void next() {
 		// 딜레이 1.5초 주고 다음게임 시작
-				timer = new Timer(1500, new ActionListener() {
+		timer2 = new Timer(1500, new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if (GameState == MiniGame) {
@@ -407,10 +408,10 @@ public class CardGame extends GameView {
 								c.Viewchange(CARD);
 							}
 						}
-						timer.stop();
+						timer2.stop();
 					}
 				});
-				timer.start();
+		timer2.start();
 			}
 
 	@Override

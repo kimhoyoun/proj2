@@ -130,6 +130,7 @@ public class RecordView extends GameView{
 			c.Viewchange(GameRecordPage);
 		}
 		if(e.getSource() == calBtn) {
+			cal.removeAll();
 			cal.display();
 			
 			backBtn.setEnabled(false);

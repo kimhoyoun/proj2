@@ -95,46 +95,51 @@ public class GameEndPane extends GameView {
 	
 	public void recordGameData(GameView view) {
 		String state = view.toString();
+		System.out.println(view.toString());
+		
 		if(GameState == MiniGame) {
 			
 		switch(state) {
 		case PlusMinus:
-			mainGameData.setTotalGame1(mainGameData.getAnsGame1()+gameNum);
+			mainGameData.setTotalGame1(mainGameData.getTotalGame1()+gameNum);
 			mainGameData.setAnsGame1(mainGameData.getAnsGame1()+gametrue);
 			gameNum = 0;
 			gametrue = 0;
 			break;
 		case CARD:
-			mainGameData.setTotalGame2(mainGameData.getAnsGame2()+gameNum);
+			mainGameData.setTotalGame2(mainGameData.getTotalGame2()+gameNum);
 			mainGameData.setAnsGame2(mainGameData.getAnsGame2()+gametrue);
 			gameNum = 0;
 			gametrue = 0;
 			break;
 		case CUP:
-			mainGameData.setTotalGame3(mainGameData.getAnsGame3()+gameNum);
+			mainGameData.setTotalGame3(mainGameData.getTotalGame3()+gameNum);
 			mainGameData.setAnsGame3(mainGameData.getAnsGame3()+gametrue);
 			gameNum = 0;
 			gametrue = 0;
 			break;
 		case LIFE:
-			mainGameData.setTotalGame4(mainGameData.getAnsGame4()+gameNum);
+			mainGameData.setTotalGame4(mainGameData.getTotalGame4()+gameNum);
 			mainGameData.setAnsGame4(mainGameData.getAnsGame4()+gametrue);
 			gameNum = 0;
 			gametrue = 0;
 			break;
 		case SelectColor:
-			mainGameData.setTotalGame5(mainGameData.getAnsGame5()+gameNum);
+			mainGameData.setTotalGame5(mainGameData.getTotalGame5()+gameNum);
 			mainGameData.setAnsGame5(mainGameData.getAnsGame5()+gametrue);
 			gameNum = 0;
 			gametrue = 0;
 			break;
 		case MaxColor:
-			mainGameData.setTotalGame5(mainGameData.getAnsGame5()+gameNum);
+			mainGameData.setTotalGame5(mainGameData.getTotalGame5()+gameNum);
 			mainGameData.setAnsGame5(mainGameData.getAnsGame5()+gametrue);
 			gameNum = 0;
 			gametrue = 0;
 			break;
 		}
+	}else {
+		gameNum = 0;
+		gametrue = 0;
 	}
 	}
 	@Override

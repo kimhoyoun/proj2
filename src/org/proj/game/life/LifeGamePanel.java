@@ -77,6 +77,7 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 	@Override
 	public void display() {
 		click = 0;
+		lifeRemaining = 2;
 		// 중복제거
 		String prev = null;
 		String now = null;
@@ -413,7 +414,6 @@ public class LifeGamePanel extends GameView implements MouseListener, MouseMotio
 					gameNum++;
 					click++;
 					xLabel.setVisible(true);
-					lifeRemaining = 2;
 					next();
 				} else if (lifeRemaining == 1) {
 					life.setText("도전횟수 : " + lifeRemaining);

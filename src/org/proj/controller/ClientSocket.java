@@ -24,7 +24,6 @@ public class ClientSocket {
 	public ObjectInputStream ois;
 	public ObjectOutputStream oos;
 	public String req;
-	public String resp;
 	public String msg;
 
 	public ClientSocket() {
@@ -73,7 +72,6 @@ public class ClientSocket {
 		return true;
 	}
 
-	// 회원가입
 	public boolean reqSignUp(UserDto dto) {
 
 		if (dto == null) {
@@ -94,7 +92,6 @@ public class ClientSocket {
 		return true;
 	}
 
-	// 수정
 	public boolean reqUpdate(UserDto dto) {
 		if (dto == null) {
 			return false;
@@ -115,6 +112,7 @@ public class ClientSocket {
 	
 	// 로그아웃
 	// 게임데이터를 데이터베이스에 저장
+	
 	public void reqLogout(GameDataDto dto) {
 		if(dto == null) {
 			return;
@@ -146,6 +144,7 @@ public class ClientSocket {
 			e1.printStackTrace();
 		}
 	}
+	
 	class ClientThread extends Thread {
 		private boolean stop;
 		public ClientThread() {
@@ -155,17 +154,12 @@ public class ClientSocket {
 		public void run() {
 			while (!stop) {
 				try {
-					// 서버로부터 메세지가 오면 클라이언트의 어떤 요청에 대한 결과인지 먼저 판단하기위해
-					// resp에 저장하고 switch로 어떤 요청인지 판단.
-					resp = ois.readUTF();
+					String resp = ois.readUTF();
 					System.out.println("server response >> " + resp);
 					switch (resp) {
 					case LOGIN:
 						login();
 						break;
-//					case NEWLOGIN:
-//						newlogin();
-//						break;
 					case SIGNUP:
 						signup();
 						break;
@@ -243,7 +237,6 @@ public class ClientSocket {
 					mainUser = user;
 					mainData = vector;
 					
-					System.out.println(mainUser);
 					String day = LocalDate.now().toString();
 					for (GameDataDto data : vector) {
 						if(day.equals(data.getDay())) {

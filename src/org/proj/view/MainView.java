@@ -1,8 +1,5 @@
 package org.proj.view;
 
-import static org.proj.Resource.FRAME_HEIGHT;
-import static org.proj.Resource.FRAME_WIDTH;
-import static org.proj.Resource.mainUser;
 import static org.proj.Resource.*;
 
 import java.awt.Color;
@@ -202,14 +199,16 @@ public class MainView extends GameView{
 		}
 		
 		if(e.getSource() == profileOkBtn) {
-			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("프로필을 수정하시겠습니까?", javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("프로필을 수정하시겠습니까?", 
+					javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
 			if(yn == 0) {
 				userNamedb = textname.getText();
 				userPassdb = textpass.getText();
 				try {
 					userAgedb = Integer.parseInt(textage.getText());
 				}catch(NumberFormatException e0) {
-					JOptionPane.showMessageDialog(this, new JLabel("나이는 숫자만 입력하세요!", javax.swing.SwingConstants.CENTER),"정보 수정",JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(this, new JLabel("나이는 숫자만 입력하세요!", 
+							javax.swing.SwingConstants.CENTER),"정보 수정",JOptionPane.PLAIN_MESSAGE);
 					textage.setText(userAgedb+"");
 					return;
 				}
@@ -225,7 +224,8 @@ public class MainView extends GameView{
 				Controller c = Controller.getController();
 				c.update(user);
 				}else {
-					JOptionPane.showMessageDialog(this, new JLabel("내용을 전부 입력해주세요", javax.swing.SwingConstants.CENTER),"정보 수정",JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(this, new JLabel("내용을 전부 입력해주세요", 
+							javax.swing.SwingConstants.CENTER),"정보 수정",JOptionPane.PLAIN_MESSAGE);
 				}
 			}
 		}
@@ -253,18 +253,15 @@ public class MainView extends GameView{
 		
 		if(e.getSource() == exitBtn) {
 			
-			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("로그아웃 하시겠습니까?", javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+			int yn = JOptionPane.showConfirmDialog(this,  new JLabel("로그아웃 하시겠습니까?", 
+					javax.swing.SwingConstants.CENTER),"확인",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
 
 			if(yn == 0) {
 				Controller c = Controller.getController();
-				
 				c.logout(mainGameData);
-				
 				mainUser = null;
 				mainGameData = null;
 				mainData = null;
-				
-				
 				c.Viewchange(LoginPage);
 			}
 		}
@@ -303,11 +300,14 @@ public class MainView extends GameView{
 		if(e.getSource() == colorGameBtn) {
 			GameState = MiniGame;
 			
-			RandomColorGame.setColor();
-			GameView colorGame = RandomColorGame.getColor();
-			
+			int n = (int) ((Math.random() * 100000) % 2);
+
 			Controller c = Controller.getController();
-			c.Viewchange(colorGame.toString());
+			if (n == 0) {
+				c.Viewchange(SelectColor);
+			} else {
+				c.Viewchange(MaxColor);
+			}
 			
 		}
 		
