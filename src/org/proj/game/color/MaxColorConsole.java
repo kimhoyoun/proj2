@@ -11,7 +11,7 @@ public class MaxColorConsole {
 	int c2 = 0;
 	
 	int max;
-	String ans;
+	String answer;
 	
 	Color color;
 	
@@ -57,15 +57,15 @@ public class MaxColorConsole {
 		// 정답 출력
 		max = c0;
 		
-		ans = "RED";
+		answer = "RED";
 		if (max < c1) {
 			max = c1;
-			ans = "BLUE";
+			answer = "BLUE";
 		}
 		
 		if (max < c2) {
 			max = c2;
-			ans = "YELLOW";
+			answer = "YELLOW";
 		}
 //		System.out.println("정답 : " + ans);
 	}

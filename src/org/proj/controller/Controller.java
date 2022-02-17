@@ -73,7 +73,7 @@ public class Controller {
 	}
 	
 	public void login(UserDto dto) {
-		clientsocket.reqLogin(dto);
+		clientsocket.reqLogin(dto); 
 	}
 	public void update(UserDto dto) {
 		clientsocket.reqUpdate(dto);

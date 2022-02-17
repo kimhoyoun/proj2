@@ -1,11 +1,14 @@
 package org.proj.game.color;
 
 import java.awt.Color;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.Icon;
+import javax.swing.JLabel;
 
 public class SelectColorConsole {
+	HashMap<String, Color> map = new HashMap<>();
 	// 글자에 입힐 색깔(스윙)
 	Color[] col = { new Color(233,23,22), new Color(255,127,0), new Color(254,228,55), new Color(33,139,34),
 			new Color(81,107,254), new Color(255,126,250), new Color(168,64,255)};
@@ -19,14 +22,16 @@ public class SelectColorConsole {
 	  int ansLoc; // 정답위치(정답위치가 일정함을 방지하기위해서)
 	  int paintColor; // 글자색
 	
+	  String ansText;
+	  
 	public SelectColorConsole() {
 		run();
 	}
 	
 	// 콘솔창에 찍히는 부분으로 필요없어서 주석처리
 	// 숫자를 글자로 바꾸기위한 변수
-	static int num;
-	static int num1;
+	static int numToKor;
+	static int numPaint;
 //	static Scanner scan = new Scanner(System.in);
 
 	// 글자 함수
@@ -35,15 +40,16 @@ public class SelectColorConsole {
 		for (int i = 0; i < 1; i++) {
 			arrTxt[i] = (int) (Math.random() * 7);
 //			System.out.println("arrTxt[i] " + arrTxt[i]);
-			ansColor = arrTxt[i];
+//			ansColor = arrTxt[i];
+			ansColor = ((int) (Math.random() * 10000000)%7);
 		}
 		
 		// 콘솔창에 찍히는 부분으로 필요없어서 주석처리
 		// 숫자를 글자로(한국어)
 //		System.out.print("글자 : ");
-		num = ansColor;
-		numToColorKor(num);
-		return numToColorKor(num);
+		numToKor = ansColor;
+		numToColorKor(numToKor);
+		return numToColorKor(numToKor);
 	}
 	
 	// 글자의 색 함수
@@ -56,14 +62,14 @@ public class SelectColorConsole {
 				break;
 			}
 		}
-		num1 = paintColor;
-		return col[num1];
+		numPaint = paintColor;
+		return col[numPaint];
 		
 		// 콘솔창에 찍히는 부분으로 필요없어서 주석처리
 		// 숫자를 글자로
 //		System.out.println(paintColor);
 //		System.out.print("글자 색 : ");
-//		num = paintColor;
+//		numToKor = paintColor;
 //		numToColor();
 	}
 
@@ -102,7 +108,7 @@ public class SelectColorConsole {
 					break;
 				}
 			}
-//			num = otherColor;
+//			numToKor = otherColor;
 //			numToColor();
 		}
 
@@ -112,7 +118,7 @@ public class SelectColorConsole {
 //		System.out.print("보기 : ");
 //		for (int i = 0; i < arrBtn.length; i++) {
 //			System.out.print(arrBtn[i] + ":");
-//			num = arrBtn[i];
+//			numToKor = arrBtn[i];
 //			numToColor();
 //		}
 	}
@@ -137,18 +143,18 @@ public class SelectColorConsole {
 //	}
 	
 	// 숫자를 글자(한국어)로 바꾸는 함수
-	public String numToColorKor(int num) {
-		if(num == 0) {
+	public String numToColorKor(int numToKor) {
+		if(numToKor == 0) {
 			return "빨간색";
-		} else if(num == 1) {
+		} else if(numToKor == 1) {
 			return "주황색";
-		} else if(num == 2) {
+		} else if(numToKor == 2) {
 			return "노란색";
-		} else if(num == 3) {
+		} else if(numToKor == 3) {
 			return "초록색";
-		} else if(num == 4) {
+		} else if(numToKor == 4) {
 			return "파란색";
-		} else if(num == 5) {
+		} else if(numToKor == 5) {
 			return "분홍색";
 		} else  {
 			return "보라색";
